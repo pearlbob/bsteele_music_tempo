@@ -1,11 +1,10 @@
 import 'dart:math';
 
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 
-import 'app_logger.dart';
 import 'audio_configuration.dart';
 
-const Level _logSummary = Level.debug;
+// const Level _logSummary = Level.debug;
 
 typedef VoidCallback = void Function();
 
@@ -37,20 +36,22 @@ class ProcessTempo {
             //  exclude out bad tempos
             _lastHertz = sampleRate / _samplesInState;
             //  note that a slow tempo can be expected, eg. a 4/4 song at 50 bpm with beats on 2 and 4 only
-            if (_lastHertz >= 25 / 60 && _lastHertz <= 200 / 60) {
+            if (_lastHertz >= 22 / 60 && _lastHertz <= 200 / 60) {
               if (_samplesNotInstateCount > 0) {
                 _samplesNotInstateAverage = _samplesNotInstateSum / _samplesNotInstateCount;
               }
 
-              logger.log(
-                  _logSummary,
-                  'processTempo: samples: $_samplesInState'
+              _consistent = (_samplesInState - _lastSamplesInState).abs() < (_samplesInState * 0.08);
+              print('${DateTime.now()}: $_samplesInState'
                   ' = ${(_samplesInState / sampleRate).toStringAsFixed(3).padLeft(6)}s'
                   ' = ${_lastHertz.toStringAsFixed(3).padLeft(6)} hz'
-                  ' = ${(60.0 * _lastHertz).toStringAsFixed(3).padLeft(6)} bpm');
+                  ' = ${(60.0 * _lastHertz).toStringAsFixed(3).padLeft(6)} bpm'
+                  ' @ ${_instateMaxAmp.toString().padLeft(5)}, consistent: $_consistent' );
 
               // notify of a new value
               callback?.call();
+
+              _lastSamplesInState = _samplesInState;
             }
           }
 
@@ -68,6 +69,13 @@ class ProcessTempo {
     }
 
     _samplesInState++;
+
+    //  something has stalled... or there is no signal
+    if (_samplesInState > 6 * sampleRate) {
+      print('${DateTime.now()}: $_samplesInState: stalled @ $abs');
+      _samplesInState = 3 * sampleRate; //  something too slow
+      _lastSamplesInState = 0;
+    }
   }
 
   @override
@@ -79,11 +87,15 @@ class ProcessTempo {
   bool isSignal = false;
   bool _isFirst = true;
   int _samplesInState = 0;
+  int _lastSamplesInState = 0;
+
+  bool get isConsistent => _consistent;
+  bool _consistent = false;
   int _lastSignalCount = 0;
   int _samplesNotInstateCount = 0;
   int _samplesNotInstateSum = 0;
 
-  int get instateMaxAmp =>_instateMaxAmp;
+  int get instateMaxAmp => _instateMaxAmp;
   int _instateMaxAmp = 0;
 
   double get samplesNotInstateAverage => _samplesNotInstateAverage;

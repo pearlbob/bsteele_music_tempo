@@ -81,10 +81,6 @@ Future<void> runArecord() async {
       '-l',
     ],
   ).then((value) {
-    print('stderr');
-    print(value.stderr);
-    print('stdout');
-
     for (var s in value.stdout.toString().split('\n')) {
       var m = cardLineRegExp.firstMatch(s);
       if (m != null) {
