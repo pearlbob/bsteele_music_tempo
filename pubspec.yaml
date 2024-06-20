@@ -1,0 +1,16 @@
+name: bsteele_music_tempo
+description: A sample command-line application with basic argument parsing.
+version: 0.0.1
+# repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: ^3.4.3
+
+# Add regular dependencies here.
+dependencies:
+  logger:
+  args:
+
+dev_dependencies:
+  lints:
+  test:
