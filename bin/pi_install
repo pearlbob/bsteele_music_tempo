@@ -38,10 +38,11 @@ if ( `hostname` == 'bob' ) then
 	echo machine status $stat
 	exit $status
 else
+  # on the pi
 
 	echo on machine `hostname`
 	cd ~/junk/$bsDir
-#	flup -y
+	pkill -f -x `pwd`/bin/bsteele_music_tempo.exe
 
 	rm -rf .gradle
 	rm -rf linux

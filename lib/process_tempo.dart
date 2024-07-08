@@ -10,6 +10,8 @@ typedef VoidCallback = void Function();
 
 class ProcessTempo {
   processTempo(final int value) {
+    var epochUs = DateTime.now().microsecondsSinceEpoch;
+
     //  note that this doubles the hysteresis minimum samples possibilities
     final int abs = value.abs(); //  negative amplitude is still amplitude
 
@@ -46,12 +48,14 @@ class ProcessTempo {
                   ' = ${(_samplesInState / sampleRate).toStringAsFixed(3).padLeft(6)}s'
                   ' = ${_lastHertz.toStringAsFixed(3).padLeft(6)} hz'
                   ' = ${(60.0 * _lastHertz).toStringAsFixed(3).padLeft(6)} bpm'
-                  ' @ ${_instateMaxAmp.toString().padLeft(5)}, consistent: $_consistent' );
+                  ' @ ${_instateMaxAmp.toString().padLeft(5)}, consistent: $_consistent'
+                  ', maxDelta: $_maxDeltaUs us');
 
               // notify of a new value
               callback?.call();
 
               _lastSamplesInState = _samplesInState;
+              _maxDeltaUs = 0;
             }
           }
 
@@ -71,11 +75,15 @@ class ProcessTempo {
     _samplesInState++;
 
     //  something has stalled... or there is no signal
-    if (_samplesInState > 6 * sampleRate) {
-      print('${DateTime.now()}: $_samplesInState: stalled @ $abs');
+    if (_samplesInState > 16 * sampleRate) {
+      print('${DateTime.now()}: $_samplesInState: stalled @ $abs, maxDelta: $_maxDeltaUs us');
       _samplesInState = 3 * sampleRate; //  something too slow
       _lastSamplesInState = 0;
+      _maxDeltaUs = 0;
     }
+
+    _maxDeltaUs = max(_maxDeltaUs, epochUs - _lastEpochUs);
+    _lastEpochUs = epochUs;
   }
 
   @override
@@ -105,6 +113,10 @@ class ProcessTempo {
 
   double get hertz => _lastHertz;
   double _lastHertz = 0;
+
+  int _lastEpochUs = DateTime.now().microsecondsSinceEpoch;
+
+  int _maxDeltaUs = 0;
 
   VoidCallback? callback; //  callback on valid data, i.e. a new bpm
 
