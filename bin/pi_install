@@ -42,7 +42,7 @@ else
 
 	echo on machine `hostname`
 	cd ~/junk/$bsDir
-	pkill -f -x `pwd`/bin/bsteele_music_tempo.exe
+	pkill -f bsteele_music_tempo.exe
 
 	rm -rf .gradle
 	rm -rf linux

@@ -44,12 +44,15 @@ class ProcessTempo {
               }
 
               _consistent = (_samplesInState - _lastSamplesInState).abs() < (_samplesInState * 0.08);
-              print('${DateTime.now()}: $_samplesInState'
+              if ( verbose ) {
+                print('${DateTime.now()}: $_samplesInState'
                   ' = ${(_samplesInState / sampleRate).toStringAsFixed(3).padLeft(6)}s'
                   ' = ${_lastHertz.toStringAsFixed(3).padLeft(6)} hz'
                   ' = ${(60.0 * _lastHertz).toStringAsFixed(3).padLeft(6)} bpm'
                   ' @ ${_instateMaxAmp.toString().padLeft(5)}, consistent: $_consistent'
-                  ', maxDelta: $_maxDeltaUs us');
+                  // ', maxDelta: $_maxDeltaUs us'
+              );
+              }
 
               // notify of a new value
               callback?.call();
@@ -117,6 +120,7 @@ class ProcessTempo {
   int _lastEpochUs = DateTime.now().microsecondsSinceEpoch;
 
   int _maxDeltaUs = 0;
+  bool verbose = false;
 
   VoidCallback? callback; //  callback on valid data, i.e. a new bpm
 
