@@ -12,6 +12,7 @@ import 'package:logger/logger.dart';
 const String version = '0.0.1';
 String host = 'cj.local';
 bool verbose = false;
+bool isWebsocket = true;
 
 SongUpdateService songUpdateService = SongUpdateService();
 final ProcessTempo processTempo = ProcessTempo();
@@ -28,6 +29,12 @@ ArgParser buildParser() {
       'host',
       valueHelp: 'hostUrl',
       help: 'Select the host server by name.',
+    )
+    ..addFlag(
+      'nowebsocket',
+      abbr: 'w',
+      negatable: false,
+      help: 'Turn the websocket interface off.',
     )
     ..addFlag(
       'verbose',
@@ -59,18 +66,15 @@ void main(List<String> arguments) async {
       printUsage(argParser);
       return;
     }
+    if (results.wasParsed('nowebsocket')) {
+      isWebsocket = false;
+    }
     if (results.wasParsed('version')) {
       print('bsteele_music_tempo version: $version');
       return;
     }
     if (results.wasParsed('verbose')) {
       verbose = true;
-    }
-
-    // Act on the arguments provided.
-    print('Positional arguments: ${results.rest}');
-    if (verbose) {
-      print('[VERBOSE] All arguments: ${results.arguments}');
     }
 
     host = results.option('host') ?? 'cj.local';
@@ -82,13 +86,24 @@ void main(List<String> arguments) async {
     return;
   }
 
-  // setup the web socket
-  SongUpdateService.open();
-  songUpdateService.user = 'tempo';
-  songUpdateService.callback = webSocketCallback; //  not required
-  songUpdateService.host = host;
+  if (verbose) print('isWebsocket: $isWebsocket');
 
-  print('songUpdateService.host: "${songUpdateService.host}"');
+  // setup the web socket
+  if (isWebsocket) {
+    try {
+      print('fixme: doesn\'t do well if web socket host not found!');
+
+      SongUpdateService.open();
+      songUpdateService.user = 'tempo';
+      songUpdateService.callback = webSocketCallback; //  not required
+      songUpdateService.host = host;
+
+      print('songUpdateService.host: "${songUpdateService.host}"');
+    } catch (e, stackTrace) {
+      print('web socket catch: $e');
+      print('web socket trace: $stackTrace');
+    }
+  }
 
   await runArecord();
 }
@@ -107,13 +122,12 @@ Future<void> runArecord() async {
       if (m != null) {
         assert(m.groupCount == 2);
         deviceName = 'hw:${m.group(1)},${m.group(2)}';
-        //print('$s  => "$deviceName"');
         break;
       }
     }
   });
+  if (verbose) print('deviceName: "$deviceName"');
   assert(deviceName.isNotEmpty);
-  print(deviceName);
 
   //  listen to the device audio
   var process = await Process.start(
@@ -152,8 +166,8 @@ processTempoCallback() {
   if (processTempo.bpm != bpm) {
     bpm = processTempo.bpm;
     var songUpdate = SongUpdate(user: songUpdateService.user, currentBeatsPerMinute: bpm);
-    songUpdateService.issueSongUpdate(songUpdate, force: true);
-    print('processTempoCallback: ${songUpdate.currentBeatsPerMinute}');
+    if (isWebsocket) songUpdateService.issueSongUpdate(songUpdate, force: true);
+    print('${DateTime.now()}: bpm: ${songUpdate.currentBeatsPerMinute}');
   }
 }
 
