@@ -18,7 +18,7 @@ void main() {
     ProcessTempo processTempo = ProcessTempo();
 
     processTempo.callback = () {
-      logger.i('bpm: ${processTempo.bpm.toString().padLeft(3)}'
+      logger.i('bpm: ${processTempo.bestBpm.toString().padLeft(3)}'
           ', amp: ${processTempo.instateMaxAmp.toString().padLeft(5)}'
           ' = x${(processTempo.instateMaxAmp/ProcessTempo.minSignalAmp).toStringAsFixed(2).padRight(5)}'
           ' / ${(processTempo.samplesNotInstateAverage/ProcessTempo.minSignalAmp).toStringAsFixed(3).padLeft(6)}'
@@ -75,7 +75,7 @@ void main() {
             // ', processTempo.bpm: ${processTempo.bpm}'
             // ', bpm / 60: $bpm'
             );
-        int error = processTempo.bpm - bpm;
+        int error = processTempo.bestBpm - bpm;
         error = error.abs();
         logger.i('   error: $error');
         maxError = max(maxError, error);

@@ -163,8 +163,8 @@ Future<void> runArecord() async {
 }
 
 processTempoCallback() {
-  if (processTempo.bpm != bpm) {
-    bpm = processTempo.bpm;
+  if (processTempo.bestBpm != bpm) {
+    bpm = processTempo.bestBpm;
     var songUpdate = SongUpdate(user: songUpdateService.user, currentBeatsPerMinute: bpm);
     if (isWebsocket) songUpdateService.issueSongUpdate(songUpdate, force: true);
     print('${DateTime.now()}: bpm: ${songUpdate.currentBeatsPerMinute}');
