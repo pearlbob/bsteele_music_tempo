@@ -156,7 +156,7 @@ Future<void> runArecord() async {
         i < data.length;
         i += 2 * 2 //  2 bytes per sample but only use one channel
         ) {
-      processTempo.processTempo(bytes.buffer.asByteData().getInt16(i, Endian.little));
+      processTempo.processNewTempo(bytes.buffer.asByteData().getInt16(i, Endian.little));
     }
   }, cancelOnError: false);
   process.stdout.pipe(streamController);

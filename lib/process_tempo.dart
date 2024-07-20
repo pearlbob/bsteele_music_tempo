@@ -1,16 +1,29 @@
+import 'dart:collection';
 import 'dart:math';
 
 // import 'package:logger/logger.dart';
 
+import 'package:logger/logger.dart';
+
+import 'app_logger.dart';
 import 'audio_configuration.dart';
 
-// const Level _logSummary = Level.debug;
+const Level _logDetail = Level.info;
+
+const _tightTolerance = 0.08; //  the operator has to be regular... or we'll follow junk tempos
+const _looseTolerance = 0.2; //  worry about every beat tap & accepting a short period
+const _confirmations = 3;
+final _maxError = double.maxFinite.toInt();
 
 typedef VoidCallback = void Function();
 
 class ProcessTempo {
-  processTempo(final int value) {
-    var epochUs = DateTime.now().microsecondsSinceEpoch;
+  ProcessTempo() {
+    _computeExpectedPeriodUs();
+  }
+
+  processNewTempo(final int value, {int? epochUs}) {
+    epochUs ??= DateTime.now().microsecondsSinceEpoch;
 
     //  note that this doubles the hysteresis minimum samples possibilities
     final int abs = value.abs(); //  negative amplitude is still amplitude
@@ -38,20 +51,23 @@ class ProcessTempo {
             //  exclude out bad tempos
             _lastHertz = sampleRate / _samplesInState;
             //  note that a slow tempo can be expected, eg. a 4/4 song at 50 bpm with beats on 2 and 4 only
-            if (_lastHertz >= 22 / 60 && _lastHertz <= 200 / 60) {
+            if (_lastHertz >= 12 / 60 && _lastHertz <= 200 / 60) {
               if (_samplesNotInstateCount > 0) {
                 _samplesNotInstateAverage = _samplesNotInstateSum / _samplesNotInstateCount;
               }
 
-              _consistent = (_samplesInState - _lastSamplesInState).abs() < (_samplesInState * 0.08);
-              if ( verbose ) {
+              _processTempoTap(epochUs);
+
+              _consistent = (_samplesInState - _lastSamplesInState).abs() < (_samplesInState * _tightTolerance);
+
+              if (verbose) {
                 print('${DateTime.now()}: $_samplesInState'
-                  ' = ${(_samplesInState / sampleRate).toStringAsFixed(3).padLeft(6)}s'
-                  ' = ${_lastHertz.toStringAsFixed(3).padLeft(6)} hz'
-                  ' = ${(60.0 * _lastHertz).toStringAsFixed(3).padLeft(6)} bpm'
-                  ' @ ${_instateMaxAmp.toString().padLeft(5)}, consistent: $_consistent'
-                  // ', maxDelta: $_maxDeltaUs us'
-              );
+                    ' = ${(_samplesInState / sampleRate).toStringAsFixed(3).padLeft(6)}s'
+                    ' = ${_lastHertz.toStringAsFixed(3).padLeft(6)} hz'
+                    ' = ${(60.0 * _lastHertz).toStringAsFixed(3).padLeft(6)} bpm'
+                    ' @ ${_instateMaxAmp.toString().padLeft(5)}, consistent: $_consistent'
+                    // ', maxDelta: $_maxDeltaUs us'
+                    );
               }
 
               // notify of a new value
@@ -89,6 +105,93 @@ class ProcessTempo {
     _lastEpochUs = epochUs;
   }
 
+  /// Low level routine to sort out measure patterns in the tempo tapped.
+  /// Could be every beat, every other beat, once a measure (on 2 or 4),
+  /// or some other regular pattern.
+  _processTempoTap(int epochUs) {
+    if (_tapUs.isNotEmpty) {
+      logger.log(_logDetail,'delta: $epochUs: ${epochUs - _tapUs.last} us'
+          ' = ${((epochUs - _tapUs.last) / Duration.microsecondsPerSecond).toStringAsFixed(3)} s');
+    }
+
+    _tapUs.add(epochUs);
+
+    //  find the best fit for the first sample
+    // logger.log(_logDetail,'_processSample($epochUs):  length: ${_tapUs.length}');
+    int maxErrorUs = _maxError;
+    int bestIndex = -1;
+    int bestPeriodUs = -1;
+    for (var i = 1; i < _tapUs.length - _confirmations; i++) {
+      int errorUs = _tapErrorUsAtIndex(i);
+      if (errorUs < _maxError) {
+        bestIndex = i;
+        bestPeriodUs = _periodUs;
+        maxErrorUs = errorUs;
+      }
+    }
+    if (bestIndex > 0) {
+      logger.log(_logDetail,'   bestIndex: $bestIndex, error: $maxErrorUs'
+          ', bestPeriodUs: $bestPeriodUs'
+          ' vs $_expectedMeasurePeriodUs us');
+      bestBpm = 60 ~/  bestPeriodUs;
+    }
+
+    //  toss stale samples
+    while ((_tapUs.last - _tapUs.first) > _confirmations * _expectedMeasurePeriodUs * (1 + _looseTolerance)) {
+      _tapUs.removeFirst();
+    }
+  }
+
+  int _tapErrorUsAtIndex(final int index) {
+    //  reject obviously bad conditions
+    if (index < 1 || index >= _tapUs.length || _tapUs.length < _confirmations + 1) return _maxError;
+
+    //  compute the implied period in us
+    _periodUs = _tapUs.elementAt(index) - _tapUs.first;
+    if (_periodUs <= 0) return _maxError; //  should never happen
+
+    //  see if the implied period is roughly sane
+    if (_periodUs < _expectedMeasurePeriodUs * (1.0 - _looseTolerance) ||
+        _periodUs > _expectedMeasurePeriodUs * (1.0 + _looseTolerance)) {
+      return _maxError;
+    }
+
+    //  try to find this period in the data
+    int count = 1;
+    int maxErrorFound = 0;
+    int firstUs = _tapUs.first;
+    int tapUs = _tapUs.elementAt(index);
+    int errorLimit = (_tightTolerance * _periodUs).floor().toInt();
+    int target = firstUs + (count + 1) * _periodUs;
+    for (int i = index + 1;
+        i < _tapUs.length //  only look at existing data
+            &&
+            count < _confirmations; //  don't need more than the minimum confirmations
+        i++) {
+      //  compute the tempo error
+      tapUs = _tapUs.elementAt(i);
+      final int error = tapUs - target;
+
+      if (error < -errorLimit) {
+        continue; //  too early
+      } else if (error > errorLimit) {
+        //  too late now, will never get better, not this pass!
+        return _maxError;
+      }
+      //  record the roughest match
+      if (error > maxErrorFound) {
+        maxErrorFound = error;
+      }
+
+      //  increment for next match
+      count++;
+      target = firstUs + (count + 1) * _periodUs;
+    }
+
+    //  return the max passing error... or a failure max error
+    return count < _confirmations ? _maxError : maxErrorFound;
+  }
+
   @override
   String toString() {
     return '$isSignal for $_samplesInState, lastHertz: $_lastHertz';
@@ -105,12 +208,33 @@ class ProcessTempo {
   int _lastSignalCount = 0;
   int _samplesNotInstateCount = 0;
   int _samplesNotInstateSum = 0;
+  final Queue<int> _tapUs = Queue();
 
   int get instateMaxAmp => _instateMaxAmp;
   int _instateMaxAmp = 0;
 
   double get samplesNotInstateAverage => _samplesNotInstateAverage;
   double _samplesNotInstateAverage = 0;
+
+  set expectedBpm(final int givenBpm) {
+    _expectedBpm = givenBpm > 0 ? givenBpm : 2;
+    _computeExpectedPeriodUs();
+  }
+
+  set beatsPerMeasure(final int beats) {
+    _beatsPerMeasure = beats < 2 ? 2 : beats;
+    _computeExpectedPeriodUs();
+  }
+
+  _computeExpectedPeriodUs() {
+    _expectedMeasurePeriodUs = (_beatsPerMeasure * Duration.microsecondsPerSecond * 60) ~/ _expectedBpm;
+  }
+
+  int _expectedBpm = 2;
+  int _beatsPerMeasure = 4; //  default only
+  int bestBpm = 0;
+  int _periodUs = -1;
+  int _expectedMeasurePeriodUs = 1;
 
   int get bpm => (_lastHertz * 60.0).round();
 

@@ -55,7 +55,7 @@ void main() {
             value = (amp * sin(2 * pi * f * index / sampleRate)).toInt();
           }
 
-          processTempo.processTempo(value);
+          processTempo.processNewTempo(value);
           logger.log(
               _logDetail,
               'sample $sample: ${value.toStringAsFixed(2).padLeft(9)}'
@@ -98,7 +98,7 @@ void main() {
     for (int sample = 0; sample < 4 * sampleRate; sample++) {
       int value = 0;
 
-      processTempo.processTempo(value);
+      processTempo.processNewTempo(value);
       logger.log(
           _logDetail,
           'sample $sample: ${value.toStringAsFixed(2).padLeft(9)}'
