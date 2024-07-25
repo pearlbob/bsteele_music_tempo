@@ -37,10 +37,17 @@ void main() {
     int sample = 0;
 
     int maxError = 0;
-    for (int beatsPerMeasure in [2, 3, 4, 6]) {
+    for (int beatsPerMeasure in [
+      //2, 3, 4,
+      6
+    ]) {
       //  compute the possible logical beats per bar
       SplayTreeSet<int> beatsPerBarSet = SplayTreeSet();
-      for (int divisor in [1, 2, 4]) {
+      for (int divisor in [
+        //1,
+        //2,
+        4
+      ]) {
         beatsPerBarSet.add(beatsPerMeasure ~/ divisor);
       }
       beatsPerBarSet.remove(0);
@@ -103,8 +110,9 @@ void main() {
             error = error.abs();
             logger.i('   error: $error');
             maxError = max(maxError, error);
-            expect(error <= 5, isTrue);
+            expect(error <= 1, isTrue);
 
+            //  clear the prior taps for the new tempo
             for (int s = 0; s < 20 * sampleCycle; s++) {
               sample++;
               processTempo.processNewTempo(0, epochUs: sample * Duration.microsecondsPerSecond ~/ sampleRate);

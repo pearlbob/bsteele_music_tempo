@@ -9,7 +9,7 @@ import 'package:logger/logger.dart';
 import 'app_logger.dart';
 import 'audio_configuration.dart';
 
-const Level _logDetail = Level.debug;
+const Level _logDetail = Level.info;
 
 const _tightTolerance = 0.08; //  the operator has to be regular... or we'll follow junk tempos
 const _looseTolerance = 0.2; //  worry about every beat tap & accepting a short period
@@ -20,7 +20,7 @@ typedef VoidCallback = void Function();
 
 class ProcessTempo {
   ProcessTempo() {
-    _computeExpectedPeriodUs();
+    _clearExpectedPeriodUs();
   }
 
   processNewTempo(final int value, {int? epochUs}) {
@@ -56,8 +56,9 @@ class ProcessTempo {
             //  exclude out bad tempos
             _lastHertz = sampleRate / _samplesInState;
             //  note that a slow tempo can be expected, eg. a 4/4 song at 50 bpm with beats on 2 only
+            //  or as fast as every beat
             if (_lastHertz >= ((1 - _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure) &&
-                _lastHertz <= ((1 + _looseTolerance) * MusicConstants.maxBpm) / (60 * _beatsPerMeasure)) {
+                _lastHertz <= ((1 + _looseTolerance) * MusicConstants.maxBpm) / 60 ) {
               if (_samplesNotInstateCount > 0) {
                 _samplesNotInstateAverage = _samplesNotInstateSum / _samplesNotInstateCount;
               }
@@ -78,6 +79,8 @@ class ProcessTempo {
 
               _lastSamplesInState = _samplesInState;
               _maxDeltaUs = 0;
+            } else {
+              logger.i('out of hertz range: $_lastHertz');
             }
           }
 
@@ -170,9 +173,11 @@ class ProcessTempo {
     if (_periodUs <= 0) return _maxError; //  should never happen
 
     //  see if the implied period is roughly sane
-    if (_periodUs < _expectedMeasurePeriodUs * (1.0 - _looseTolerance) ||
-        _periodUs > _expectedMeasurePeriodUs * (1.0 + _looseTolerance)) {
-      return _maxError;
+    if (_expectedPeriodUsIsValid()) {
+      if (_periodUs < _expectedMeasurePeriodUs * (1.0 - _looseTolerance) ||
+          _periodUs > _expectedMeasurePeriodUs * (1.0 + _looseTolerance)) {
+        return _maxError;
+      }
     }
 
     //  try to find this period in the data
@@ -247,6 +252,14 @@ class ProcessTempo {
 
   _computeExpectedPeriodUs() {
     _expectedMeasurePeriodUs = (_beatsPerMeasure * Duration.microsecondsPerSecond * 60) ~/ _expectedBpm;
+  }
+
+  _clearExpectedPeriodUs() {
+    _expectedMeasurePeriodUs = 1;
+  }
+
+  _expectedPeriodUsIsValid() {
+    return _expectedMeasurePeriodUs > 1;
   }
 
   static const defaultBpm = 120;
