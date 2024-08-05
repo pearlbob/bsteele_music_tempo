@@ -30,24 +30,14 @@ void main() {
       }
     };
 
-    //  notice that the same process temp measures all of them.
-    //  so the initial measure can be quite wrong
-
     double f = 180.0; //  tone pitch
     int sample = 0;
 
     int maxError = 0;
-    for (int beatsPerMeasure in [
-      //2, 3, 4,
-      6
-    ]) {
+    for (int beatsPerMeasure in [2, 3, 4, 6]) {
       //  compute the possible logical beats per bar
       SplayTreeSet<int> beatsPerBarSet = SplayTreeSet();
-      for (int divisor in [
-        //1,
-        //2,
-        4
-      ]) {
+      for (int divisor in [1, 2, 4]) {
         beatsPerBarSet.add(beatsPerMeasure ~/ divisor);
       }
       beatsPerBarSet.remove(0);
@@ -119,7 +109,7 @@ void main() {
             }
           }
 
-          // logger.i('');
+          logger.i('');
         }
       }
     }

@@ -11,8 +11,7 @@ import 'audio_configuration.dart';
 
 const Level _logDetail = Level.info;
 
-const _tightTolerance = 0.08; //  the operator has to be regular... or we'll follow junk tempos
-const _looseTolerance = 0.2; //  worry about every beat tap & accepting a short period
+
 const _confirmations = 2;
 final _maxError = double.maxFinite.toInt();
 
@@ -247,6 +246,7 @@ class ProcessTempo {
 
   set beatsPerMeasure(final int beats) {
     _beatsPerMeasure = beats < 2 ? 2 : beats;
+    _looseTolerance = _beatsPerMeasure < 6 ? _looseTolerance234: _looseTolerance6;
     _computeExpectedPeriodUs();
   }
 
@@ -278,6 +278,11 @@ class ProcessTempo {
   bool verbose = false;
 
   VoidCallback? callback; //  callback on valid data, i.e. a new bpm
+
+  static const _tightTolerance = 0.08; //  the operator has to be regular... or we'll follow junk tempos
+  static const _looseTolerance234 = 0.225;//  worry about every beat tap & accepting a short period
+  static const _looseTolerance6 = 0.16;
+  double _looseTolerance =_looseTolerance234;
 
   static const _minimumHertz = 40;
   static const int _hysteresisMinimumSamples = sampleRate ~/ _minimumHertz;
