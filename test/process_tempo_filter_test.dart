@@ -78,7 +78,7 @@ void main() {
                 value = (amp * sin(2 * pi * f * index / sampleRate)).toInt();
               }
 
-              processTempo.processNewTempo(value, epochUs: sample * Duration.microsecondsPerSecond ~/ sampleRate);
+              processTempo.processNewTempo(value, epochUs: sample * Duration.microsecondsPerSecond / sampleRate);
               logger.log(
                   _logDetail,
                   'sample $sample: ${value.toStringAsFixed(2).padLeft(9)}'
@@ -105,7 +105,7 @@ void main() {
             //  clear the prior taps for the new tempo
             for (int s = 0; s < 20 * sampleCycle; s++) {
               sample++;
-              processTempo.processNewTempo(0, epochUs: sample * Duration.microsecondsPerSecond ~/ sampleRate);
+              processTempo.processNewTempo(0, epochUs: sample * Duration.microsecondsPerSecond / sampleRate);
             }
           }
 

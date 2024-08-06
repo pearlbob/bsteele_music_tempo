@@ -167,13 +167,15 @@ processTempoCallback() {
     bpm = processTempo.bestBpm;
     var songUpdate = SongUpdate(user: songUpdateService.user, currentBeatsPerMinute: bpm);
     if (isWebsocket) songUpdateService.issueSongUpdate(songUpdate, force: true);
-    print('${DateTime.now()}: bpm: ${songUpdate.currentBeatsPerMinute}');
+    print('${DateTime.now()}: bestBpm: ${processTempo.bestBpm}');
   }
 }
 
 /// not required for this feature
 void webSocketCallback(SongUpdate songUpdate) {
-  if (verbose) print('webSocketCallback: $songUpdate');
+  if (verbose) print('webSocketCallback: $songUpdate, bpm: ${songUpdate.song.beatsPerMinute}');
+  processTempo.expectedBpm = songUpdate.song.beatsPerMinute;
+  processTempo.beatsPerMeasure = songUpdate.song.beatsPerBar;
 }
 
 int bpm = 0;
