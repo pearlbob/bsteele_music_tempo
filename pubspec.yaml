@@ -5,12 +5,14 @@ publish_to: none
 # repository: https://github.com/my_org/my_repo
 
 environment:
-  sdk: ^3.4.4
+  sdk: ^3.5.0
 
 # Add regular dependencies here.
 dependencies:
   logger:
   args:
+  bsteele_bass_common:
+    path: ../bsteele_bass_common
   bsteele_music_lib:
     path: ../bsteeleMusicLib/bsteele_music_lib
 

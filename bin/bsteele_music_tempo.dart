@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:args/args.dart';
+import 'package:bsteele_bass_common/low_pass_filter.dart';
 import 'package:bsteele_music_lib/songs/song_update.dart';
 import 'package:bsteele_music_lib/util/song_update_service.dart';
 import 'package:bsteele_music_tempo/audio_configuration.dart';
@@ -16,6 +17,7 @@ bool isWebsocket = true;
 
 SongUpdateService songUpdateService = SongUpdateService();
 final ProcessTempo processTempo = ProcessTempo();
+LowPassFilter400Hz _lowPass400 = LowPassFilter400Hz();
 
 ArgParser buildParser() {
   return ArgParser()
@@ -135,7 +137,7 @@ Future<void> runArecord() async {
     'arecord',
     [
       '-v',
-      '-c2',
+      '-c$channels',
       '-r',
       sampleRate.toString(),
       '-f',
@@ -152,11 +154,20 @@ Future<void> runArecord() async {
   processTempo.verbose = verbose;
   streamController.stream.listen((data) {
     var bytes = Uint8List.fromList(data);
+    var byteData = bytes.buffer.asByteData();
     for (int i = 0;
         i < data.length;
-        i += 2 * 2 //  2 bytes per sample but only use one channel
+        i += bitDepthBytes * channels //  bytes per sample but only use one channel
         ) {
-      processTempo.processNewTempo(bytes.buffer.asByteData().getInt16(i, Endian.little));
+      //  add signals in case only one of the stereo channels is active
+      int value = 0;
+      for (var channel = 0; channel < channels; channel++) {
+        value += byteData.getInt16(i + channel * bitDepthBytes, Endian.little);
+      }
+      //  filter out noise
+   //   value = _lowPass400.process(value.toDouble()).toInt();
+
+      processTempo.processNewTempo(value);
     }
   }, cancelOnError: false);
   process.stdout.pipe(streamController);
@@ -165,9 +176,11 @@ Future<void> runArecord() async {
 processTempoCallback() {
   if (processTempo.bestBpm != bpm) {
     bpm = processTempo.bestBpm;
-    var songUpdate = SongUpdate(user: songUpdateService.user, currentBeatsPerMinute: bpm);
+    var songUpdate =
+        SongUpdate(state: SongUpdateState.drumTempo, user: songUpdateService.user, currentBeatsPerMinute: bpm);
     if (isWebsocket) songUpdateService.issueSongUpdate(songUpdate, force: true);
-    print('${DateTime.now()}: bestBpm: ${processTempo.bestBpm}');
+    print('${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
+        ' @ ${processTempo.instateMaxAmp}');
   }
 }
 
