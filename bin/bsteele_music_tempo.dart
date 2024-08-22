@@ -174,13 +174,15 @@ Future<void> runArecord() async {
 }
 
 processTempoCallback() {
-  if (processTempo.bestBpm != bpm) {
+  if (processTempo.bestBpm != bpm  || processTempo.tapsPerMeasure != tpm ) {
     bpm = processTempo.bestBpm;
+    tpm = processTempo.tapsPerMeasure;
     var songUpdate =
         SongUpdate(state: SongUpdateState.drumTempo, user: songUpdateService.user, currentBeatsPerMinute: bpm);
     if (isWebsocket) songUpdateService.issueSongUpdate(songUpdate, force: true);
     print('${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
-        ' @ ${processTempo.instateMaxAmp}');
+        ' @ ${processTempo.instateMaxAmp}'
+        ', tpm: ${processTempo.tapsPerMeasure}');
   }
 }
 
@@ -192,6 +194,7 @@ void webSocketCallback(SongUpdate songUpdate) {
 }
 
 int bpm = 0;
+int tpm = 0;  //  taps per measure as read
 const targetDevice = 'Plugable USB Audio Device'; //  known misspelling
 final cardLineRegExp = RegExp(r'^card\s+([0-9]+):\s+\w+\s+\['
     '$targetDevice'

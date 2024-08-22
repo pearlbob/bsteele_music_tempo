@@ -132,41 +132,46 @@ class ProcessTempo {
     //   print('${_tapUs.elementAt(1) - _tapUs.first}');
     // }
 
-    //  find the best fit for the first sample
-    // print('_processSample($epochUs):  length: ${_tapUs.length}');
-    int maxErrorUs = _maxError;
-    int bestIndex = -1;
-    int bestPeriodUs = -1;
-    for (var i = 1; i < _tapUs.length - _confirmations; i++) {
-      int errorUs = _tapErrorUsAtIndex(i);
-      // print('_tapErrorUsAtIndex($i): $errorUs');
-      if (errorUs < maxErrorUs) {
-        bestIndex = i;
-        bestPeriodUs = _periodUs;
-        maxErrorUs = errorUs;
+    //  find the max tempo error
+    int maxError = -1;
+    int periodUs = 1;
+    if (_tapUs.length > 1 + _confirmations) {
+      int nextElement = _tapUs.elementAt(1);
+      int lastElement = _tapUs.first;
+      periodUs = nextElement - lastElement;
+      lastElement = nextElement;
+
+      for (var i = 2; i < _tapUs.length; i++) {
+        nextElement = _tapUs.elementAt(i);
+        int nextPeriodUs = nextElement - lastElement;
+        int errorUs = (nextPeriodUs - periodUs).abs();
+        maxError = max(maxError, errorUs);
+         // print('errorUsAtIndex($i): $errorUs/$maxError, period: $nextPeriodUs vs $periodUs');
+        lastElement = nextElement;
       }
     }
-    if (bestIndex > 0) {
-      bestBpm = ((60 * Duration.microsecondsPerSecond * _beatsPerMeasure) / bestPeriodUs).round();
-      // if (verbose) {
-      //   print('bestBpm: ${(60 * Duration.microsecondsPerSecond * _beatsPerMeasure) / bestPeriodUs}'
-      //       ', _beatsPerMeasure: $_beatsPerMeasure'
-      //       ', bestPeriodUs: $bestPeriodUs'
-      //       ', bestIndex: $bestIndex'
-      //       ', maxErrorUs: $maxErrorUs'
-      //       ', _expectedMeasurePeriodUs: $_expectedMeasurePeriodUs');
-      // }
+
+    //  find the taps per measure
+    tapsPerMeasure = (_expectedMeasurePeriodUs / periodUs).round();
+    tapsPerMeasure = min(tapsPerMeasure,_beatsPerMeasure);
+
+    //  deliver the result if valid
+    if (maxError >= 0 && maxError < _expectedMeasurePeriodUs / tapsPerMeasure //  fewer taps implies more tolerance
+        * _tightTolerance) {
+      bestBpm = (60 * Duration.microsecondsPerSecond * _beatsPerMeasure / ( tapsPerMeasure * periodUs)).round();
 
       // notify of a new value
       callback?.call();
 
-      if (verbose) {
-        print('   bestIndex: $bestIndex, error: ${maxErrorUs.toString().padLeft(6)}'
-            ', beatsPerMeasure: $_beatsPerMeasure'
-            ', bestPeriodUs: $bestPeriodUs/$_expectedMeasurePeriodUs = $bestBpm bpm');
-      }
-      // print('delta: $epochUs: ${epochUs - _tapUs.last} us'
-      //     ' = ${((epochUs - _tapUs.last) / Duration.microsecondsPerSecond).toStringAsFixed(3)} s');
+      // print('error: $maxError, tapsPerMeasure: $tapsPerMeasure, period: $periodUs'
+      //     ' = ${periodUs / Duration.microsecondsPerSecond} s'
+      //     ' = ${Duration.microsecondsPerSecond / periodUs} hz'
+      //     ' = $bestBpm bpm');
+    }
+    else {
+      // print('error: $maxError: out of bounds, tapsPerMeasure: $tapsPerMeasure'
+      //     ' , taps: ${_tapUs.length}'
+      //     ' , limit: ${_expectedMeasurePeriodUs / tapsPerMeasure * _tightTolerance}');
     }
 
     //  toss stale samples
@@ -177,82 +182,40 @@ class ProcessTempo {
     //     ', $_confirmations * $_expectedMeasurePeriodUs');
   }
 
-  int _tapErrorUsAtIndex(final int index) {
-    //  reject obviously bad conditions
-    if (index < 1 || index >= _tapUs.length || _tapUs.length < _confirmations + 1) {
-      return _maxError;
-    }
-
-    //  compute the implied period in us
-    final int firstUs = _tapUs.first;
-    _periodUs = _tapUs.elementAt(index) - firstUs;
-    // print('$index: $_periodUs/$_expectedMeasurePeriodUs'
-    //     ' = ${_periodUs/_expectedMeasurePeriodUs}');
-    if (_periodUs <= 0) {
-      return _maxError; //  should never happen
-    }
-
-    //  see if the implied period is roughly sane
-    if (_expectedPeriodUsIsValid()) {
-      if (_periodUs < _expectedMeasurePeriodUs * (1.0 - _looseTolerance)) {
-        // print( 'too fast: $_periodUs < $_expectedMeasurePeriodUs * ${(1.0 - _looseTolerance)}');
-        return _maxError;
-      }
-      if (_periodUs > _expectedMeasurePeriodUs * (1.0 + _looseTolerance)) {
-        // print( 'too slow: $_periodUs < $_expectedMeasurePeriodUs * ${(1.0 + _looseTolerance)}');
-        return _maxError;
-      }
-    } else {
-      return _maxError;
-    }
-
-    //  try to find this period in the data
-    int count = 1;
-    int maxErrorFound = 0;
-    int errorLimitUs = (_tightTolerance * _periodUs).floor().toInt();
-    int target = firstUs + (count + 1) * _periodUs;
-    int beats = 1;
-    for (int i = index + 1;
-        i < _tapUs.length //  only look at existing data
-            &&
-            count < _confirmations; //  don't need more than the minimum confirmations
-        i++) {
-
-      //  compute the tempo error
-    int  tapElementUs = _tapUs.elementAt(i);
-      final int errorUs = tapElementUs - target;
-
-      // print( 'errorUs $i: ${-errorLimitUs} < $errorUs < $errorLimitUs');
-      if (errorUs < -errorLimitUs) {
-        beats++;
-        continue; //  too early
-      } else if (errorUs > errorLimitUs) {
-        //  too late now, will never get better, not this pass!
-        return _maxError;
-      }
-      //  record the roughest match
-      if (errorUs.abs() > maxErrorFound) {
-        maxErrorFound = errorUs.abs();
-      }
-
-      //  break if we've seen too many attempts, i.e. beats per bar or more
-      if ( beats > _beatsPerMeasure ){
-        break;
-      }
-
-      //  increment for next match
-      count++;
-      target = firstUs + (count + 1) * _periodUs;
-      beats = 1;
-    }
-
-    if (maxErrorFound > errorLimitUs) {
-      return maxErrorFound;
-    }
-
-    //  return the max passing error... or a failure max error
-    return count < _confirmations ? _maxError : maxErrorFound;
-  }
+  // int _tapErrorUsAtIndex(final int index) {
+  //   //  reject obviously bad conditions
+  //   if (index < 1 || index >= _tapUs.length || _tapUs.length < _confirmations + 1) {
+  //     return _maxError;
+  //   }
+  //
+  //   if (index > 1) {
+  //     return _maxError;
+  //   }
+  //
+  //   //  compute the implied period in us
+  //   final int firstUs = _tapUs.first;
+  //   _periodUs = _tapUs.elementAt(index) - firstUs;
+  //   print('$index: $_periodUs/$_expectedMeasurePeriodUs'
+  //       ' = ${_periodUs / _expectedMeasurePeriodUs}');
+  //   if (_periodUs <= 0) {
+  //     return _maxError; //  should never happen
+  //   }
+  //
+  //   //  try to find this period in the data
+  //   int count = 1;
+  //   int maxErrorFound = 0;
+  //   int errorLimitUs = (_tightTolerance * _periodUs).floor().toInt();
+  //   int target = firstUs + (count + 1) * _periodUs;
+  //   int beats = 1;
+  //   for (int i = index + 1;
+  //       i < _tapUs.length //  only look at existing data
+  //           &&
+  //           count < _confirmations; //  don't need more than the minimum confirmations
+  //       i++) {}
+  //
+  //   //  return the max passing error... or a failure max error
+  //   return 0;
+  // }
 
   @override
   String toString() {
@@ -304,8 +267,9 @@ class ProcessTempo {
 
   static const defaultBpm = 120;
   int _expectedBpm = defaultBpm;
-  int _beatsPerMeasure = 4; //  default only
+  int _beatsPerMeasure = 4; //  default only value
   int bestBpm = 0;
+  int tapsPerMeasure = 0;
   int _periodUs = -1;
   int _expectedMeasurePeriodUs = 1;
 

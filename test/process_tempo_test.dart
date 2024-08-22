@@ -117,6 +117,7 @@ void main() {
   });
 
   test('test process fast tempo', () {
+    Logger.level = Level.info;
     logger.i('test process fast tempo');
 
     logger.i('fixme');
@@ -124,45 +125,53 @@ void main() {
     double f = 180.0; //  tone pitch
     final ampMax = 1 << (bitDepth - 1);
     double toneFraction = 0.15;
+    final int beatsPerMeasure = 4;
 
-    for (int currentBpm = 110; currentBpm <
-         146;
-    currentBpm += 1) {
-      ProcessTempo processTempo = ProcessTempo();
-      processTempo.expectedBpm = 120; //  limit the range allowed
-      processTempo.beatsPerMeasure = 4;
-      processTempo.verbose = true;
+    ProcessTempo processTempo = ProcessTempo();
+    processTempo.callback = () {
+      print('callback: bpm: ${processTempo.bestBpm}, tpm: ${processTempo.tapsPerMeasure}');
+    };
+    processTempo.expectedBpm = 120; //  limit the range allowed
+    processTempo.beatsPerMeasure = beatsPerMeasure;
+    processTempo.verbose = true;
 
-      logger.i('currentBpm: $currentBpm, $processTempo');
+    int sample = 0;
+    for (int currentBpm = 105; currentBpm < 150; currentBpm += 1) {
+      for (int tapsPerMeasure in [1, 2, beatsPerMeasure]) {
+        logger.i('currentBpm: $currentBpm, $processTempo');
 
-      bool lastInSignal = false;
-      double periodS = 60 / currentBpm;
-      int sampleCycle = (sampleRate * periodS).toInt();
-      int samplesOn = (sampleCycle * toneFraction).toInt();
+        bool lastInSignal = false;
+        double periodS = 60 * beatsPerMeasure / (tapsPerMeasure * currentBpm);
+        logger.i('currentBpm: $currentBpm, taps: $tapsPerMeasure => periodS $periodS = ${1 / periodS} hz');
+        int sampleCycle = (sampleRate * periodS).toInt();
+        int samplesOn = (sampleCycle * toneFraction).toInt();
 
-      for (int sample = 0; sample < 8 * sampleRate; sample++) {
-        int value = 0;
-        var amp = (sample % sampleCycle < samplesOn) ? ampMax : 0;
+        int sampleEnd = sample + 16 * sampleRate;
+        print('sampleEnd: $sampleEnd');
+        for (; sample < sampleEnd; sample++) {
+          int value = 0;
+          var amp = (sample % sampleCycle < samplesOn) ? ampMax : 0;
 
-        //  generate a pulse train every bpm
-        value = (amp * sin(2 * pi * f * sample / sampleRate)).toInt();
+          //  generate a pulse train every bpm
+          value = (amp * sin(2 * pi * f * sample / sampleRate)).toInt();
 
-        processTempo.processNewTempo(value, epochUs: sample * Duration.microsecondsPerSecond / sampleRate);
-        logger.log(
-            _logDetail,
-            'sample: $sample: ${value.toStringAsFixed(2).padLeft(9)}'
-            ' $processTempo');
-
-        if (lastInSignal != processTempo.isSignal) {
-          lastInSignal = processTempo.isSignal;
+          processTempo.processNewTempo(value, epochUs: sample * Duration.microsecondsPerSecond / sampleRate);
           logger.log(
-              _logSummary,
-              'sample ${sample.toString().padLeft(9)} = ${(sample / sampleRate).toStringAsFixed(3)}s:'
-              ' ${value.toStringAsFixed(2).padLeft(8)}'
+              _logDetail,
+              'sample: $sample: ${value.toStringAsFixed(2).padLeft(9)}'
               ' $processTempo');
+
+          if (lastInSignal != processTempo.isSignal) {
+            lastInSignal = processTempo.isSignal;
+            logger.log(
+                _logSummary,
+                'sample ${sample.toString().padLeft(9)} = ${(sample / sampleRate).toStringAsFixed(3)}s:'
+                ' ${value.toStringAsFixed(2).padLeft(8)}'
+                ' $processTempo');
+          }
         }
+        expect(processTempo.bestBpm, currentBpm);
       }
-      expect(processTempo.bestBpm, currentBpm);
     }
   });
 }
