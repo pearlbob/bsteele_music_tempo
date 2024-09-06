@@ -20,7 +20,7 @@ class ProcessTempo {
   ProcessTempo() {
     //  default setup to run without supervision
     expectedBpm = defaultBpm;
-    beatsPerMeasure = 4;
+    beatsPerMeasure = 4; //  default only
   }
 
   processNewTempo(final int value, {double? epochUs}) {
@@ -146,19 +146,29 @@ class ProcessTempo {
         int nextPeriodUs = nextElement - lastElement;
         int errorUs = (nextPeriodUs - periodUs).abs();
         maxError = max(maxError, errorUs);
-         // print('errorUsAtIndex($i): $errorUs/$maxError, period: $nextPeriodUs vs $periodUs');
+        // print('errorUsAtIndex($i): $errorUs/$maxError, period: $nextPeriodUs vs $periodUs');
         lastElement = nextElement;
       }
     }
 
     //  find the taps per measure
     tapsPerMeasure = (_expectedMeasurePeriodUs / periodUs).round();
-    tapsPerMeasure = min(tapsPerMeasure,_beatsPerMeasure);
+    tapsPerMeasure = min(tapsPerMeasure, _beatsPerMeasure);
+
+    //  insist on reasonable multiples: 1, 2, or beats per measure
+    if (tapsPerMeasure < _beatsPerMeasure && tapsPerMeasure != 1) {
+      //  tapping 3 out of 4 or 3 over 6 beats doesn't work
+      tapsPerMeasure = 2;
+    }
 
     //  deliver the result if valid
-    if (maxError >= 0 && maxError < _expectedMeasurePeriodUs / tapsPerMeasure //  fewer taps implies more tolerance
-        * _tightTolerance) {
-      bestBpm = (60 * Duration.microsecondsPerSecond * _beatsPerMeasure / ( tapsPerMeasure * periodUs)).round();
+    if (maxError >= 0 &&
+        maxError <
+            _expectedMeasurePeriodUs /
+                tapsPerMeasure //  fewer taps implies more tolerance
+                *
+                _tightTolerance) {
+      bestBpm = (60 * Duration.microsecondsPerSecond * _beatsPerMeasure / (tapsPerMeasure * periodUs)).round();
 
       // notify of a new value
       callback?.call();
@@ -167,8 +177,7 @@ class ProcessTempo {
       //     ' = ${periodUs / Duration.microsecondsPerSecond} s'
       //     ' = ${Duration.microsecondsPerSecond / periodUs} hz'
       //     ' = $bestBpm bpm');
-    }
-    else {
+    } else {
       // print('error: $maxError: out of bounds, tapsPerMeasure: $tapsPerMeasure'
       //     ' , taps: ${_tapUs.length}'
       //     ' , limit: ${_expectedMeasurePeriodUs / tapsPerMeasure * _tightTolerance}');
@@ -267,10 +276,11 @@ class ProcessTempo {
 
   static const defaultBpm = 120;
   int _expectedBpm = defaultBpm;
+
+  int get beatsPerMeasure => _beatsPerMeasure;
   int _beatsPerMeasure = 4; //  default only value
   int bestBpm = 0;
   int tapsPerMeasure = 0;
-  int _periodUs = -1;
   int _expectedMeasurePeriodUs = 1;
 
   double get hertz => _lastHertz;
@@ -281,7 +291,7 @@ class ProcessTempo {
   VoidCallback? callback; //  callback on valid data, i.e. a new bpm
 
   static const _tightTolerance = 0.08; //  the operator has to be regular... or we'll follow junk tempos
-  static const _looseTolerance234 = 0.19; //  worry about every beat tap & accepting a short period
+  static const _looseTolerance234 = 0.3; //  worry about every beat tap & accepting a short period
   static const _looseTolerance6 = 0.16; //  worry about 6 beats per bar being misunderstood.
   double _looseTolerance = _looseTolerance234;
 

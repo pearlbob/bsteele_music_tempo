@@ -48,7 +48,7 @@ else
 	rm -rf .gradle
 	rm -rf linux
 	dart pub get
-  dart compile exe --target-os linux bin/bsteele_music_tempo.dart
+  dart compile exe --target-os linux lib/bsteele_music_tempo.dart
 	set stat=$status
 	if ( $stat != 0 ) exit $stat
 

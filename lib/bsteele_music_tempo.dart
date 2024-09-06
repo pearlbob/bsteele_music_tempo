@@ -14,6 +14,7 @@ const String version = '0.0.1';
 String host = 'cj.local';
 bool verbose = false;
 bool isWebsocket = true;
+bool isWebsocketFeedback = true;
 
 SongUpdateService songUpdateService = SongUpdateService();
 final ProcessTempo processTempo = ProcessTempo();
@@ -33,8 +34,14 @@ ArgParser buildParser() {
       help: 'Select the host server by name.',
     )
     ..addFlag(
-      'nowebsocket',
+      'noWebsocketFeedback',
       abbr: 'w',
+      negatable: false,
+      help: 'Turn the websocket feedback off back to host.',
+    )
+    ..addFlag(
+      'nowebsocket',
+      abbr: 'W',
       negatable: false,
       help: 'Turn the websocket interface off.',
     )
@@ -67,6 +74,9 @@ void main(List<String> arguments) async {
     if (results.wasParsed('help')) {
       printUsage(argParser);
       return;
+    }
+    if (results.wasParsed('noWebsocketFeedback')) {
+      isWebsocketFeedback = false;
     }
     if (results.wasParsed('nowebsocket')) {
       isWebsocket = false;
@@ -120,7 +130,7 @@ Future<void> runArecord() async {
     ],
   ).then((value) {
     for (var s in value.stdout.toString().split('\n')) {
-      var m = cardLineRegExp.firstMatch(s);
+      var m = _cardLineRegExp.firstMatch(s);
       if (m != null) {
         assert(m.groupCount == 2);
         deviceName = 'hw:${m.group(1)},${m.group(2)}';
@@ -165,7 +175,7 @@ Future<void> runArecord() async {
         value += byteData.getInt16(i + channel * bitDepthBytes, Endian.little);
       }
       //  filter out noise
-   //   value = _lowPass400.process(value.toDouble()).toInt();
+      value = _lowPass400.process(value.toDouble()).toInt();
 
       processTempo.processNewTempo(value);
     }
@@ -174,28 +184,28 @@ Future<void> runArecord() async {
 }
 
 processTempoCallback() {
-  if (processTempo.bestBpm != bpm  || processTempo.tapsPerMeasure != tpm ) {
-    bpm = processTempo.bestBpm;
-    tpm = processTempo.tapsPerMeasure;
+  if (processTempo.bestBpm != _bpm  || processTempo.tapsPerMeasure != _tpm ) {
+    _bpm = processTempo.bestBpm;
+    _tpm = processTempo.tapsPerMeasure;
     var songUpdate =
-        SongUpdate(state: SongUpdateState.drumTempo, user: songUpdateService.user, currentBeatsPerMinute: bpm);
-    if (isWebsocket) songUpdateService.issueSongUpdate(songUpdate, force: true);
+        SongUpdate(state: SongUpdateState.drumTempo, user: songUpdateService.user, currentBeatsPerMinute: _bpm);
+    if (isWebsocketFeedback) songUpdateService.issueSongUpdate(songUpdate, force: true);
     print('${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
         ' @ ${processTempo.instateMaxAmp}'
-        ', tpm: ${processTempo.tapsPerMeasure}');
+        ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}');
   }
 }
 
 /// not required for this feature
-void webSocketCallback(SongUpdate songUpdate) {
-  if (verbose) print('webSocketCallback: $songUpdate, bpm: ${songUpdate.song.beatsPerMinute}');
-  processTempo.expectedBpm = songUpdate.song.beatsPerMinute;
+void webSocketCallback(final SongUpdate songUpdate) {
+  if (verbose) print('webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}');
+  processTempo.expectedBpm = songUpdate.currentBeatsPerMinute;
   processTempo.beatsPerMeasure = songUpdate.song.beatsPerBar;
 }
 
-int bpm = 0;
-int tpm = 0;  //  taps per measure as read
-const targetDevice = 'Plugable USB Audio Device'; //  known misspelling
-final cardLineRegExp = RegExp(r'^card\s+([0-9]+):\s+\w+\s+\['
-    '$targetDevice'
+int _bpm = 0;
+int _tpm = 0;  //  taps per measure as read
+const _targetDevice = 'Plugable USB Audio Device'; //  known misspelling
+final _cardLineRegExp = RegExp(r'^card\s+([0-9]+):\s+\w+\s+\['
+    '$_targetDevice'
     r'\],\s+device\s+([0-9]+):'); //
