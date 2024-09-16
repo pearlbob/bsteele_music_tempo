@@ -42,6 +42,7 @@ class ProcessTempo {
           isSignal = false;
           _samplesNotInstateCount = 0;
           _samplesNotInstateSum = 0;
+          _maxAbs = 0;
         }
         break;
       case false:
@@ -97,6 +98,7 @@ class ProcessTempo {
         }
         _samplesNotInstateSum += abs;
         _samplesNotInstateCount++;
+        _maxAbs = max(_maxAbs, abs);
         break;
     }
 
@@ -104,9 +106,11 @@ class ProcessTempo {
 
     //  something has stalled... or there is no signal
     if (_samplesInState > 6 * sampleRate) {
-      print('${DateTime.now()}: $_samplesInState: stalled @ $abs');
+      print('${DateTime.now()}: $_samplesInState: stalled @ $_maxAbs');
+
       _samplesInState = 3 * sampleRate; //  something too slow
       _lastSamplesInState = 0;
+      _maxAbs = 0;
     }
   }
 
@@ -155,10 +159,17 @@ class ProcessTempo {
     tapsPerMeasure = (_expectedMeasurePeriodUs / periodUs).round();
     tapsPerMeasure = min(tapsPerMeasure, _beatsPerMeasure);
 
-    //  insist on reasonable multiples: 1, 2, or beats per measure
+    //  insist on reasonable tap multiples: 1, 2, or beats per measure
     if (tapsPerMeasure < _beatsPerMeasure && tapsPerMeasure != 1) {
       //  tapping 3 out of 4 or 3 over 6 beats doesn't work
-      tapsPerMeasure = 2;
+      switch (_beatsPerMeasure) {
+        case 3:
+          tapsPerMeasure = 1;
+          break;
+        default:
+          tapsPerMeasure = 2;
+          break;
+      }
     }
 
     //  deliver the result if valid
@@ -247,6 +258,8 @@ class ProcessTempo {
 
   int get instateMaxAmp => _instateMaxAmp;
   int _instateMaxAmp = 0;
+  int get outOfStateMaxAmp => _maxAbs;
+  int _maxAbs = 0;
 
   double get samplesNotInstateAverage => _samplesNotInstateAverage;
   double _samplesNotInstateAverage = 0;

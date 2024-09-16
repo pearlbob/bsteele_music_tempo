@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:args/args.dart';
 import 'package:bsteele_bass_common/low_pass_filter.dart';
+import 'package:bsteele_music_lib/songs/song_tempo_update.dart';
 import 'package:bsteele_music_lib/songs/song_update.dart';
 import 'package:bsteele_music_lib/util/song_update_service.dart';
 import 'package:bsteele_music_tempo/audio_configuration.dart';
@@ -107,7 +108,7 @@ void main(List<String> arguments) async {
 
       SongUpdateService.open();
       songUpdateService.user = 'tempo';
-      songUpdateService.callback = webSocketCallback; //  not required
+      songUpdateService.callback = webSocketCallback;
       songUpdateService.host = host;
 
       print('songUpdateService.host: "${songUpdateService.host}"');
@@ -184,27 +185,36 @@ Future<void> runArecord() async {
 }
 
 processTempoCallback() {
-  if (processTempo.bestBpm != _bpm  || processTempo.tapsPerMeasure != _tpm ) {
+  if (processTempo.bestBpm != _bpm || processTempo.tapsPerMeasure != _tpm) {
     _bpm = processTempo.bestBpm;
     _tpm = processTempo.tapsPerMeasure;
-    var songUpdate =
-        SongUpdate(state: SongUpdateState.drumTempo, user: songUpdateService.user, currentBeatsPerMinute: _bpm);
-    if (isWebsocketFeedback) songUpdateService.issueSongUpdate(songUpdate, force: true);
-    print('${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
-        ' @ ${processTempo.instateMaxAmp}'
-        ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}');
+    if (_songTempoUpdate != null) {
+      var songTempoUpdate = SongTempoUpdate(_songTempoUpdate!.songId, _bpm);
+      if (isWebsocketFeedback) {
+        songUpdateService.issueSongTempoUpdate(songTempoUpdate);
+      }
+      print('${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
+          ' @ ${processTempo.instateMaxAmp}'
+          ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
+          ', songId: ${songTempoUpdate.songId}');
+    }
   }
 }
 
-/// not required for this feature
+///
 void webSocketCallback(final SongUpdate songUpdate) {
-  if (verbose) print('webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}');
+  if (verbose) {
+    print('webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}'
+        ', songId: ${songUpdate.song.songId}');
+  }
   processTempo.expectedBpm = songUpdate.currentBeatsPerMinute;
   processTempo.beatsPerMeasure = songUpdate.song.beatsPerBar;
+  _songTempoUpdate = SongTempoUpdate(songUpdate.song.songId, songUpdate.currentBeatsPerMinute);
 }
 
+SongTempoUpdate? _songTempoUpdate;
 int _bpm = 0;
-int _tpm = 0;  //  taps per measure as read
+int _tpm = 0; //  taps per measure as read
 const _targetDevice = 'Plugable USB Audio Device'; //  known misspelling
 final _cardLineRegExp = RegExp(r'^card\s+([0-9]+):\s+\w+\s+\['
     '$_targetDevice'
