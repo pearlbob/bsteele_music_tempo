@@ -11,7 +11,6 @@ const Level _logDetail = Level.debug;
 
 const _confirmations = 2;
 const samplePeriodUs = Duration.microsecondsPerSecond / sampleRate;
-final _maxError = double.maxFinite.toInt();
 double lastEpochUs = 0;
 
 typedef VoidCallback = void Function();
@@ -184,10 +183,12 @@ class ProcessTempo {
       // notify of a new value
       callback?.call();
 
-      // print('error: $maxError, tapsPerMeasure: $tapsPerMeasure, period: $periodUs'
-      //     ' = ${periodUs / Duration.microsecondsPerSecond} s'
-      //     ' = ${Duration.microsecondsPerSecond / periodUs} hz'
-      //     ' = $bestBpm bpm');
+      if ( veryVerbose) {
+        print('error: $maxError, amp: $_instateMaxAmp, tapsPerMeasure: $tapsPerMeasure, period: $periodUs'
+          ' = ${periodUs / Duration.microsecondsPerSecond} s'
+          ' = ${Duration.microsecondsPerSecond / periodUs} hz'
+          ' = $bestBpm bpm');
+      }
     } else {
       // print('error: $maxError: out of bounds, tapsPerMeasure: $tapsPerMeasure'
       //     ' , taps: ${_tapUs.length}'
@@ -300,6 +301,7 @@ class ProcessTempo {
   double _lastHertz = 0;
 
   bool verbose = false;
+  bool veryVerbose = false;
 
   VoidCallback? callback; //  callback on valid data, i.e. a new bpm
 

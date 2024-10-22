@@ -14,6 +14,7 @@ import 'package:logger/logger.dart';
 const String version = '0.0.1';
 String host = 'cj.local';
 bool verbose = false;
+bool veryVerbose = false;
 bool isWebsocket = true;
 bool isWebsocketFeedback = true;
 
@@ -50,7 +51,13 @@ ArgParser buildParser() {
       'verbose',
       abbr: 'v',
       negatable: false,
-      help: 'Show additional command output.',
+      help: 'Show verbose command output.',
+    )
+    ..addFlag(
+      'veryVerbose',
+      abbr: 'V',
+      negatable: false,
+      help: 'Show very verbose command output.',
     )
     ..addFlag(
       'version',
@@ -88,6 +95,10 @@ void main(List<String> arguments) async {
     }
     if (results.wasParsed('verbose')) {
       verbose = true;
+    }
+    if (results.wasParsed('veryVerbose')) {
+      verbose = true;
+      veryVerbose = true;
     }
 
     host = results.option('host') ?? 'cj.local';
@@ -163,18 +174,20 @@ Future<void> runArecord() async {
   final StreamController<List<int>> streamController = StreamController();
   processTempo.callback = processTempoCallback;
   processTempo.verbose = verbose;
+  processTempo.veryVerbose = veryVerbose;
   streamController.stream.listen((data) {
     var bytes = Uint8List.fromList(data);
     var byteData = bytes.buffer.asByteData();
     for (int i = 0;
         i < data.length;
-        i += bitDepthBytes * channels //  bytes per sample but only use one channel
+        i += bitDepthBytes * channels //  bytes per frame
         ) {
       //  add signals in case only one of the stereo channels is active
       int value = 0;
       for (var channel = 0; channel < channels; channel++) {
         value += byteData.getInt16(i + channel * bitDepthBytes, Endian.little);
       }
+
       //  filter out noise
       value = _lowPass400.process(value.toDouble()).toInt();
 

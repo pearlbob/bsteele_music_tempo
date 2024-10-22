@@ -44,6 +44,7 @@ else
 	echo on machine `hostname`
 	cd ~/junk/$bsDir
 	pkill -f bsteele_music_tempo.exe
+	pkill -f bob_tempo_
 
 	rm -rf .gradle
 	rm -rf linux
