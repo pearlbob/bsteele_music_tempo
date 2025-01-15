@@ -1,10 +1,10 @@
 #!/bin/tcsh
 set echo
-#set verbose
+set verbose
 
 echo $0\:
 
-set machine=pi@bobspi7.local
+set machine=pi@bobspi8
 
 ##	prep for the build
 #	cd ~/github/bsteele_music_flutter/
@@ -27,11 +27,15 @@ set remoteDir=remotePi
 set src=${app}
 
 if ( `hostname` == 'bob' ) then
-	cd ~/github/${app}
 
-	ssh ${machine} rm -rf '~pi/junk/'$bsDir
-	ssh ${machine} 'mkdir -p  ~pi/junk/'$bsDir
-	scp -q -r *  ${machine}:junk/$bsDir
+	ssh ${machine} mkdir -p '~pi/junk'
+  foreach project ( $bsDir bsteele_bass_common bsteeleMusicLib )
+    ssh ${machine} rm -rf '~pi/junk/'$project   # start with a clean copy
+    ssh ${machine} 'mkdir -p  ~pi/junk/'$project
+    cd ~/github
+    scp -p -q -r $project  ${machine}:junk/
+	end
+	cd ~/github/${app}
 
 	#	execute this script on the machine
 	ssh ${machine} "cd ~pi/junk/$bsDir; ./bin/$0:t"
@@ -42,6 +46,7 @@ else
   # on the pi
 
 	echo on machine `hostname`
+
 	cd ~/junk/$bsDir
 	pkill -f bsteele_music_tempo.exe
 	pkill -f bob_tempo_
