@@ -185,8 +185,8 @@ class ProcessTempo {
 
       if ( veryVerbose) {
         print('error: $maxError, amp: $_instateMaxAmp, tapsPerMeasure: $tapsPerMeasure, period: $periodUs'
-          ' = ${periodUs / Duration.microsecondsPerSecond} s'
-          ' = ${Duration.microsecondsPerSecond / periodUs} hz'
+          ' = ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
+          ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
           ' = $bestBpm bpm');
       }
     } else {
