@@ -83,7 +83,7 @@ class ProcessTempo {
 
               _lastSamplesInState = _samplesInState;
             } else {
-              print('out of hertz range: $_lastHertz');
+              print('out of hertz range: $_lastHertz @ $_maxAbs');
             }
           }
 
@@ -119,9 +119,10 @@ class ProcessTempo {
   _processTempoTap(int epochUs) {
     if (_tapUs.isNotEmpty) {
       logger.log(
-          _logDetail,
-          'delta: $epochUs: ${epochUs - _tapUs.last} us'
-          ' = ${((epochUs - _tapUs.last) / Duration.microsecondsPerSecond).toStringAsFixed(3)} s');
+        _logDetail,
+        'delta: $epochUs: ${epochUs - _tapUs.last} us'
+        ' = ${((epochUs - _tapUs.last) / Duration.microsecondsPerSecond).toStringAsFixed(3)} s',
+      );
       // if ( verbose ){
       //   print(
       //       'delta: $epochUs: ${epochUs - _tapUs.last} us'
@@ -135,8 +136,8 @@ class ProcessTempo {
     //   print('${_tapUs.elementAt(1) - _tapUs.first}');
     // }
 
-    //  find the max tempo error
-    int maxError = -1;
+    //  find the max tempo delta
+    int maxDelta = -1;
     int periodUs = 1;
     if (_tapUs.length > 1 + _confirmations) {
       int nextElement = _tapUs.elementAt(1);
@@ -147,9 +148,9 @@ class ProcessTempo {
       for (var i = 2; i < _tapUs.length; i++) {
         nextElement = _tapUs.elementAt(i);
         int nextPeriodUs = nextElement - lastElement;
-        int errorUs = (nextPeriodUs - periodUs).abs();
-        maxError = max(maxError, errorUs);
-        // print('errorUsAtIndex($i): $errorUs/$maxError, period: $nextPeriodUs vs $periodUs');
+        int deltaUs = (nextPeriodUs - periodUs).abs();
+        maxDelta = max(maxDelta, deltaUs);
+        // print('deltaUsAtIndex($i): $deltaUs/$maxDelta, period: $nextPeriodUs vs $periodUs');
         lastElement = nextElement;
       }
     }
@@ -172,8 +173,8 @@ class ProcessTempo {
     }
 
     //  deliver the result if valid
-    if (maxError >= 0 &&
-        maxError <
+    if (maxDelta >= 0 &&
+        maxDelta <
             _expectedMeasurePeriodUs /
                 tapsPerMeasure //  fewer taps implies more tolerance
                 *
@@ -183,14 +184,16 @@ class ProcessTempo {
       // notify of a new value
       callback?.call();
 
-      if ( veryVerbose) {
-        print('error: $maxError, amp: $_instateMaxAmp, tapsPerMeasure: $tapsPerMeasure, period: $periodUs'
+      if (veryVerbose) {
+        print(
+          'found: delta: $maxDelta, amp: $_instateMaxAmp, tapsPerMeasure: $tapsPerMeasure, period: $periodUs'
           ' = ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
           ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
-          ' = $bestBpm bpm');
+          ' = $bestBpm bpm',
+        );
       }
     } else {
-      // print('error: $maxError: out of bounds, tapsPerMeasure: $tapsPerMeasure'
+      // print('delta: $maxDelta: out of bounds, tapsPerMeasure: $tapsPerMeasure'
       //     ' , taps: ${_tapUs.length}'
       //     ' , limit: ${_expectedMeasurePeriodUs / tapsPerMeasure * _tightTolerance}');
     }
@@ -202,41 +205,6 @@ class ProcessTempo {
     // print('_tapUs: ${_tapUs.length}'
     //     ', $_confirmations * $_expectedMeasurePeriodUs');
   }
-
-  // int _tapErrorUsAtIndex(final int index) {
-  //   //  reject obviously bad conditions
-  //   if (index < 1 || index >= _tapUs.length || _tapUs.length < _confirmations + 1) {
-  //     return _maxError;
-  //   }
-  //
-  //   if (index > 1) {
-  //     return _maxError;
-  //   }
-  //
-  //   //  compute the implied period in us
-  //   final int firstUs = _tapUs.first;
-  //   _periodUs = _tapUs.elementAt(index) - firstUs;
-  //   print('$index: $_periodUs/$_expectedMeasurePeriodUs'
-  //       ' = ${_periodUs / _expectedMeasurePeriodUs}');
-  //   if (_periodUs <= 0) {
-  //     return _maxError; //  should never happen
-  //   }
-  //
-  //   //  try to find this period in the data
-  //   int count = 1;
-  //   int maxErrorFound = 0;
-  //   int errorLimitUs = (_tightTolerance * _periodUs).floor().toInt();
-  //   int target = firstUs + (count + 1) * _periodUs;
-  //   int beats = 1;
-  //   for (int i = index + 1;
-  //       i < _tapUs.length //  only look at existing data
-  //           &&
-  //           count < _confirmations; //  don't need more than the minimum confirmations
-  //       i++) {}
-  //
-  //   //  return the max passing error... or a failure max error
-  //   return 0;
-  // }
 
   @override
   String toString() {
@@ -259,6 +227,7 @@ class ProcessTempo {
 
   int get instateMaxAmp => _instateMaxAmp;
   int _instateMaxAmp = 0;
+
   int get outOfStateMaxAmp => _maxAbs;
   int _maxAbs = 0;
 

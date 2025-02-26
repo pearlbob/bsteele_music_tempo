@@ -30,40 +30,12 @@ ArgParser buildParser() {
       negatable: false,
       help: 'Print this usage information.',
     )
-    ..addOption(
-      'host',
-      valueHelp: 'hostUrl',
-      help: 'Select the host server by name.',
-    )
-    ..addFlag(
-      'noWebsocketFeedback',
-      abbr: 'w',
-      negatable: false,
-      help: 'Turn the websocket feedback off back to host.',
-    )
-    ..addFlag(
-      'nowebsocket',
-      abbr: 'W',
-      negatable: false,
-      help: 'Turn the websocket interface off.',
-    )
-    ..addFlag(
-      'verbose',
-      abbr: 'v',
-      negatable: false,
-      help: 'Show verbose command output.',
-    )
-    ..addFlag(
-      'veryVerbose',
-      abbr: 'V',
-      negatable: false,
-      help: 'Show very verbose command output.',
-    )
-    ..addFlag(
-      'version',
-      negatable: false,
-      help: 'Print the tool version.',
-    );
+    ..addOption('host', valueHelp: 'hostUrl', help: 'Select the host server by name.')
+    ..addFlag('noWebsocketFeedback', abbr: 'w', negatable: false, help: 'Turn the websocket feedback off back to host.')
+    ..addFlag('nowebsocket', abbr: 'W', negatable: false, help: 'Turn the websocket interface off.')
+    ..addFlag('verbose', abbr: 'v', negatable: false, help: 'Show verbose command output.')
+    ..addFlag('veryVerbose', abbr: 'V', negatable: false, help: 'Show very verbose command output.')
+    ..addFlag('version', negatable: false, help: 'Print the tool version.');
 }
 
 void printUsage(ArgParser argParser) {
@@ -115,7 +87,7 @@ void main(List<String> arguments) async {
   // setup the web socket
   if (isWebsocket) {
     try {
-      print('fixme: doesn\'t do well if web socket host not found!');
+      print('fixme: does not do well if web socket host not found!');
 
       SongUpdateService.open();
       songUpdateService.user = 'tempo';
@@ -123,24 +95,24 @@ void main(List<String> arguments) async {
       songUpdateService.host = host;
 
       print('songUpdateService.host: "${songUpdateService.host}"');
+
+      await runARecord();
+    } on Exception catch (e) {
+      // Anything else that is an exception
+      print('Unknown exception: $e');
     } catch (e, stackTrace) {
       print('web socket catch: $e');
       print('web socket trace: $stackTrace');
     }
+  } else {
+    await runARecord();
   }
-
-  await runArecord();
 }
 
-Future<void> runArecord() async {
+Future<void> runARecord() async {
   //  find the target device
   String deviceName = '';
-  await Process.run(
-    'arecord',
-    [
-      '-l',
-    ],
-  ).then((value) {
+  await Process.run('arecord', ['-l']).then((value) {
     for (var s in value.stdout.toString().split('\n')) {
       var m = _cardLineRegExp.firstMatch(s);
       if (m != null) {
@@ -151,24 +123,16 @@ Future<void> runArecord() async {
     }
   });
   if (verbose) print('deviceName: "$deviceName"');
-  assert(deviceName.isNotEmpty);
+  if (deviceName.isEmpty) {
+    print('Error: hardware interface not found!');
+    exit(1);
+  }
 
   //  listen to the device audio
   var process = await Process.start(
     //  arecord -v -c2 -r 48000 -f S16_LE -t raw -D hw:2,0
     'arecord',
-    [
-      '-v',
-      '-c$channels',
-      '-r',
-      sampleRate.toString(),
-      '-f',
-      'S16_LE',
-      '-t',
-      'raw',
-      '-D',
-      deviceName,
-    ],
+    ['-v', '-c$channels', '-r', sampleRate.toString(), '-f', 'S16_LE', '-t', 'raw', '-D', deviceName],
   );
 
   final StreamController<List<int>> streamController = StreamController();
@@ -178,10 +142,11 @@ Future<void> runArecord() async {
   streamController.stream.listen((data) {
     var bytes = Uint8List.fromList(data);
     var byteData = bytes.buffer.asByteData();
-    for (int i = 0;
-        i < data.length;
-        i += bitDepthBytes * channels //  bytes per frame
-        ) {
+    for (
+      int i = 0;
+      i < data.length;
+      i += bitDepthBytes * channels //  bytes per frame
+    ) {
       //  add signals in case only one of the stereo channels is active
       int value = 0;
       for (var channel = 0; channel < channels; channel++) {
@@ -204,12 +169,18 @@ processTempoCallback() {
     if (_songTempoUpdate != null) {
       var songTempoUpdate = SongTempoUpdate(_songTempoUpdate!.songId, _bpm);
       if (isWebsocketFeedback) {
-        songUpdateService.issueSongTempoUpdate(songTempoUpdate);
+        try {
+          songUpdateService.issueSongTempoUpdate(songTempoUpdate);
+        } catch (e) {
+          print('tempo caught: $e');
+        }
       }
-      print('${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
-          ' @ ${processTempo.instateMaxAmp}'
-          ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
-          ', songId: ${songTempoUpdate.songId}');
+      print(
+        '${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
+        ' @ ${processTempo.instateMaxAmp}'
+        ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
+        ', songId: ${songTempoUpdate.songId}',
+      );
     }
   }
 }
@@ -217,8 +188,10 @@ processTempoCallback() {
 ///
 void webSocketCallback(final SongUpdate songUpdate) {
   if (verbose) {
-    print('webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}'
-        ', songId: ${songUpdate.song.songId}');
+    print(
+      'webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}'
+      ', songId: ${songUpdate.song.songId}',
+    );
   }
   processTempo.expectedBpm = songUpdate.currentBeatsPerMinute;
   processTempo.beatsPerMeasure = songUpdate.song.beatsPerBar;
@@ -229,6 +202,8 @@ SongTempoUpdate? _songTempoUpdate;
 int _bpm = 0;
 int _tpm = 0; //  taps per measure as read
 const _targetDevice = 'Plugable USB Audio Device'; //  known misspelling
-final _cardLineRegExp = RegExp(r'^card\s+([0-9]+):\s+\w+\s+\['
-    '$_targetDevice'
-    r'\],\s+device\s+([0-9]+):'); //
+final _cardLineRegExp = RegExp(
+  r'^card\s+([0-9]+):\s+\w+\s+\['
+  '$_targetDevice'
+  r'\],\s+device\s+([0-9]+):',
+); //
