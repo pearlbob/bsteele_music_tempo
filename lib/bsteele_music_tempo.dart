@@ -19,8 +19,9 @@ bool isWebsocket = true;
 bool isWebsocketFeedback = true;
 
 SongUpdateService songUpdateService = SongUpdateService();
-final ProcessTempo processTempo = ProcessTempo();
+late ProcessTempo processTempo;
 LowPassFilter400Hz _lowPass400 = LowPassFilter400Hz();
+AudioConfiguration audioConfiguration = AudioConfiguration(2);
 
 ArgParser buildParser() {
   return ArgParser()
@@ -112,12 +113,24 @@ void main(List<String> arguments) async {
 Future<void> runARecord() async {
   //  find the target device
   String deviceName = '';
+  var format = 'S16_LE';
+  var bitDepthBytes = 2;
   await Process.run('arecord', ['-l']).then((value) {
     for (var s in value.stdout.toString().split('\n')) {
       var m = _cardLineRegExp.firstMatch(s);
       if (m != null) {
         assert(m.groupCount == 2);
+        print('Plugable USB Audio found:');
         deviceName = 'hw:${m.group(1)},${m.group(2)}';
+        //  give the scarlett solo preference without a break; here
+      }
+      m = _scarlettSoloRegExp.firstMatch(s);
+      if (m != null) {
+        assert(m.groupCount == 2);
+        print('Scarlett Solo found:');
+        deviceName = 'hw:${m.group(1)},${m.group(2)}';
+        format = 'S32_LE'; //  required
+        bitDepthBytes = 4;
         break;
       }
     }
@@ -127,21 +140,39 @@ Future<void> runARecord() async {
     print('Error: hardware interface not found!');
     exit(1);
   }
+  audioConfiguration = AudioConfiguration(bitDepthBytes);
 
   //  listen to the device audio
+  List<String> arecordCommandArgs = [
+    '-v',
+    '-c$channels',
+    '-r',
+    sampleRate.toString(),
+    '-f',
+    format,
+    '-t',
+    'raw',
+    '-D',
+    deviceName,
+  ];
+  if (verbose) {
+    print('arecord ${arecordCommandArgs.toString().replaceAll(RegExp(r'[\[\]]'), '').replaceAll(RegExp(r', '), ' ')}');
+  }
   var process = await Process.start(
     //  arecord -v -c2 -r 48000 -f S16_LE -t raw -D hw:2,0
     'arecord',
-    ['-v', '-c$channels', '-r', sampleRate.toString(), '-f', 'S16_LE', '-t', 'raw', '-D', deviceName],
+    arecordCommandArgs,
   );
 
   final StreamController<List<int>> streamController = StreamController();
+  processTempo = ProcessTempo();
   processTempo.callback = processTempoCallback;
   processTempo.verbose = verbose;
   processTempo.veryVerbose = veryVerbose;
   streamController.stream.listen((data) {
     var bytes = Uint8List.fromList(data);
     var byteData = bytes.buffer.asByteData();
+    //print('heard ${data.length} bytes');
     for (
       int i = 0;
       i < data.length;
@@ -149,12 +180,25 @@ Future<void> runARecord() async {
     ) {
       //  add signals in case only one of the stereo channels is active
       int value = 0;
-      for (var channel = 0; channel < channels; channel++) {
-        value += byteData.getInt16(i + channel * bitDepthBytes, Endian.little);
+      switch (audioConfiguration.bitDepthBytes) {
+        case 2:
+          for (var channel = 0; channel < channels; channel++) {
+            value += byteData.getInt16(i + channel * bitDepthBytes, Endian.little);
+          }
+          break;
+        case 4:
+          for (var channel = 0; channel < channels; channel++) {
+            value += byteData.getInt32(i + channel * bitDepthBytes, Endian.little);
+          }
+          break;
+        default:
+          print('bad bitDepthBytes: ${audioConfiguration.bitDepthBytes}');
+          exit(-1);
       }
+      //print(value); //  way temp
 
       //  filter out noise
-      value = _lowPass400.process(value.toDouble()).toInt();
+     // value = _lowPass400.process(value.toDouble()).toInt();
 
       processTempo.processNewTempo(value);
     }
@@ -172,7 +216,7 @@ processTempoCallback() {
         try {
           songUpdateService.issueSongTempoUpdate(songTempoUpdate);
         } catch (e) {
-          print('tempo caught: $e');
+          print('tempo update caught: $e');
         }
       }
       print(
@@ -205,5 +249,10 @@ const _targetDevice = 'Plugable USB Audio Device'; //  known misspelling
 final _cardLineRegExp = RegExp(
   r'^card\s+([0-9]+):\s+\w+\s+\['
   '$_targetDevice'
+  r'\],\s+device\s+([0-9]+):',
+); //
+final _scarlettSoloRegExp = RegExp(
+  r'^card\s+([0-9]+):\s+\w+\s+\['
+  'Scarlett Solo USB'
   r'\],\s+device\s+([0-9]+):',
 ); //

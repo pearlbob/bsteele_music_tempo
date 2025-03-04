@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 
 import 'app_logger.dart';
 import 'audio_configuration.dart';
+import 'bsteele_music_tempo.dart';
 
 const Level _logDetail = Level.debug;
 
@@ -42,6 +43,7 @@ class ProcessTempo {
           _samplesNotInstateCount = 0;
           _samplesNotInstateSum = 0;
           _maxAbs = 0;
+          _minAbs = audioConfiguration.ampMaximum;
         }
         break;
       case false:
@@ -83,7 +85,8 @@ class ProcessTempo {
 
               _lastSamplesInState = _samplesInState;
             } else {
-              print('out of hertz range: $_lastHertz @ $_maxAbs');
+              print('out of hertz range: ${_lastHertz.toStringAsFixed(3)}'
+                  ' @ ${audioConfiguration.debug(_maxAbs)}');
             }
           }
 
@@ -98,6 +101,7 @@ class ProcessTempo {
         _samplesNotInstateSum += abs;
         _samplesNotInstateCount++;
         _maxAbs = max(_maxAbs, abs);
+        _minAbs = min(_minAbs, abs);
         break;
     }
 
@@ -105,11 +109,14 @@ class ProcessTempo {
 
     //  something has stalled... or there is no signal
     if (_samplesInState > 6 * sampleRate) {
-      print('${DateTime.now()}: $_samplesInState: stalled @ $_maxAbs');
+      print('${DateTime.now()}: $_samplesInState: stalled'
+          ' @${audioConfiguration.debug(_minAbs)} <= ${audioConfiguration.debug(_minAbs)}'
+          ', from ${audioConfiguration.debug(minSignalAmp)} < 1.0');
 
       _samplesInState = 3 * sampleRate; //  something too slow
       _lastSamplesInState = 0;
       _maxAbs = 0;
+      _minAbs = audioConfiguration.ampMaximum;
     }
   }
 
@@ -137,7 +144,7 @@ class ProcessTempo {
     // }
 
     //  find the max tempo delta
-    int maxDelta = -1;
+    int maxDeltaUs = -1;
     int periodUs = 1;
     if (_tapUs.length > 1 + _confirmations) {
       int nextElement = _tapUs.elementAt(1);
@@ -149,7 +156,7 @@ class ProcessTempo {
         nextElement = _tapUs.elementAt(i);
         int nextPeriodUs = nextElement - lastElement;
         int deltaUs = (nextPeriodUs - periodUs).abs();
-        maxDelta = max(maxDelta, deltaUs);
+        maxDeltaUs = max(maxDeltaUs, deltaUs);
         // print('deltaUsAtIndex($i): $deltaUs/$maxDelta, period: $nextPeriodUs vs $periodUs');
         lastElement = nextElement;
       }
@@ -173,8 +180,8 @@ class ProcessTempo {
     }
 
     //  deliver the result if valid
-    if (maxDelta >= 0 &&
-        maxDelta <
+    if (maxDeltaUs >= 0 &&
+        maxDeltaUs <
             _expectedMeasurePeriodUs /
                 tapsPerMeasure //  fewer taps implies more tolerance
                 *
@@ -186,7 +193,9 @@ class ProcessTempo {
 
       if (veryVerbose) {
         print(
-          'found: delta: $maxDelta, amp: $_instateMaxAmp, tapsPerMeasure: $tapsPerMeasure, period: $periodUs'
+          'found: delta: ${(maxDeltaUs/Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
+              ', amp: ${audioConfiguration.debug(_instateMaxAmp)}'
+              ', tapsPerMeasure: $tapsPerMeasure, period: $periodUs'
           ' = ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
           ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
           ' = $bestBpm bpm',
@@ -212,7 +221,7 @@ class ProcessTempo {
         ', expectedBpm: $_expectedBpm, beatsPerMeasure: $_beatsPerMeasure';
   }
 
-  static const minSignalAmp = ampMaximum * 0.045;
+  int minSignalAmp = (audioConfiguration.ampMaximum * 0.045).toInt();
   bool isSignal = false;
   bool _isFirst = true;
   int _samplesInState = 0;
@@ -230,6 +239,7 @@ class ProcessTempo {
 
   int get outOfStateMaxAmp => _maxAbs;
   int _maxAbs = 0;
+  int _minAbs = audioConfiguration.ampMaximum;
 
   double get samplesNotInstateAverage => _samplesNotInstateAverage;
   double _samplesNotInstateAverage = 0;
@@ -249,13 +259,13 @@ class ProcessTempo {
     _expectedMeasurePeriodUs = (_beatsPerMeasure * Duration.microsecondsPerSecond * 60) ~/ _expectedBpm;
   }
 
-  _clearExpectedPeriodUs() {
-    _expectedMeasurePeriodUs = 1;
-  }
-
-  _expectedPeriodUsIsValid() {
-    return _expectedMeasurePeriodUs > 1;
-  }
+  // _clearExpectedPeriodUs() {
+  //   _expectedMeasurePeriodUs = 1;
+  // }
+  //
+  // _expectedPeriodUsIsValid() {
+  //   return _expectedMeasurePeriodUs > 1;
+  // }
 
   static const defaultBpm = 120;
   int _expectedBpm = defaultBpm;
@@ -274,7 +284,7 @@ class ProcessTempo {
 
   VoidCallback? callback; //  callback on valid data, i.e. a new bpm
 
-  static const _tightTolerance = 0.08; //  the operator has to be regular... or we'll follow junk tempos
+  static const _tightTolerance = 0.095; //  the operator has to be regular... or we'll follow junk tempos
   static const _looseTolerance234 = 0.3; //  worry about every beat tap & accepting a short period
   static const _looseTolerance6 = 0.16; //  worry about 6 beats per bar being misunderstood.
   double _looseTolerance = _looseTolerance234;

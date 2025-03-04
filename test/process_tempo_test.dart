@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bsteele_music_tempo/app_logger.dart';
 import 'package:bsteele_music_tempo/audio_configuration.dart';
+import 'package:bsteele_music_tempo/bsteele_music_tempo.dart';
 import 'package:bsteele_music_tempo/process_tempo.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
@@ -123,7 +124,7 @@ void main() {
     logger.i('fixme');
 
     double f = 180.0; //  tone pitch
-    final ampMax = 1 << (bitDepth - 1);
+    final ampMax = 1 << (audioConfiguration.bitDepth - 1);
     double toneFraction = 0.15;
     final int beatsPerMeasure = 4;
 

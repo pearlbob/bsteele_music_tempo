@@ -1,18 +1,12 @@
-import 'dart:collection';
-import 'dart:math';
-
-import 'package:bsteele_music_lib/songs/music_constants.dart';
 import 'package:bsteele_music_tempo/app_logger.dart';
-import 'package:bsteele_music_tempo/audio_configuration.dart';
-import 'package:bsteele_music_tempo/process_tempo.dart';
 import 'package:logger/logger.dart';
 import 'package:test/test.dart';
 
-const Level _logDetail = Level.debug;
-const Level _logSummary = Level.debug;
-
-int _lastBestBpm = -1;
-int _currentBpm = -1;
+// const Level _logDetail = Level.debug;
+// const Level _logSummary = Level.debug;
+//
+// int _lastBestBpm = -1;
+// int _currentBpm = -1;
 
 void main() {
   Logger.level = Level.info;
