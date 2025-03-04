@@ -26,8 +26,8 @@ set bsDir=${app}
 set remoteDir=remotePi
 set src=${app}
 
-if ( `hostname` == 'bob' ) then
-
+set hostname=`hostname`;
+if ( $hostname == 'bob' || $hostname == 'bobsm4.localdomain' ) then
 	ssh ${machine} mkdir -p '~pi/junk'
   foreach project ( $bsDir bsteele_bass_common bsteeleMusicLib )
     ssh ${machine} rm -rf '~pi/junk/'$project   # start with a clean copy
