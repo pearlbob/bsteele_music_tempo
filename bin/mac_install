@@ -1,0 +1,6 @@
+#!/bin/tcsh
+#set echo
+set verbose
+
+brew update
+brew upgrade
