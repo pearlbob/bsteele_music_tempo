@@ -14,6 +14,9 @@ const _confirmations = 2;
 const samplePeriodUs = Duration.microsecondsPerSecond / sampleRate;
 double lastEpochUs = 0;
 
+const String greekCapitalDelta = '\u0394';
+const String greekLambda = '\u03bb';
+
 typedef VoidCallback = void Function();
 
 class ProcessTempo {
@@ -85,8 +88,10 @@ class ProcessTempo {
 
               _lastSamplesInState = _samplesInState;
             } else {
-              print('out of hertz range: ${_lastHertz.toStringAsFixed(3)}'
-                  ' @ ${audioConfiguration.debug(_maxAbs)}');
+              print(
+                'out of hertz range: ${_lastHertz.toStringAsFixed(3)}'
+                ' @ ${audioConfiguration.debug(_maxAbs)}',
+              );
             }
           }
 
@@ -109,9 +114,11 @@ class ProcessTempo {
 
     //  something has stalled... or there is no signal
     if (_samplesInState > 6 * sampleRate) {
-      print('${DateTime.now()}: $_samplesInState: stalled'
-          ' @${audioConfiguration.debug(_minAbs)} <= ${audioConfiguration.debug(_minAbs)}'
-          ', from ${audioConfiguration.debug(minSignalAmp)} < 1.0');
+      print(
+        '${DateTime.now()}: $_samplesInState: stalled'
+        ' @${audioConfiguration.debug(_minAbs)} <= ${audioConfiguration.debug(_minAbs)}'
+        ', from ${audioConfiguration.debug(minSignalAmp)} < 1.0',
+      );
 
       _samplesInState = 3 * sampleRate; //  something too slow
       _lastSamplesInState = 0;
@@ -193,10 +200,11 @@ class ProcessTempo {
 
       if (veryVerbose) {
         print(
-          'found: delta: ${(maxDeltaUs/Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
-              ', amp: ${audioConfiguration.debug(_instateMaxAmp)}'
-              ', tapsPerMeasure: $tapsPerMeasure, period: $periodUs'
-          ' = ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
+          '${DateTime.now()}:'
+          ' $greekCapitalDelta: ${(maxDeltaUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
+          ', amp: ${audioConfiguration.debug(_instateMaxAmp)}'
+          ', taps/bar: $tapsPerMeasure, $greekLambda:'
+          ' ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
           ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
           ' = $bestBpm bpm',
         );

@@ -3,7 +3,8 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:args/args.dart';
-import 'package:bsteele_bass_common/low_pass_filter.dart';
+
+// import 'package:bsteele_bass_common/low_pass_filter.dart';
 import 'package:bsteele_music_lib/songs/song_tempo_update.dart';
 import 'package:bsteele_music_lib/songs/song_update.dart';
 import 'package:bsteele_music_lib/util/song_update_service.dart';
@@ -20,7 +21,7 @@ bool isWebsocketFeedback = true;
 
 SongUpdateService songUpdateService = SongUpdateService();
 late ProcessTempo processTempo;
-LowPassFilter400Hz _lowPass400 = LowPassFilter400Hz();
+// LowPassFilter400Hz _lowPass400 = LowPassFilter400Hz();
 AudioConfiguration audioConfiguration = AudioConfiguration(2);
 
 ArgParser buildParser() {
@@ -83,7 +84,12 @@ void main(List<String> arguments) async {
     return;
   }
 
-  if (verbose) print('isWebsocket: $isWebsocket');
+  if (verbose) {
+    print(
+      'isWebsocket: $isWebsocket, isWebsocketFeedback: $isWebsocketFeedback'
+      ', verbose: $verbose, veryVerbose: $veryVerbose',
+    );
+  }
 
   // setup the web socket
   if (isWebsocket) {
@@ -115,31 +121,39 @@ Future<void> runARecord() async {
   String deviceName = '';
   var format = 'S16_LE';
   var bitDepthBytes = 2;
-  await Process.run('arecord', ['-l']).then((value) {
-    for (var s in value.stdout.toString().split('\n')) {
-      var m = _cardLineRegExp.firstMatch(s);
-      if (m != null) {
-        assert(m.groupCount == 2);
-        print('Plugable USB Audio found:');
-        deviceName = 'hw:${m.group(1)},${m.group(2)}';
-        //  give the scarlett solo preference without a break; here
+
+  //  loop forever, looking for hardware
+  for (;;) {
+    await Process.run('arecord', ['-l']).then((value) {
+      for (var s in value.stdout.toString().split('\n')) {
+        var m = _cardLineRegExp.firstMatch(s);
+        if (m != null) {
+          assert(m.groupCount == 2);
+          print('Plugable USB Audio found:');
+          deviceName = 'hw:${m.group(1)},${m.group(2)}';
+          //  give the scarlett solo preference without a break; here
+        }
+        m = _scarlettSoloRegExp.firstMatch(s);
+        if (m != null) {
+          assert(m.groupCount == 2);
+          print('Scarlett Solo found:');
+          deviceName = 'hw:${m.group(1)},${m.group(2)}';
+          format = 'S32_LE'; //  required
+          bitDepthBytes = 4;
+          break;
+        }
       }
-      m = _scarlettSoloRegExp.firstMatch(s);
-      if (m != null) {
-        assert(m.groupCount == 2);
-        print('Scarlett Solo found:');
-        deviceName = 'hw:${m.group(1)},${m.group(2)}';
-        format = 'S32_LE'; //  required
-        bitDepthBytes = 4;
-        break;
-      }
+    });
+
+    if (deviceName.isNotEmpty) {
+      if (verbose) print('deviceName: "$deviceName"');
+      break; //  hardware found
     }
-  });
-  if (verbose) print('deviceName: "$deviceName"');
-  if (deviceName.isEmpty) {
-    print('Error: hardware interface not found!');
-    exit(1);
+
+    print('Error: hardware interface not found!  looking for Scarlett Solo');
+    sleep(Duration(seconds: 60));
   }
+
   audioConfiguration = AudioConfiguration(bitDepthBytes);
 
   //  listen to the device audio
@@ -152,8 +166,8 @@ Future<void> runARecord() async {
     format,
     '-t',
     'raw',
-    '-D',
-    deviceName,
+    // '-D',
+    // deviceName,
   ];
   if (verbose) {
     print('arecord ${arecordCommandArgs.toString().replaceAll(RegExp(r'[\[\]]'), '').replaceAll(RegExp(r', '), ' ')}');
@@ -172,7 +186,7 @@ Future<void> runARecord() async {
   streamController.stream.listen((data) {
     var bytes = Uint8List.fromList(data);
     var byteData = bytes.buffer.asByteData();
-    //print('heard ${data.length} bytes');
+  // if (veryVerbose) print('heard ${data.length} bytes');
     for (
       int i = 0;
       i < data.length;
@@ -198,7 +212,7 @@ Future<void> runARecord() async {
       //print(value); //  way temp
 
       //  filter out noise
-     // value = _lowPass400.process(value.toDouble()).toInt();
+      // value = _lowPass400.process(value.toDouble()).toInt();
 
       processTempo.processNewTempo(value);
     }
@@ -207,6 +221,7 @@ Future<void> runARecord() async {
 }
 
 processTempoCallback() {
+  // print('processTempoCallback():');
   if (processTempo.bestBpm != _bpm || processTempo.tapsPerMeasure != _tpm) {
     _bpm = processTempo.bestBpm;
     _tpm = processTempo.tapsPerMeasure;
@@ -215,16 +230,19 @@ processTempoCallback() {
       if (isWebsocketFeedback) {
         try {
           songUpdateService.issueSongTempoUpdate(songTempoUpdate);
+          if (veryVerbose) print(songTempoUpdate.toString());
         } catch (e) {
           print('tempo update caught: $e');
         }
       }
-      print(
-        '${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
-        ' @ ${processTempo.instateMaxAmp}'
-        ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
-        ', songId: ${songTempoUpdate.songId}',
-      );
+      if (verbose) {
+        print(
+          '${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
+          ' @ ${processTempo.instateMaxAmp}'
+          ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
+          ', songId: ${songTempoUpdate.songId}',
+        );
+      }
     }
   }
 }
@@ -253,6 +271,6 @@ final _cardLineRegExp = RegExp(
 ); //
 final _scarlettSoloRegExp = RegExp(
   r'^card\s+([0-9]+):\s+\w+\s+\['
-  'Scarlett Solo USB'
+  'Scarlett Solo.*'
   r'\],\s+device\s+([0-9]+):',
 ); //
