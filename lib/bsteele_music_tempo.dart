@@ -166,8 +166,9 @@ Future<void> runARecord() async {
     format,
     '-t',
     'raw',
-    // '-D',
-    // deviceName,
+    //  the two below don't work for bob linux box
+    '-D',
+    deviceName,
   ];
   if (verbose) {
     print('arecord ${arecordCommandArgs.toString().replaceAll(RegExp(r'[\[\]]'), '').replaceAll(RegExp(r', '), ' ')}');
@@ -238,7 +239,7 @@ processTempoCallback() {
       if (verbose) {
         print(
           '${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
-          ' @ ${processTempo.instateMaxAmp}'
+          ' @ ${audioConfiguration.debugAmp(processTempo.instateMaxAmp)}'
           ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
           ', songId: ${songTempoUpdate.songId}',
         );
@@ -249,7 +250,7 @@ processTempoCallback() {
 
 ///
 void webSocketCallback(final SongUpdate songUpdate) {
-  if (verbose) {
+  if (veryVerbose) {
     print(
       'webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}'
       ', songId: ${songUpdate.song.songId}',

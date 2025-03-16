@@ -90,7 +90,7 @@ class ProcessTempo {
             } else {
               print(
                 'out of hertz range: ${_lastHertz.toStringAsFixed(3)}'
-                ' @ ${audioConfiguration.debug(_maxAbs)}',
+                ' @ ${audioConfiguration.debugAmp(_maxAbs)}',
               );
             }
           }
@@ -116,8 +116,8 @@ class ProcessTempo {
     if (_samplesInState > 6 * sampleRate) {
       print(
         '${DateTime.now()}: $_samplesInState: stalled'
-        ' @${audioConfiguration.debug(_minAbs)} <= ${audioConfiguration.debug(_minAbs)}'
-        ', from ${audioConfiguration.debug(minSignalAmp)} < 1.0',
+        ' @${audioConfiguration.debugAmp(_minAbs)} <= ${audioConfiguration.debugAmp(_minAbs)}'
+        ', from ${audioConfiguration.debugAmp(minSignalAmp)} < 1.0',
       );
 
       _samplesInState = 3 * sampleRate; //  something too slow
@@ -158,6 +158,13 @@ class ProcessTempo {
       int lastElement = _tapUs.first;
       periodUs = nextElement - lastElement;
       lastElement = nextElement;
+      // if (veryVerbose) {
+      //   print(
+      //     '$greekLambda: ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
+      //     ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
+      //     ' = $bestBpm bpm',
+      //   );
+      // }
 
       for (var i = 2; i < _tapUs.length; i++) {
         nextElement = _tapUs.elementAt(i);
@@ -202,8 +209,14 @@ class ProcessTempo {
         print(
           '${DateTime.now()}:'
           ' $greekCapitalDelta: ${(maxDeltaUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
-          ', amp: ${audioConfiguration.debug(_instateMaxAmp)}'
-          ', taps/bar: $tapsPerMeasure, $greekLambda:'
+          ', amp: ${audioConfiguration.debugAmp(_instateMaxAmp)}'
+          //  tpm = taps per measure
+          ', tpm: $tapsPerMeasure'
+           ', Q: ${_tapUs.length}'
+          //'$_tapUs'
+          // ', Qs: ${(_expectedMeasurePeriodUs/ Duration.microsecondsPerSecond).toStringAsFixed(3)}'
+              ', Qmax: ${((_confirmations * _expectedMeasurePeriodUs * (1 + _tightTolerance))/ Duration.microsecondsPerSecond).toStringAsFixed(3)}'
+              ', $greekLambda:'
           ' ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
           ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
           ' = $bestBpm bpm',
@@ -216,7 +229,9 @@ class ProcessTempo {
     }
 
     //  toss stale samples
-    while ((_tapUs.last - _tapUs.first) > _confirmations * _expectedMeasurePeriodUs * (1 + _looseTolerance)) {
+    while ((_tapUs.last - _tapUs.first) > _confirmations * _expectedMeasurePeriodUs
+        // * (1 + _tightTolerance)
+    ) {
       _tapUs.removeFirst();
     }
     // print('_tapUs: ${_tapUs.length}'

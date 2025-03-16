@@ -10,7 +10,7 @@ class AudioConfiguration {
 
   int get ampMaximum => (1 << (bitDepth - 1)) - 1;
 
-  String debug(final int v){
+  String debugAmp(final int v){
     return (v/ampMaximum).toStringAsFixed(3);
   }
 }
