@@ -132,15 +132,17 @@ Future<void> runRec() async {
     '-L',
     '-b',
     '32',
+
     // '-t',
     // 'raw',
-
     'output.wav',
-    'trim','0','10',
+    'trim', '0', '10',
   ];
   var processName = 'rec';
   if (verbose) {
-    print('$processName ${arecordCommandArgs.toString().replaceAll(RegExp(r'[\[\]]'), '').replaceAll(RegExp(r', '), ' ')}');
+    print(
+      '$processName ${arecordCommandArgs.toString().replaceAll(RegExp(r'[\[\]]'), '').replaceAll(RegExp(r', '), ' ')}',
+    );
   }
   var process = await Process.start(processName, arecordCommandArgs);
   // stdout.addStream(process.stdout);
@@ -179,7 +181,7 @@ processTempoCallback() {
     _bpm = processTempo.bestBpm;
     _tpm = processTempo.tapsPerMeasure;
     if (_songTempoUpdate != null) {
-      var songTempoUpdate = SongTempoUpdate(_songTempoUpdate!.songId, _bpm);
+      var songTempoUpdate = SongTempoUpdate(_songTempoUpdate!.songId, _bpm, processTempo.maxAmp);
       if (isWebsocketFeedback) {
         try {
           songUpdateService.issueSongTempoUpdate(songTempoUpdate);
@@ -191,7 +193,6 @@ processTempoCallback() {
         '${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
         ' @ ${processTempo.instateMaxAmp}'
         ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
-        ', songId: ${songTempoUpdate.songId}',
       );
     }
   }
@@ -202,12 +203,11 @@ void webSocketCallback(final SongUpdate songUpdate) {
   if (verbose) {
     print(
       'webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}'
-      ', songId: ${songUpdate.song.songId}',
     );
   }
   processTempo.expectedBpm = songUpdate.currentBeatsPerMinute;
   processTempo.beatsPerMeasure = songUpdate.song.beatsPerBar;
-  _songTempoUpdate = SongTempoUpdate(songUpdate.song.songId, songUpdate.currentBeatsPerMinute);
+  _songTempoUpdate = SongTempoUpdate(songUpdate.song.songId, songUpdate.currentBeatsPerMinute, processTempo.maxAmp);
 }
 
 SongTempoUpdate? _songTempoUpdate;

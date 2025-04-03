@@ -28,6 +28,11 @@ set src=${app}
 
 set hostname=`hostname`;
 if ( $hostname == 'bob' || $hostname == 'bobsm4.localdomain' ) then
+  #  update the date file
+  cd ~/github/${app}
+  echo "String releaseUtcDate() => '`date --utc +%Y%m%d_%H%M%S`';"  > lib/utcDate.dart
+
+  # copy source to pi
 	ssh ${machine} mkdir -p '~pi/junk'
   foreach project ( $bsDir bsteele_bass_common bsteeleMusicLib )
     ssh ${machine} rm -rf '~pi/junk/'$project   # start with a clean copy
@@ -35,9 +40,9 @@ if ( $hostname == 'bob' || $hostname == 'bobsm4.localdomain' ) then
     cd ~/github
     scp -p -q -r $project  ${machine}:junk/
 	end
-	cd ~/github/${app}
 
-	#	execute this script on the machine
+	#	execute this script on the remote machine
+	cd ~/github/${app}
 	ssh ${machine} "cd ~pi/junk/$bsDir; ./bin/$0:t"
 	set stat=$status
 	echo machine status $stat

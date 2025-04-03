@@ -10,6 +10,7 @@ import 'package:bsteele_music_lib/songs/song_update.dart';
 import 'package:bsteele_music_lib/util/song_update_service.dart';
 import 'package:bsteele_music_tempo/audio_configuration.dart';
 import 'package:bsteele_music_tempo/process_tempo.dart';
+import 'package:bsteele_music_tempo/utcDate.dart';
 import 'package:logger/logger.dart';
 
 const String version = '0.0.1';
@@ -90,6 +91,10 @@ void main(List<String> arguments) async {
       ', verbose: $verbose, veryVerbose: $veryVerbose',
     );
   }
+
+  //  show compile date
+  print( 'release date: ${releaseUtcDate()} UTC' );
+
 
   // setup the web socket
   if (isWebsocket) {
@@ -227,7 +232,7 @@ processTempoCallback() {
     _bpm = processTempo.bestBpm;
     _tpm = processTempo.tapsPerMeasure;
     if (_songTempoUpdate != null) {
-      var songTempoUpdate = SongTempoUpdate(_songTempoUpdate!.songId, _bpm);
+      var songTempoUpdate = SongTempoUpdate(_songTempoUpdate!.songId, _bpm, processTempo.maxAmp);
       if (isWebsocketFeedback) {
         try {
           songUpdateService.issueSongTempoUpdate(songTempoUpdate);
@@ -241,7 +246,6 @@ processTempoCallback() {
           '${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
           ' @ ${audioConfiguration.debugAmp(processTempo.instateMaxAmp)}'
           ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
-          ', songId: ${songTempoUpdate.songId}',
         );
       }
     }
@@ -253,12 +257,11 @@ void webSocketCallback(final SongUpdate songUpdate) {
   if (veryVerbose) {
     print(
       'webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}'
-      ', songId: ${songUpdate.song.songId}',
     );
   }
   processTempo.expectedBpm = songUpdate.currentBeatsPerMinute;
   processTempo.beatsPerMeasure = songUpdate.song.beatsPerBar;
-  _songTempoUpdate = SongTempoUpdate(songUpdate.song.songId, songUpdate.currentBeatsPerMinute);
+  _songTempoUpdate = SongTempoUpdate(songUpdate.song.songId, songUpdate.currentBeatsPerMinute, processTempo.maxAmp );
 }
 
 SongTempoUpdate? _songTempoUpdate;

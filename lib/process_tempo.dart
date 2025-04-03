@@ -59,10 +59,12 @@ class ProcessTempo {
             _lastHertz = sampleRate / _samplesInState;
             //  note that a slow tempo can be expected, eg. a 4/4 song at 50 bpm with beats on 2 only
             //  or as fast as every beat
-            // print( 'hertz: '
-            //     ' ${((1 + _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure)}'
-            //     ' <= $_lastHertz'
-            //     ' <= ${((1 - _looseTolerance) * MusicConstants.maxBpm) / 60 }');
+            print(
+              'hertz: '
+              ' ${((1 + _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure)}'
+              ' <= $_lastHertz'
+              ' <= ${((1 - _looseTolerance) * MusicConstants.maxBpm) / 60}',
+            );
             if (_lastHertz >= ((1 + _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure) &&
                 _lastHertz <= ((1 - _looseTolerance) * MusicConstants.maxBpm) / 60) {
               if (_samplesNotInstateCount > 0) {
@@ -146,9 +148,9 @@ class ProcessTempo {
 
     _tapUs.add(epochUs);
 
-    // if (_tapUs.length > 1) {
-    //   print('${_tapUs.elementAt(1) - _tapUs.first}');
-    // }
+    if (_tapUs.length > 1) {
+      print('deltaUs: ${_tapUs.elementAt(1) - _tapUs.first}');
+    }
 
     //  find the max tempo delta
     int maxDeltaUs = -1;
@@ -157,6 +159,7 @@ class ProcessTempo {
       int nextElement = _tapUs.elementAt(1);
       int lastElement = _tapUs.first;
       periodUs = nextElement - lastElement;
+      maxDeltaUs = periodUs;
       lastElement = nextElement;
       // if (veryVerbose) {
       //   print(
@@ -171,13 +174,14 @@ class ProcessTempo {
         int nextPeriodUs = nextElement - lastElement;
         int deltaUs = (nextPeriodUs - periodUs).abs();
         maxDeltaUs = max(maxDeltaUs, deltaUs);
-        // print('deltaUsAtIndex($i): $deltaUs/$maxDelta, period: $nextPeriodUs vs $periodUs');
+        print('deltaUsAtIndex($i): $deltaUs/$maxDeltaUs, period: $nextPeriodUs vs $periodUs');
         lastElement = nextElement;
       }
     }
 
     //  find the taps per measure
     tapsPerMeasure = (_expectedMeasurePeriodUs / periodUs).round();
+    //print('tapsPerMeasure: $tapsPerMeasure = ${_expectedMeasurePeriodUs / periodUs}');
     tapsPerMeasure = min(tapsPerMeasure, _beatsPerMeasure);
 
     //  insist on reasonable tap multiples: 1, 2, or beats per measure
@@ -192,6 +196,7 @@ class ProcessTempo {
           break;
       }
     }
+    print('tapsPerMeasure: $tapsPerMeasure');
 
     //  deliver the result if valid
     if (maxDeltaUs >= 0 &&
@@ -199,7 +204,7 @@ class ProcessTempo {
             _expectedMeasurePeriodUs /
                 tapsPerMeasure //  fewer taps implies more tolerance
                 *
-                _tightTolerance) {
+                (1 + _tightTolerance)) {
       bestBpm = (60 * Duration.microsecondsPerSecond * _beatsPerMeasure / (tapsPerMeasure * periodUs)).round();
 
       // notify of a new value
@@ -212,25 +217,27 @@ class ProcessTempo {
           ', amp: ${audioConfiguration.debugAmp(_instateMaxAmp)}'
           //  tpm = taps per measure
           ', tpm: $tapsPerMeasure'
-           ', Q: ${_tapUs.length}'
+          ', Q: ${_tapUs.length}'
           //'$_tapUs'
           // ', Qs: ${(_expectedMeasurePeriodUs/ Duration.microsecondsPerSecond).toStringAsFixed(3)}'
-              ', Qmax: ${((_confirmations * _expectedMeasurePeriodUs * (1 + _tightTolerance))/ Duration.microsecondsPerSecond).toStringAsFixed(3)}'
-              ', $greekLambda:'
+          ', Qmax: ${((_confirmations * _expectedMeasurePeriodUs * (1 + _tightTolerance)) / Duration.microsecondsPerSecond).toStringAsFixed(3)}'
+          ', $greekLambda:'
           ' ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
           ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
           ' = $bestBpm bpm',
         );
       }
     } else {
-      // print('delta: $maxDelta: out of bounds, tapsPerMeasure: $tapsPerMeasure'
-      //     ' , taps: ${_tapUs.length}'
-      //     ' , limit: ${_expectedMeasurePeriodUs / tapsPerMeasure * _tightTolerance}');
+      print(
+        'delta: $maxDeltaUs: out of bounds, tapsPerMeasure: $tapsPerMeasure'
+        ' , taps: ${_tapUs.length}'
+        ' , limit: ${_expectedMeasurePeriodUs / tapsPerMeasure * (1 + _tightTolerance)}',
+      );
     }
 
     //  toss stale samples
     while ((_tapUs.last - _tapUs.first) > _confirmations * _expectedMeasurePeriodUs
-        // * (1 + _tightTolerance)
+    // * (1 + _tightTolerance)
     ) {
       _tapUs.removeFirst();
     }
@@ -260,7 +267,7 @@ class ProcessTempo {
   int get instateMaxAmp => _instateMaxAmp;
   int _instateMaxAmp = 0;
 
-  int get outOfStateMaxAmp => _maxAbs;
+  double get maxAmp => _maxAbs / audioConfiguration.ampMaximum;
   int _maxAbs = 0;
   int _minAbs = audioConfiguration.ampMaximum;
 
