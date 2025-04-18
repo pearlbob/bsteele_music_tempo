@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:args/args.dart';
-import 'package:bsteele_bass_common/low_pass_filter.dart';
+// import 'package:bsteele_bass_common/low_pass_filter.dart';
 import 'package:bsteele_music_lib/songs/song_tempo_update.dart';
 import 'package:bsteele_music_lib/songs/song_update.dart';
 import 'package:bsteele_music_lib/util/song_update_service.dart';
@@ -20,7 +20,7 @@ bool isWebsocketFeedback = true;
 
 SongUpdateService songUpdateService = SongUpdateService();
 late ProcessTempo processTempo;
-LowPassFilter400Hz _lowPass400 = LowPassFilter400Hz();
+// LowPassFilter400Hz _lowPass400 = LowPassFilter400Hz();
 AudioConfiguration audioConfiguration = AudioConfiguration(2);
 
 ArgParser buildParser() {
@@ -213,17 +213,17 @@ void webSocketCallback(final SongUpdate songUpdate) {
 SongTempoUpdate? _songTempoUpdate;
 int _bpm = 0;
 int _tpm = 0; //  taps per measure as read
-const _targetDevice = 'Plugable USB Audio Device'; //  known misspelling
-final _cardLineRegExp = RegExp(
-  r'^card\s+([0-9]+):\s+\w+\s+\['
-  '$_targetDevice'
-  r'\],\s+device\s+([0-9]+):',
-); //
-final _scarlettSoloRegExp = RegExp(
-  r'^card\s+([0-9]+):\s+\w+\s+\['
-  'Scarlett Solo USB'
-  r'\],\s+device\s+([0-9]+):',
-); //
+// const _targetDevice = 'Plugable USB Audio Device'; //  known misspelling
+// final _cardLineRegExp = RegExp(
+//   r'^card\s+([0-9]+):\s+\w+\s+\['
+//   '$_targetDevice'
+//   r'\],\s+device\s+([0-9]+):',
+// ); //
+// final _scarlettSoloRegExp = RegExp(
+//   r'^card\s+([0-9]+):\s+\w+\s+\['
+//   'Scarlett Solo USB'
+//   r'\],\s+device\s+([0-9]+):',
+// ); //
 
 /*
 

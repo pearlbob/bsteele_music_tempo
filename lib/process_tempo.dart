@@ -11,7 +11,6 @@ import 'bsteele_music_tempo.dart';
 const Level _logDetail = Level.debug;
 const Level _logTapUsRemove = Level.debug;
 
-
 const _confirmations = 2;
 const samplePeriodUs = Duration.microsecondsPerSecond / sampleRate;
 double lastEpochUs = 0;
@@ -61,7 +60,8 @@ class ProcessTempo {
             _lastHertz = sampleRate / _samplesInState;
             //  note that a slow tempo can be expected, eg. a 4/4 song at 50 bpm with beats on 2 only
             //  or as fast as every beat
-            logger.log(_logDetail,
+            logger.log(
+              _logDetail,
               'hertz: '
               ' ${((1 - _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure)}'
               ' <= $_lastHertz'
@@ -92,7 +92,8 @@ class ProcessTempo {
 
               _lastSamplesInState = _samplesInState;
             } else {
-              logger.log(_logDetail,
+              logger.log(
+                _logDetail,
                 'out of hertz range: ${_lastHertz.toStringAsFixed(3)}'
                 ' @ ${audioConfiguration.debugAmp(_maxAbs)}',
               );
@@ -151,7 +152,7 @@ class ProcessTempo {
     _tapUs.add(epochUs);
 
     if (_tapUs.length > 1) {
-      logger.log(_logDetail,'deltaUs: ${_tapUs.elementAt(1) - _tapUs.first}');
+      logger.log(_logDetail, 'deltaUs: ${_tapUs.elementAt(1) - _tapUs.first}');
     }
 
     //  find the max tempo delta
@@ -161,7 +162,7 @@ class ProcessTempo {
       int nextElement = _tapUs.elementAt(1);
       int lastElement = _tapUs.first;
       periodUs = nextElement - lastElement;
-      maxDeltaUs = 0;   //  the first period is the reference
+      maxDeltaUs = 0; //  the first period is the reference
       lastElement = nextElement;
       // if (veryVerbose) {
       //   print(
@@ -176,13 +177,18 @@ class ProcessTempo {
         int nextPeriodUs = nextElement - lastElement;
         int deltaUs = (nextPeriodUs - periodUs).abs();
         maxDeltaUs = max(maxDeltaUs, deltaUs);
-        logger.log(_logDetail,'deltaUsAtIndex($i): $deltaUs/$maxDeltaUs, period: $nextPeriodUs vs $periodUs');
+        logger.log(_logDetail, 'deltaUsAtIndex($i): $deltaUs/$maxDeltaUs, period: $nextPeriodUs vs $periodUs');
         lastElement = nextElement;
       }
     }
 
     //  find the taps per measure
-    tapsPerMeasure = (_expectedMeasurePeriodUs / periodUs).round();
+    tapsPerMeasure =
+        (1.3 //  bias the selection to choose a slower tempo
+                *
+                _expectedMeasurePeriodUs /
+                periodUs)
+            .round();
     //logger.log(_logDetail,'tapsPerMeasure: $tapsPerMeasure = ${_expectedMeasurePeriodUs / periodUs}');
     tapsPerMeasure = min(tapsPerMeasure, _beatsPerMeasure);
 
@@ -198,7 +204,7 @@ class ProcessTempo {
           break;
       }
     }
-    logger.log(_logDetail,'tapsPerMeasure: $tapsPerMeasure');
+    logger.log(_logDetail, 'tapsPerMeasure: $tapsPerMeasure');
 
     //  deliver the result if valid
     if (maxDeltaUs >= 0 &&
@@ -230,7 +236,8 @@ class ProcessTempo {
         );
       }
     } else {
-      logger.log(_logDetail,
+      logger.log(
+        _logDetail,
         'maxDeltaUs: $maxDeltaUs: out of bounds, tapsPerMeasure: $tapsPerMeasure'
         ' , taps: ${_tapUs.length}'
         ' , limit: ${_expectedMeasurePeriodUs / tapsPerMeasure * (1 + _tightTolerance)}',
@@ -238,17 +245,21 @@ class ProcessTempo {
     }
 
     //  toss stale samples
-    while ((_tapUs.last - _tapUs.first) > (1+_confirmations) * _expectedMeasurePeriodUs
-     * (1 + _looseTolerance)
-    ) {
-      logger.log(_logTapUsRemove,'_tapUs remove: ${_tapUs.length}'
-          ', $_confirmations * $_expectedMeasurePeriodUs'
-          ' vs ${_tapUs.last - _tapUs.first } = ${(_tapUs.last - _tapUs.first)/((1+_confirmations) * _expectedMeasurePeriodUs)}');
+    while ((_tapUs.last - _tapUs.first) > (1 + _confirmations) * _expectedMeasurePeriodUs * (1 + _looseTolerance)) {
+      logger.log(
+        _logTapUsRemove,
+        '_tapUs remove: ${_tapUs.length}'
+        ', $_confirmations * $_expectedMeasurePeriodUs'
+        ' vs ${_tapUs.last - _tapUs.first} = ${(_tapUs.last - _tapUs.first) / ((1 + _confirmations) * _expectedMeasurePeriodUs)}',
+      );
       _tapUs.removeFirst();
     }
-    logger.log(_logDetail,'_tapUs: ${_tapUs.length}'
-        ', $_confirmations * $_expectedMeasurePeriodUs'
-        ' vs ${_tapUs.last - _tapUs.first } = ${(_tapUs.last - _tapUs.first)/(_confirmations * _expectedMeasurePeriodUs)}');
+    logger.log(
+      _logDetail,
+      '_tapUs: ${_tapUs.length}'
+      ', $_confirmations * $_expectedMeasurePeriodUs'
+      ' vs ${_tapUs.last - _tapUs.first} = ${(_tapUs.last - _tapUs.first) / (_confirmations * _expectedMeasurePeriodUs)}',
+    );
   }
 
   @override

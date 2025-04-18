@@ -10,7 +10,7 @@ import 'package:bsteele_music_lib/songs/song_update.dart';
 import 'package:bsteele_music_lib/util/song_update_service.dart';
 import 'package:bsteele_music_tempo/audio_configuration.dart';
 import 'package:bsteele_music_tempo/process_tempo.dart';
-import 'package:bsteele_music_tempo/utcDate.dart';
+import 'package:bsteele_music_tempo/utc_date.dart';
 import 'package:logger/logger.dart';
 
 const String version = '0.0.1';
@@ -93,8 +93,7 @@ void main(List<String> arguments) async {
   }
 
   //  show compile date
-  print( 'release date: ${releaseUtcDate()} UTC' );
-
+  print('release date: ${releaseUtcDate()} UTC');
 
   // setup the web socket
   if (isWebsocket) {
@@ -192,7 +191,7 @@ Future<void> runARecord() async {
   streamController.stream.listen((data) {
     var bytes = Uint8List.fromList(data);
     var byteData = bytes.buffer.asByteData();
-  // if (veryVerbose) print('heard ${data.length} bytes');
+    // if (veryVerbose) print('heard ${data.length} bytes');
     for (
       int i = 0;
       i < data.length;
@@ -245,7 +244,7 @@ processTempoCallback() {
         print(
           '${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
           ' @ ${audioConfiguration.debugAmp(processTempo.instateMaxAmp)}'
-          ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
+          ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}',
         );
       }
     }
@@ -255,13 +254,16 @@ processTempoCallback() {
 ///
 void webSocketCallback(final SongUpdate songUpdate) {
   if (veryVerbose) {
-    print(
-      'webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}'
-    );
+    print('webSocketCallback: $songUpdate, bpm: ${songUpdate.currentBeatsPerMinute}');
   }
-  processTempo.expectedBpm = songUpdate.currentBeatsPerMinute;
+  //print('webSocketCallback: title: "${songUpdate.song.title}", beatsPerMinute: ${songUpdate.song.beatsPerMinute}');
+
+  //  only use beats per minute from a non-empty song
+  if (songUpdate.song.title.isNotEmpty) {
+    processTempo.expectedBpm = songUpdate.song.beatsPerMinute;
+  }
   processTempo.beatsPerMeasure = songUpdate.song.beatsPerBar;
-  _songTempoUpdate = SongTempoUpdate(songUpdate.song.songId, songUpdate.currentBeatsPerMinute, processTempo.maxAmp );
+  _songTempoUpdate = SongTempoUpdate(songUpdate.song.songId, songUpdate.currentBeatsPerMinute, processTempo.maxAmp);
 }
 
 SongTempoUpdate? _songTempoUpdate;
