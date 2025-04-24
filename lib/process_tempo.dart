@@ -2,18 +2,19 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:bsteele_music_lib/songs/music_constants.dart';
+import 'package:bsteele_music_lib/util/util.dart';
 import 'package:logger/logger.dart';
 
 import 'app_logger.dart';
 import 'audio_configuration.dart';
 import 'bsteele_music_tempo.dart';
 
-const Level _logDetail = Level.debug;
+const Level _logDetail = Level.info;
 const Level _logTapUsRemove = Level.debug;
 
 const _confirmations = 2;
-const samplePeriodUs = Duration.microsecondsPerSecond / sampleRate;
-double lastEpochUs = 0;
+const _samplePeriodUs = Duration.microsecondsPerSecond / sampleRate;
+double _lastEpochUs = 0;
 
 const String greekCapitalDelta = '\u0394';
 const String greekLambda = '\u03bb';
@@ -28,8 +29,8 @@ class ProcessTempo {
   }
 
   processNewTempo(final int value, {double? epochUs}) {
-    epochUs ??= lastEpochUs + samplePeriodUs;
-    lastEpochUs = epochUs;
+    epochUs ??= _lastEpochUs + _samplePeriodUs;
+    _lastEpochUs = epochUs;
 
     //  note that this doubles the hysteresis minimum samples possibilities
     final int abs = value.abs(); //  negative amplitude is still amplitude
@@ -149,110 +150,134 @@ class ProcessTempo {
       // }
     }
 
+    int periodUs = epochUs - _lastPeiodStartUs;
+    _lastPeiodStartUs = epochUs;
+
+    if (periodUs > _expectedMeasurePeriodUs * (1 + _confirmations) * (1 + _looseTolerance)) {
+      //  it's been too long, eliminate stale data
+      _tapUs.clear();
+      _beatUs.clear();
+      return;
+    }
+
+    //  remember when the last tap was
     _tapUs.add(epochUs);
 
-    if (_tapUs.length > 1) {
-      logger.log(_logDetail, 'deltaUs: ${_tapUs.elementAt(1) - _tapUs.first}');
-    }
+    //  figure out how many beats have there been since the prior tap
+    int beats = (periodUs / _expectedBeatPeriodUs).round();
+    beats = max(1, beats);
 
-    //  find the max tempo delta
-    int maxDeltaUs = -1;
-    int periodUs = 1;
-    if (_tapUs.length >= 1 + _confirmations) {
-      int nextElement = _tapUs.elementAt(1);
-      int lastElement = _tapUs.first;
-      periodUs = nextElement - lastElement;
-      maxDeltaUs = 0; //  the first period is the reference
-      lastElement = nextElement;
-      // if (veryVerbose) {
-      //   print(
-      //     '$greekLambda: ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
-      //     ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
-      //     ' = $bestBpm bpm',
-      //   );
-      // }
+    //  remember the average beat duration between taps
+    _beatUs.add(periodUs / beats);
 
-      for (var i = 2; i < _tapUs.length; i++) {
-        nextElement = _tapUs.elementAt(i);
-        int nextPeriodUs = nextElement - lastElement;
-        int deltaUs = (nextPeriodUs - periodUs).abs();
-        maxDeltaUs = max(maxDeltaUs, deltaUs);
-        logger.log(_logDetail, 'deltaUsAtIndex($i): $deltaUs/$maxDeltaUs, period: $nextPeriodUs vs $periodUs');
-        lastElement = nextElement;
+    //  see if we have enough taps to average
+    if (_beatUs.length >= _confirmations) {
+      double sum = 0;
+      for (double p in _beatUs) {
+        sum += p;
       }
-    }
+      double averageUs = sum / _beatUs.length;
 
-    //  find the taps per measure
-    tapsPerMeasure =
-        (1.3 //  bias the selection to choose a slower tempo
-                *
-                _expectedMeasurePeriodUs /
-                periodUs)
-            .round();
-    //logger.log(_logDetail,'tapsPerMeasure: $tapsPerMeasure = ${_expectedMeasurePeriodUs / periodUs}');
-    tapsPerMeasure = min(tapsPerMeasure, _beatsPerMeasure);
-
-    //  insist on reasonable tap multiples: 1, 2, or beats per measure
-    if (tapsPerMeasure < _beatsPerMeasure && tapsPerMeasure != 1) {
-      //  tapping 3 out of 4 or 3 over 6 beats doesn't work
-      switch (_beatsPerMeasure) {
-        case 3:
-          tapsPerMeasure = 1;
+      //  see if the taps are consistent with each other
+      bool consistent = true;
+      for (double p in _beatUs) {
+        if ( (p-averageUs).abs() > averageUs*(1+_tightTolerance)) {
+          //  failed
+          consistent = false;
           break;
-        default:
-          tapsPerMeasure = 2;
-          break;
+        }
+      }
+      if ( consistent) {
+          bestBpm = (60 * Duration.microsecondsPerSecond / averageUs).round();
+
+          // notify of a new value
+          callback?.call();
       }
     }
-    logger.log(_logDetail, 'tapsPerMeasure: $tapsPerMeasure');
 
-    //  deliver the result if valid
-    if (maxDeltaUs >= 0 &&
-        maxDeltaUs <
-            _expectedMeasurePeriodUs /
-                tapsPerMeasure //  fewer taps implies more tolerance
-                *
-                (1 + _tightTolerance)) {
-      bestBpm = (60 * Duration.microsecondsPerSecond * _beatsPerMeasure / (tapsPerMeasure * periodUs)).round();
+    // //  find the max tempo delta
+    // int maxDeltaUs = -1;
 
-      // notify of a new value
-      callback?.call();
+    // if (_tapUs.length >= 1 + _confirmations) {
+    //   int nextElement = _tapUs.elementAt(1);
+    //   int lastElement = _tapUs.first;
+    //   periodUs = nextElement - lastElement;
+    //   maxDeltaUs = 0; //  the first period is the reference
+    //   lastElement = nextElement;
+    //   // if (veryVerbose) {
+    //   //   print(
+    //   //     '$greekLambda: ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
+    //   //     ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
+    //   //     ' = $bestBpm bpm',
+    //   //   );
+    //   // }
+    //
+    //   for (var i = 2; i < _tapUs.length; i++) {
+    //     nextElement = _tapUs.elementAt(i);
+    //     int nextPeriodUs = nextElement - lastElement;
+    //     int deltaUs = (nextPeriodUs - periodUs).abs();
+    //     maxDeltaUs = max(maxDeltaUs, deltaUs);
+    //     logger.log(_logDetail, 'deltaUsAtIndex($i): $deltaUs/$maxDeltaUs, period: $nextPeriodUs vs $periodUs');
+    //     lastElement = nextElement;
+    //   }
+    // }
 
-      if (veryVerbose) {
-        print(
-          '${DateTime.now()}:'
-          ' $greekCapitalDelta: ${(maxDeltaUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
-          ', amp: ${audioConfiguration.debugAmp(_instateMaxAmp)}'
-          //  tpm = taps per measure
-          ', tpm: $tapsPerMeasure'
-          ', Q: ${_tapUs.length}'
-          //'$_tapUs'
-          // ', Qs: ${(_expectedMeasurePeriodUs/ Duration.microsecondsPerSecond).toStringAsFixed(3)}'
-          ', Qmax: ${((_confirmations * _expectedMeasurePeriodUs * (1 + _tightTolerance)) / Duration.microsecondsPerSecond).toStringAsFixed(3)}'
-          ', $greekLambda:'
-          ' ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
-          ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
-          ' = $bestBpm bpm',
-        );
-      }
-    } else {
-      logger.log(
-        _logDetail,
-        'maxDeltaUs: $maxDeltaUs: out of bounds, tapsPerMeasure: $tapsPerMeasure'
-        ' , taps: ${_tapUs.length}'
-        ' , limit: ${_expectedMeasurePeriodUs / tapsPerMeasure * (1 + _tightTolerance)}',
-      );
-    }
+    // //  find the taps per measure
+    // tapsPerMeasure = (_expectedMeasurePeriodUs / Util.intLimit(periodUs, 1, _expectedMeasurePeriodUs)).round();
+    // logger.log(
+    //   _logDetail,
+    //   '      _expectedMeasurePeriodUs/periodUs = $_expectedMeasurePeriodUs/$periodUs = $tapsPerMeasure',
+    // );
+    // tapsPerMeasure = Util.intLimit(tapsPerMeasure, 1, _beatsPerMeasure);
+    // logger.log(_logDetail, 'tapsPerMeasure: $tapsPerMeasure, periodUs: $periodUs');
+    //
+    // _beatUs.add(periodUs / tapsPerMeasure);
+    // logger.log(_logDetail, '    _beatUs: $_beatUs');
+
+    // //  deliver the result if valid
+    // if (maxDeltaUs >= 0 &&
+    //     maxDeltaUs <
+    //         _expectedMeasurePeriodUs /
+    //             tapsPerMeasure //  fewer taps implies more tolerance
+    //             *
+    //             (1 + _tightTolerance)) {
+    //   bestBpm = (60 * Duration.microsecondsPerSecond * _beatsPerMeasure / (tapsPerMeasure * periodUs)).round();
+    //
+    //   // notify of a new value
+    //   callback?.call();
+    //
+    //   if (veryVerbose) {
+    //     print(
+    //       '${DateTime.now()}:'
+    //       ' $greekCapitalDelta: ${(maxDeltaUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
+    //       ', amp: ${audioConfiguration.debugAmp(_instateMaxAmp)}'
+    //       //  tpm = taps per measure
+    //       ', tpm: $tapsPerMeasure'
+    //       ', Q: ${_tapUs.length}'
+    //       //'$_tapUs'
+    //       // ', Qs: ${(_expectedMeasurePeriodUs/ Duration.microsecondsPerSecond).toStringAsFixed(3)}'
+    //       ', Qmax: ${((_confirmations * _expectedMeasurePeriodUs * (1 + _tightTolerance)) / Duration.microsecondsPerSecond).toStringAsFixed(3)}'
+    //       ', $greekLambda:'
+    //       ' ${(periodUs / Duration.microsecondsPerSecond).toStringAsFixed(3)} s'
+    //       ' = ${(Duration.microsecondsPerSecond / periodUs).toStringAsFixed(3)} hz'
+    //       ' = $bestBpm bpm',
+    //     );
+    //   }
+    // } else {
+    //   logger.log(
+    //     _logDetail,
+    //     'maxDeltaUs: $maxDeltaUs: out of bounds, tapsPerMeasure: $tapsPerMeasure'
+    //     ' , taps: ${_tapUs.length}'
+    //     ' , limit: ${_expectedMeasurePeriodUs / tapsPerMeasure * (1 + _tightTolerance)}',
+    //   );
+    // }
 
     //  toss stale samples
-    while ((_tapUs.last - _tapUs.first) > (1 + _confirmations) * _expectedMeasurePeriodUs * (1 + _looseTolerance)) {
-      logger.log(
-        _logTapUsRemove,
-        '_tapUs remove: ${_tapUs.length}'
-        ', $_confirmations * $_expectedMeasurePeriodUs'
-        ' vs ${_tapUs.last - _tapUs.first} = ${(_tapUs.last - _tapUs.first) / ((1 + _confirmations) * _expectedMeasurePeriodUs)}',
-      );
+    while (_tapUs.length > (1 + _confirmations) ) {
       _tapUs.removeFirst();
+    }
+    while (_beatUs.length > _tapUs.length) {
+      _beatUs.removeFirst();
     }
     logger.log(
       _logDetail,
@@ -260,6 +285,8 @@ class ProcessTempo {
       ', $_confirmations * $_expectedMeasurePeriodUs'
       ' vs ${_tapUs.last - _tapUs.first} = ${(_tapUs.last - _tapUs.first) / (_confirmations * _expectedMeasurePeriodUs)}',
     );
+    logger.log(_logDetail, '    _tapUs:  $_tapUs');
+    logger.log(_logDetail, '    _beatUs: $_beatUs');
   }
 
   @override
@@ -279,7 +306,9 @@ class ProcessTempo {
   int _lastSignalCount = 0;
   int _samplesNotInstateCount = 0;
   int _samplesNotInstateSum = 0;
+  int _lastPeiodStartUs = 0;
   final Queue<int> _tapUs = Queue();
+  final Queue<double> _beatUs = Queue();
 
   int get instateMaxAmp => _instateMaxAmp;
   int _instateMaxAmp = 0;
@@ -303,16 +332,9 @@ class ProcessTempo {
   }
 
   _computeExpectedPeriodUs() {
-    _expectedMeasurePeriodUs = (_beatsPerMeasure * Duration.microsecondsPerSecond * 60) ~/ _expectedBpm;
+    _expectedBeatPeriodUs = (Duration.microsecondsPerSecond * 60) ~/ _expectedBpm;
+    _expectedMeasurePeriodUs = _beatsPerMeasure * _expectedBeatPeriodUs;
   }
-
-  // _clearExpectedPeriodUs() {
-  //   _expectedMeasurePeriodUs = 1;
-  // }
-  //
-  // _expectedPeriodUsIsValid() {
-  //   return _expectedMeasurePeriodUs > 1;
-  // }
 
   static const defaultBpm = 120;
   int _expectedBpm = defaultBpm;
@@ -322,6 +344,7 @@ class ProcessTempo {
   int bestBpm = 0;
   int tapsPerMeasure = 0;
   int _expectedMeasurePeriodUs = 1;
+  int _expectedBeatPeriodUs = 1;
 
   double get hertz => _lastHertz;
   double _lastHertz = 0;
