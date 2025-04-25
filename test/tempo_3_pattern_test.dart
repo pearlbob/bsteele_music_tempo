@@ -11,6 +11,6 @@ void main() {
   test('test 3 beatsPerMeasure', () {
     Logger.level = Level.info;
     logger.i('test 3 beatsPerMeasure');
-    testTempoPattern(3, [true, true, false,]);
+    testTempoPattern(3, [true, true, false,true, false, false,]);
   });
 }

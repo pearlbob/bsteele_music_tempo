@@ -9,8 +9,8 @@ import 'app_logger.dart';
 import 'audio_configuration.dart';
 import 'bsteele_music_tempo.dart';
 
-const Level _logDetail = Level.info;
-const Level _logTapUsRemove = Level.debug;
+const Level _logDetail = Level.debug;
+// const Level _logTapUsRemove = Level.debug;
 
 const _confirmations = 2;
 const _samplePeriodUs = Duration.microsecondsPerSecond / sampleRate;
@@ -181,17 +181,17 @@ class ProcessTempo {
       //  see if the taps are consistent with each other
       bool consistent = true;
       for (double p in _beatUs) {
-        if ( (p-averageUs).abs() > averageUs*(1+_tightTolerance)) {
+        if ((p - averageUs).abs() > averageUs * _tightTolerance) {
           //  failed
           consistent = false;
           break;
         }
       }
-      if ( consistent) {
-          bestBpm = (60 * Duration.microsecondsPerSecond / averageUs).round();
+      if (consistent) {
+        bestBpm = (60 * Duration.microsecondsPerSecond / averageUs).round();
 
-          // notify of a new value
-          callback?.call();
+        // notify of a new value
+        callback?.call();
       }
     }
 
@@ -273,7 +273,7 @@ class ProcessTempo {
     // }
 
     //  toss stale samples
-    while (_tapUs.length > (1 + _confirmations) ) {
+    while (_tapUs.length > (1 + _confirmations)) {
       _tapUs.removeFirst();
     }
     while (_beatUs.length > _tapUs.length) {
