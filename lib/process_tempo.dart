@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'dart:math';
 
 import 'package:bsteele_music_lib/songs/music_constants.dart';
-import 'package:bsteele_music_lib/util/util.dart';
 import 'package:bsteele_music_tempo/util.dart';
 import 'package:logger/logger.dart';
 
@@ -261,7 +260,6 @@ class ProcessTempo {
 
   set beatsPerMeasure(final int beats) {
     _beatsPerMeasure = beats < 2 ? 2 : beats;
-    _looseTolerance = _beatsPerMeasure < 6 ? _looseTolerance234 : _looseTolerance6;
     _computeExpectedPeriodUs();
   }
 
@@ -289,9 +287,7 @@ class ProcessTempo {
   VoidCallback? callback; //  callback on valid data, i.e. a new bpm
 
   static const _tightTolerance = 0.095; //  the operator has to be regular... or we'll follow junk tempos
-  static const _looseTolerance234 = 0.3; //  worry about every beat tap & accepting a short period
-  static const _looseTolerance6 = 0.16; //  worry about 6 beats per bar being misunderstood.
-  double _looseTolerance = _looseTolerance234;
+  static const _looseTolerance = 0.3;
 
   static const _minimumHertz = 40;
   static const int _hysteresisMinimumSamples = sampleRate ~/ _minimumHertz;
