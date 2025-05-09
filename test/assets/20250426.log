@@ -1,0 +1,925 @@
+2025-04-26 13:15:03.137844: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 0, beat: 0, measure: A, repeat: 1/2, key: C, currentBPM: 106, bpm: 106
+2025-04-26 13:15:06.138026: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:15:09.138200: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:15:12.138351: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:15:15.138541: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:15:18.138687: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:15:21.138855: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:15:25.139192: @    0.373,    2.894 s / 6 =    2.074 hz =  124.411 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 127, user: tempo, level: 0.029
+2025-04-26 13:15:27.014693: bestBpm: 127 @ 0.846, tpm: 0/4
+2025-04-26 13:15:27.014710: @    0.846,    1.844 s / 4 =    2.169 hz =  130.147 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 130, user: tempo, level: 0.032
+2025-04-26 13:15:28.764543: bestBpm: 130 @ 1.000, tpm: 0/4
+2025-04-26 13:15:28.764560: @    1.000,    1.773 s / 4 =    2.256 hz =  135.338 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 131, user: tempo, level: 0.032
+2025-04-26 13:15:30.515601: bestBpm: 131 @ 1.000, tpm: 0/4
+2025-04-26 13:15:30.515621: @    1.000,    1.786 s / 4 =    2.239 hz =  134.350 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 133, user: tempo, level: 0.032
+2025-04-26 13:15:32.389878: bestBpm: 133 @ 1.000, tpm: 0/4
+2025-04-26 13:15:32.389894: @    1.000,    1.803 s / 4 =    2.218 hz =  133.079 bpm
+2025-04-26 13:15:34.264534: @    1.000,    1.855 s / 4 =    2.156 hz =  129.358 bpm
+2025-04-26 13:15:36.014717: @    1.000,    1.784 s / 4 =    2.242 hz =  134.512 bpm
+2025-04-26 13:15:37.765060: @    1.000,    1.749 s / 4 =    2.287 hz =  137.221 bpm
+2025-04-26 13:15:39.639803: @    1.000,    1.817 s / 4 =    2.202 hz =  132.122 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 134, user: tempo, level: 0.027
+2025-04-26 13:15:41.390153: bestBpm: 134 @ 1.000, tpm: 0/4
+2025-04-26 13:15:41.390170: @    1.000,    1.799 s / 4 =    2.224 hz =  133.428 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 133, user: tempo, level: 0.031
+2025-04-26 13:15:43.265195: bestBpm: 133 @ 1.000, tpm: 0/4
+2025-04-26 13:15:43.265210: @    1.000,    1.846 s / 4 =    2.167 hz =  130.045 bpm
+2025-04-26 13:15:45.015155: @    1.000,    1.774 s / 4 =    2.255 hz =  135.283 bpm
+2025-04-26 13:15:46.765367: @    1.000,    1.808 s / 4 =    2.213 hz =  132.759 bpm
+2025-04-26 13:15:48.640342: @    1.000,    1.807 s / 4 =    2.214 hz =  132.838 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 134, user: tempo, level: 0.027
+2025-04-26 13:15:50.390722: bestBpm: 134 @ 1.000, tpm: 0/4
+2025-04-26 13:15:50.390737: @    1.000,    1.801 s / 4 =    2.221 hz =  133.267 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 133, user: tempo, level: 0.034
+2025-04-26 13:15:52.265690: bestBpm: 133 @ 1.000, tpm: 0/4
+2025-04-26 13:15:52.265706: @    1.000,    1.809 s / 4 =    2.211 hz =  132.653 bpm
+2025-04-26 13:15:54.015688: @    1.000,    1.785 s / 4 =    2.241 hz =  134.485 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 135, user: tempo, level: 0.042
+2025-04-26 13:15:58.766056: bestBpm: 135 @ 1.000, tpm: 0/4
+2025-04-26 13:15:58.766073: @    1.000,    4.718 s / 11 =    2.331 hz =  139.887 bpm
+2025-04-26 13:16:00.266016: @    1.000,    1.527 s / 3 =    1.965 hz =  117.878 bpm
+2025-04-26 13:16:06.266333: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:16:14.766811: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:16:17.766986: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:16:19.767153: @    1.000,    1.797 s / 4 =    2.227 hz =  133.592 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 132, user: tempo, level: 0.038
+2025-04-26 13:16:21.642365: bestBpm: 132 @ 1.000, tpm: 0/4
+2025-04-26 13:16:21.642382: @    1.000,    1.852 s / 4 =    2.160 hz =  129.614 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 131, user: tempo, level: 0.044
+2025-04-26 13:16:23.517441: bestBpm: 131 @ 1.000, tpm: 0/4
+2025-04-26 13:16:23.517457: @    1.000,    1.865 s / 4 =    2.145 hz =  128.676 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 130, user: tempo, level: 0.039
+2025-04-26 13:16:25.392584: bestBpm: 130 @ 1.000, tpm: 0/4
+2025-04-26 13:16:25.392614: @    1.000,    1.876 s / 4 =    2.132 hz =  127.906 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 129, user: tempo, level: 0.041
+2025-04-26 13:16:27.267611: bestBpm: 129 @ 1.000, tpm: 0/4
+2025-04-26 13:16:27.267627: @    1.000,    1.848 s / 4 =    2.165 hz =  129.892 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 130, user: tempo, level: 0.039
+2025-04-26 13:16:29.017785: bestBpm: 130 @ 1.000, tpm: 0/4
+2025-04-26 13:16:29.017802: @    1.000,    1.789 s / 4 =    2.236 hz =  134.183 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 131, user: tempo, level: 0.041
+2025-04-26 13:16:30.767985: bestBpm: 131 @ 1.000, tpm: 0/4
+2025-04-26 13:16:30.768009: @    1.000,    1.789 s / 4 =    2.236 hz =  134.134 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 0, beat: 0, measure: A, repeat: 1/2, key: C, currentBPM: 131, bpm: 131
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 132, user: tempo, level: 0.045
+2025-04-26 13:16:32.642957: bestBpm: 132 @ 1.000, tpm: 0/4
+2025-04-26 13:16:32.642973: @    1.000,    1.836 s / 4 =    2.178 hz =  130.707 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 1, beat: 4, measure: Bm, repeat: 1/2, key: C, currentBPM: 132, bpm: 132
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 132, user: tempo, level: 0.037
+2025-04-26 13:16:34.518016: bestBpm: 132 @ 1.000, tpm: 0/4
+2025-04-26 13:16:34.518031: @    1.000,    1.844 s / 4 =    2.169 hz =  130.121 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 2, beat: 8, measure: D, repeat: 1/2, key: C, currentBPM: 132, bpm: 132
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 134, user: tempo, level: 0.035
+2025-04-26 13:16:36.143268: bestBpm: 134 @ 1.000, tpm: 0/4
+2025-04-26 13:16:36.143285: @    1.000,    1.705 s / 4 =    2.345 hz =  140.723 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 3, beat: 12, measure: A, repeat: 1/2, key: C, currentBPM: 134, bpm: 134
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 135, user: tempo, level: 0.035
+2025-04-26 13:16:37.893373: bestBpm: 135 @ 1.000, tpm: 0/4
+2025-04-26 13:16:37.893388: @    1.000,    1.744 s / 4 =    2.293 hz =  137.590 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 4, beat: 16, measure: A, repeat: 2/2, key: C, currentBPM: 135, bpm: 135
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 136, user: tempo, level: 0.036
+2025-04-26 13:16:39.768280: bestBpm: 136 @ 1.000, tpm: 0/4
+2025-04-26 13:16:39.768295: @    1.000,    1.787 s / 4 =    2.239 hz =  134.322 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 5, beat: 20, measure: Bm, repeat: 2/2, key: C, currentBPM: 136, bpm: 136
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 0, beat: 0, measure: A, repeat: 1/2, key: C, currentBPM: 136, bpm: 136
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 138, user: tempo, level: 0.035
+2025-04-26 13:16:41.518347: bestBpm: 138 @ 1.000, tpm: 0/4
+2025-04-26 13:16:41.518362: @    1.000,    1.743 s / 4 =    2.295 hz =  137.682 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 1, beat: 4, measure: Bm, repeat: 1/2, key: C, currentBPM: 138, bpm: 138
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 137, user: tempo, level: 0.041
+2025-04-26 13:16:43.268475: bestBpm: 137 @ 1.000, tpm: 0/4
+2025-04-26 13:16:43.268491: @    1.000,    1.752 s / 4 =    2.283 hz =  136.959 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 2, beat: 8, measure: D, repeat: 1/2, key: C, currentBPM: 137, bpm: 137
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 136, user: tempo, level: 0.038
+2025-04-26 13:16:45.018605: bestBpm: 136 @ 1.000, tpm: 0/4
+2025-04-26 13:16:45.018619: @    1.000,    1.773 s / 4 =    2.256 hz =  135.372 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 4, beat: 16, measure: A, repeat: 2/2, key: C, currentBPM: 136, bpm: 136
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 137, user: tempo, level: 0.037
+2025-04-26 13:16:46.768671: bestBpm: 137 @ 1.000, tpm: 0/4
+2025-04-26 13:16:46.768687: @    1.000,    1.724 s / 4 =    2.320 hz =  139.209 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 5, beat: 20, measure: Bm, repeat: 2/2, key: C, currentBPM: 137, bpm: 137
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 137, user: tempo, level: 0.043
+2025-04-26 13:16:48.518811: bestBpm: 137 @ 1.000, tpm: 0/4
+2025-04-26 13:16:48.518826: @    1.000,    1.783 s / 4 =    2.243 hz =  134.595 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 6, beat: 24, measure: D, repeat: 2/2, key: C, currentBPM: 137, bpm: 137
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 137, user: tempo, level: 0.044
+2025-04-26 13:16:50.268894: bestBpm: 137 @ 1.000, tpm: 0/4
+2025-04-26 13:16:50.268908: @    1.000,    1.736 s / 4 =    2.305 hz =  138.277 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 7, beat: 28, measure: A, repeat: 2/2, key: C, currentBPM: 137, bpm: 137
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 138, user: tempo, level: 0.033
+2025-04-26 13:16:52.018945: bestBpm: 138 @ 1.000, tpm: 0/4
+2025-04-26 13:16:52.018960: @    1.000,    1.734 s / 4 =    2.306 hz =  138.368 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 8, beat: 32, measure: A, repeat: 1/2, key: C, currentBPM: 138, bpm: 138
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 137, user: tempo, level: 0.029
+2025-04-26 13:16:53.769042: bestBpm: 137 @ 1.000, tpm: 0/4
+2025-04-26 13:16:53.769057: @    1.000,    1.745 s / 4 =    2.292 hz =  137.534 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 9, beat: 36, measure: Bm, repeat: 1/2, key: C, currentBPM: 137, bpm: 137
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.028
+2025-04-26 13:16:55.394283: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:16:55.394299: @    1.000,    1.711 s / 4 =    2.337 hz =  140.245 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 10, beat: 40, measure: D, repeat: 1/2, key: C, currentBPM: 139, bpm: 139
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.025
+2025-04-26 13:16:57.144348: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:16:57.144364: @    1.000,    1.729 s / 4 =    2.313 hz =  138.802 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 11, beat: 44, measure: A, repeat: 1/2, key: C, currentBPM: 139, bpm: 139
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.040
+2025-04-26 13:16:58.894438: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:16:58.894455: @    1.000,    1.737 s / 4 =    2.303 hz =  138.166 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 12, beat: 48, measure: A, repeat: 2/2, key: C, currentBPM: 139, bpm: 139
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 138, user: tempo, level: 0.039
+2025-04-26 13:17:00.644546: bestBpm: 138 @ 1.000, tpm: 0/4
+2025-04-26 13:17:00.644572: @    1.000,    1.756 s / 4 =    2.278 hz =  136.681 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 8, beat: 32, measure: A, repeat: 1/2, key: C, currentBPM: 138, bpm: 138
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 138, user: tempo, level: 0.031
+2025-04-26 13:17:02.394582: bestBpm: 138 @ 1.000, tpm: 0/4
+2025-04-26 13:17:02.394608: @    1.000,    1.716 s / 4 =    2.331 hz =  139.860 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 9, beat: 36, measure: Bm, repeat: 1/2, key: C, currentBPM: 138, bpm: 138
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 138, user: tempo, level: 0.043
+2025-04-26 13:17:04.144740: bestBpm: 138 @ 1.000, tpm: 0/4
+2025-04-26 13:17:04.144765: @    1.000,    1.766 s / 4 =    2.265 hz =  135.894 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 10, beat: 40, measure: D, repeat: 1/2, key: C, currentBPM: 138, bpm: 138
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 137, user: tempo, level: 0.027
+2025-04-26 13:17:05.894806: bestBpm: 137 @ 1.000, tpm: 0/4
+2025-04-26 13:17:05.894834: @    1.000,    1.761 s / 4 =    2.271 hz =  136.259 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 11, beat: 44, measure: A, repeat: 1/2, key: C, currentBPM: 137, bpm: 137
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 137, user: tempo, level: 0.031
+2025-04-26 13:17:07.644952: bestBpm: 137 @ 1.000, tpm: 0/4
+2025-04-26 13:17:07.644971: @    1.000,    1.754 s / 4 =    2.280 hz =  136.794 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 12, beat: 48, measure: A, repeat: 2/2, key: C, currentBPM: 137, bpm: 137
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 137, user: tempo, level: 0.041
+2025-04-26 13:17:09.395003: bestBpm: 137 @ 1.000, tpm: 0/4
+2025-04-26 13:17:09.395020: @    1.000,    1.746 s / 4 =    2.290 hz =  137.419 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 8, beat: 32, measure: A, repeat: 1/2, key: C, currentBPM: 137, bpm: 137
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 138, user: tempo, level: 0.039
+2025-04-26 13:17:11.145014: bestBpm: 138 @ 1.000, tpm: 0/4
+2025-04-26 13:17:11.145030: @    1.000,    1.706 s / 4 =    2.345 hz =  140.692 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 9, beat: 36, measure: Bm, repeat: 1/2, key: C, currentBPM: 138, bpm: 138
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.036
+2025-04-26 13:17:12.770309: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:17:12.770325: @    1.000,    1.715 s / 4 =    2.333 hz =  139.979 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 12, beat: 48, measure: A, repeat: 2/2, key: C, currentBPM: 139, bpm: 139
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.035
+2025-04-26 13:17:14.520369: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:17:14.520385: @    1.000,    1.756 s / 4 =    2.278 hz =  136.681 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 13, beat: 52, measure: Bm, repeat: 2/2, key: C, currentBPM: 139, bpm: 139
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.033
+2025-04-26 13:17:16.270464: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:17:16.270480: @    1.000,    1.736 s / 4 =    2.304 hz =  138.222 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 14, beat: 56, measure: D, repeat: 2/2, key: C, currentBPM: 139, bpm: 139
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.037
+2025-04-26 13:17:18.020410: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:17:18.020425: @    1.000,    1.679 s / 4 =    2.382 hz =  142.942 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 15, beat: 60, measure: A, repeat: 2/2, key: C, currentBPM: 139, bpm: 139
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.035
+2025-04-26 13:17:19.770472: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:17:19.770487: @    1.000,    1.733 s / 4 =    2.308 hz =  138.483 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 16, beat: 64, measure: A, repeat: 1/4, key: C, currentBPM: 139, bpm: 139
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 140, user: tempo, level: 0.031
+2025-04-26 13:17:21.395771: bestBpm: 140 @ 1.000, tpm: 0/4
+2025-04-26 13:17:21.395787: @    1.000,    1.727 s / 4 =    2.317 hz =  139.008 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 17, beat: 68, measure: Bm, repeat: 1/4, key: C, currentBPM: 140, bpm: 140
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 17, beat: 68, measure: Bm, repeat: 1/4, key: C, currentBPM: 140, bpm: 140
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 140, user: tempo, level: 0.036
+2025-04-26 13:17:23.145758: bestBpm: 140 @ 1.000, tpm: 0/4
+2025-04-26 13:17:23.145772: @    1.000,    1.698 s / 4 =    2.355 hz =  141.327 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.035
+2025-04-26 13:17:24.895847: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:17:24.895864: @    1.000,    1.745 s / 4 =    2.293 hz =  137.559 bpm
+2025-04-26 13:17:26.645725: @    1.000,    1.733 s / 4 =    2.308 hz =  138.455 bpm
+2025-04-26 13:17:28.395757: @    1.000,    1.712 s / 4 =    2.337 hz =  140.221 bpm
+2025-04-26 13:17:30.021066: @    1.000,    1.731 s / 4 =    2.310 hz =  138.628 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 138, user: tempo, level: 0.037
+2025-04-26 13:17:31.896145: bestBpm: 138 @ 1.000, tpm: 0/4
+2025-04-26 13:17:31.896162: @    1.000,    1.774 s / 4 =    2.254 hz =  135.256 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 139, user: tempo, level: 0.039
+2025-04-26 13:17:33.521412: bestBpm: 139 @ 1.000, tpm: 0/4
+2025-04-26 13:17:33.521428: @    1.000,    1.704 s / 4 =    2.347 hz =  140.812 bpm
+2025-04-26 13:17:35.271258: @    1.000,    1.720 s / 4 =    2.325 hz =  139.506 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 140, user: tempo, level: 0.031
+2025-04-26 13:17:36.896627: bestBpm: 140 @ 1.000, tpm: 0/4
+2025-04-26 13:17:36.896645: @    1.000,    1.679 s / 4 =    2.383 hz =  142.972 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 141, user: tempo, level: 0.043
+2025-04-26 13:17:38.646684: bestBpm: 141 @ 1.000, tpm: 0/4
+2025-04-26 13:17:38.646699: @    1.000,    1.718 s / 4 =    2.328 hz =  139.706 bpm
+2025-04-26 13:17:40.396465: @    1.000,    1.695 s / 4 =    2.360 hz =  141.596 bpm
+2025-04-26 13:17:42.146530: @    1.000,    1.732 s / 4 =    2.309 hz =  138.541 bpm
+2025-04-26 13:17:43.771729: @    1.000,    1.680 s / 4 =    2.381 hz =  142.880 bpm
+2025-04-26 13:17:45.521721: @    1.000,    1.695 s / 4 =    2.360 hz =  141.602 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.040
+2025-04-26 13:17:47.147077: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:17:47.147093: @    1.000,    1.670 s / 4 =    2.395 hz =  143.713 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 143, user: tempo, level: 0.034
+2025-04-26 13:17:48.772251: bestBpm: 143 @ 1.000, tpm: 0/4
+2025-04-26 13:17:48.772267: @    1.000,    1.660 s / 4 =    2.409 hz =  144.540 bpm
+2025-04-26 13:17:50.521990: @    1.000,    1.668 s / 4 =    2.398 hz =  143.906 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 32, beat: 128, measure: A, repeat: 1/2, key: C, currentBPM: 143, bpm: 143
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 144, user: tempo, level: 0.041
+2025-04-26 13:17:52.147404: bestBpm: 144 @ 1.000, tpm: 0/4
+2025-04-26 13:17:52.147419: @    1.000,    1.690 s / 4 =    2.367 hz =  142.015 bpm
+2025-04-26 13:17:53.772369: @    1.000,    1.648 s / 4 =    2.428 hz =  145.655 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 143, user: tempo, level: 0.040
+2025-04-26 13:17:55.522540: bestBpm: 143 @ 1.000, tpm: 0/4
+2025-04-26 13:17:55.522555: @    1.000,    1.705 s / 4 =    2.346 hz =  140.747 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.036
+2025-04-26 13:17:57.272555: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:17:57.272571: @    1.000,    1.712 s / 4 =    2.337 hz =  140.214 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 141, user: tempo, level: 0.034
+2025-04-26 13:17:58.897865: bestBpm: 141 @ 1.000, tpm: 0/4
+2025-04-26 13:17:58.897881: @    1.000,    1.729 s / 4 =    2.313 hz =  138.804 bpm
+2025-04-26 13:18:00.647625: @    1.000,    1.679 s / 4 =    2.382 hz =  142.910 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 140, user: tempo, level: 0.042
+2025-04-26 13:18:02.397875: bestBpm: 140 @ 1.000, tpm: 0/4
+2025-04-26 13:18:02.397895: @    1.000,    1.724 s / 4 =    2.321 hz =  139.245 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 141, user: tempo, level: 0.040
+2025-04-26 13:18:04.023078: bestBpm: 141 @ 1.000, tpm: 0/4
+2025-04-26 13:18:04.023095: @    1.000,    1.675 s / 4 =    2.387 hz =  143.248 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.034
+2025-04-26 13:18:05.773014: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:18:05.773032: @    1.000,    1.691 s / 4 =    2.365 hz =  141.900 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 141, user: tempo, level: 0.034
+2025-04-26 13:18:07.398516: bestBpm: 141 @ 1.000, tpm: 0/4
+2025-04-26 13:18:07.398539: @    1.000,    1.708 s / 4 =    2.342 hz =  140.543 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.034
+2025-04-26 13:18:09.148234: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:18:09.148251: @    1.000,    1.671 s / 4 =    2.394 hz =  143.657 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 141, user: tempo, level: 0.032
+2025-04-26 13:18:10.773513: bestBpm: 141 @ 1.000, tpm: 0/4
+2025-04-26 13:18:10.773530: @    1.000,    1.716 s / 4 =    2.331 hz =  139.889 bpm
+2025-04-26 13:18:12.523364: @    1.000,    1.732 s / 4 =    2.309 hz =  138.541 bpm
+2025-04-26 13:18:14.273363: @    1.000,    1.698 s / 4 =    2.355 hz =  141.324 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 140, user: tempo, level: 0.041
+2025-04-26 13:18:15.898791: bestBpm: 140 @ 1.000, tpm: 0/4
+2025-04-26 13:18:15.898807: @    1.000,    1.699 s / 4 =    2.354 hz =  141.232 bpm
+2025-04-26 13:18:17.648651: @    1.000,    1.712 s / 4 =    2.337 hz =  140.216 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 141, user: tempo, level: 0.035
+2025-04-26 13:18:19.398797: bestBpm: 141 @ 1.000, tpm: 0/4
+2025-04-26 13:18:19.398813: @    1.000,    1.692 s / 4 =    2.364 hz =  141.814 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.041
+2025-04-26 13:18:21.023991: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:18:21.024006: @    1.000,    1.677 s / 4 =    2.385 hz =  143.122 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 40, beat: 160, measure: A, repeat: 1/2, key: C, currentBPM: 142, bpm: 142
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.036
+2025-04-26 13:18:22.649173: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:18:22.649189: @    1.000,    1.685 s / 4 =    2.374 hz =  142.449 bpm
+2025-04-26 13:18:24.398992: @    1.000,    1.700 s / 4 =    2.353 hz =  141.173 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 141, user: tempo, level: 0.035
+2025-04-26 13:18:26.149248: bestBpm: 141 @ 1.000, tpm: 0/4
+2025-04-26 13:18:26.149263: @    1.000,    1.736 s / 4 =    2.304 hz =  138.252 bpm
+2025-04-26 13:18:27.774259: @    1.000,    1.670 s / 4 =    2.395 hz =  143.718 bpm
+2025-04-26 13:18:29.524272: @    1.000,    1.704 s / 4 =    2.347 hz =  140.842 bpm
+2025-04-26 13:18:31.149475: @    1.000,    1.689 s / 4 =    2.369 hz =  142.113 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.031
+2025-04-26 13:18:32.899634: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:18:32.899649: @    1.000,    1.679 s / 4 =    2.383 hz =  142.972 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 143, user: tempo, level: 0.032
+2025-04-26 13:18:34.524784: bestBpm: 143 @ 1.000, tpm: 0/4
+2025-04-26 13:18:34.524799: @    1.000,    1.652 s / 4 =    2.422 hz =  145.297 bpm
+2025-04-26 13:18:36.274563: @    1.000,    1.696 s / 4 =    2.359 hz =  141.535 bpm
+2025-04-26 13:18:37.899781: @    1.000,    1.682 s / 4 =    2.379 hz =  142.726 bpm
+2025-04-26 13:18:39.649739: @    1.000,    1.680 s / 4 =    2.380 hz =  142.818 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.039
+2025-04-26 13:18:41.275174: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:18:41.275190: @    1.000,    1.705 s / 4 =    2.346 hz =  140.783 bpm
+2025-04-26 13:18:43.024947: @    1.000,    1.684 s / 4 =    2.376 hz =  142.541 bpm
+2025-04-26 13:18:44.650127: @    1.000,    1.671 s / 4 =    2.394 hz =  143.625 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 143, user: tempo, level: 0.038
+2025-04-26 13:18:46.275460: bestBpm: 143 @ 1.000, tpm: 0/4
+2025-04-26 13:18:46.275477: @    1.000,    1.641 s / 4 =    2.438 hz =  146.293 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 145, user: tempo, level: 0.038
+2025-04-26 13:18:47.900572: bestBpm: 145 @ 1.000, tpm: 0/4
+2025-04-26 13:18:47.900589: @    1.000,    1.645 s / 4 =    2.432 hz =  145.937 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 48, beat: 192, measure: A, repeat: 1/2, key: C, currentBPM: 145, bpm: 145
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 144, user: tempo, level: 0.039
+2025-04-26 13:18:49.650581: bestBpm: 144 @ 1.000, tpm: 0/4
+2025-04-26 13:18:49.650600: @    1.000,    1.701 s / 4 =    2.352 hz =  141.112 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 145, user: tempo, level: 0.041
+2025-04-26 13:18:51.275642: bestBpm: 145 @ 1.000, tpm: 0/4
+2025-04-26 13:18:51.275658: @    1.000,    1.626 s / 4 =    2.460 hz =  147.598 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 144, user: tempo, level: 0.032
+2025-04-26 13:18:52.900891: bestBpm: 144 @ 1.000, tpm: 0/4
+2025-04-26 13:18:52.900906: @    1.000,    1.692 s / 4 =    2.364 hz =  141.839 bpm
+2025-04-26 13:18:54.650583: @    1.000,    1.652 s / 4 =    2.422 hz =  145.297 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 145, user: tempo, level: 0.034
+2025-04-26 13:18:56.275941: bestBpm: 145 @ 1.000, tpm: 0/4
+2025-04-26 13:18:56.275956: @    1.000,    1.658 s / 4 =    2.413 hz =  144.756 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 143, user: tempo, level: 0.031
+2025-04-26 13:18:58.025932: bestBpm: 143 @ 1.000, tpm: 0/4
+2025-04-26 13:18:58.025948: @    1.000,    1.692 s / 4 =    2.363 hz =  141.809 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 144, user: tempo, level: 0.039
+2025-04-26 13:18:59.651381: bestBpm: 144 @ 1.000, tpm: 0/4
+2025-04-26 13:18:59.651397: @    1.000,    1.683 s / 4 =    2.376 hz =  142.571 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 143, user: tempo, level: 0.030
+2025-04-26 13:19:01.401207: bestBpm: 143 @ 1.000, tpm: 0/4
+2025-04-26 13:19:01.401228: @    1.000,    1.700 s / 4 =    2.352 hz =  141.144 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.029
+2025-04-26 13:19:03.026424: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:19:03.026463: @    1.000,    1.694 s / 4 =    2.361 hz =  141.687 bpm
+2025-04-26 13:19:04.651340: @    1.000,    1.665 s / 4 =    2.402 hz =  144.124 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 143, user: tempo, level: 0.032
+2025-04-26 13:19:06.401501: bestBpm: 143 @ 1.000, tpm: 0/4
+2025-04-26 13:19:06.401522: @    1.000,    1.668 s / 4 =    2.398 hz =  143.906 bpm
+2025-04-26 13:19:08.026484: @    1.000,    1.676 s / 4 =    2.386 hz =  143.159 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 144, user: tempo, level: 0.039
+2025-04-26 13:19:09.776618: bestBpm: 144 @ 1.000, tpm: 0/4
+2025-04-26 13:19:09.776636: @    1.000,    1.679 s / 4 =    2.382 hz =  142.942 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.033
+2025-04-26 13:19:11.402046: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:19:11.402127: @    1.000,    1.729 s / 4 =    2.313 hz =  138.773 bpm
+2025-04-26 13:19:13.151676: @    1.000,    1.680 s / 4 =    2.381 hz =  142.880 bpm
+2025-04-26 13:19:14.776857: @    1.000,    1.665 s / 4 =    2.403 hz =  144.157 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 56, beat: 224, measure: A, repeat: 1/4, key: C, currentBPM: 142, bpm: 142
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.037
+2025-04-26 13:19:16.527017: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:19:16.527034: @    1.000,    1.706 s / 4 =    2.345 hz =  140.699 bpm
+2025-04-26 13:19:18.276851: @    1.000,    1.711 s / 4 =    2.337 hz =  140.238 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 141, user: tempo, level: 0.038
+2025-04-26 13:19:19.902342: bestBpm: 141 @ 1.000, tpm: 0/4
+2025-04-26 13:19:19.902362: @    1.000,    1.711 s / 4 =    2.338 hz =  140.305 bpm
+2025-04-26 13:19:21.652074: @    1.000,    1.671 s / 4 =    2.394 hz =  143.657 bpm
+2025-04-26 13:19:23.277363: @    1.000,    1.723 s / 4 =    2.321 hz =  139.270 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.044
+2025-04-26 13:19:25.027441: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:19:25.027459: @    1.000,    1.654 s / 4 =    2.418 hz =  145.074 bpm
+2025-04-26 13:19:26.652508: @    1.000,    1.705 s / 4 =    2.346 hz =  140.757 bpm
+2025-04-26 13:19:28.402486: @    1.000,    1.687 s / 4 =    2.372 hz =  142.291 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 143, user: tempo, level: 0.035
+2025-04-26 13:19:30.027874: bestBpm: 143 @ 1.000, tpm: 0/4
+2025-04-26 13:19:30.027891: @    1.000,    1.684 s / 4 =    2.375 hz =  142.511 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.032
+2025-04-26 13:19:31.777854: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:19:31.777871: @    1.000,    1.700 s / 4 =    2.353 hz =  141.209 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 143, user: tempo, level: 0.038
+2025-04-26 13:19:33.402924: bestBpm: 143 @ 1.000, tpm: 0/4
+2025-04-26 13:19:33.402943: @    1.000,    1.623 s / 4 =    2.465 hz =  147.888 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 144, user: tempo, level: 0.034
+2025-04-26 13:19:35.028052: bestBpm: 144 @ 1.000, tpm: 0/4
+2025-04-26 13:19:35.028076: @    1.000,    1.650 s / 4 =    2.425 hz =  145.495 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 145, user: tempo, level: 0.044
+2025-04-26 13:19:36.653235: bestBpm: 145 @ 1.000, tpm: 0/4
+2025-04-26 13:19:36.653261: @    1.000,    1.666 s / 4 =    2.401 hz =  144.063 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 147, user: tempo, level: 0.037
+2025-04-26 13:19:38.278202: bestBpm: 147 @ 1.000, tpm: 0/4
+2025-04-26 13:19:38.278226: @    1.000,    1.579 s / 4 =    2.533 hz =  151.973 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 146, user: tempo, level: 0.042
+2025-04-26 13:19:39.903416: bestBpm: 146 @ 1.000, tpm: 0/4
+2025-04-26 13:19:39.903443: @    1.000,    1.666 s / 4 =    2.401 hz =  144.061 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 72, beat: 288, measure: A, repeat: 1/2, key: C, currentBPM: 146, bpm: 146
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 148, user: tempo, level: 0.045
+2025-04-26 13:19:41.528378: bestBpm: 148 @ 1.000, tpm: 0/4
+2025-04-26 13:19:41.528403: @    1.000,    1.582 s / 4 =    2.529 hz =  151.729 bpm
+2025-04-26 13:19:43.153356: @    1.000,    1.642 s / 4 =    2.436 hz =  146.167 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 146, user: tempo, level: 0.040
+2025-04-26 13:19:44.778708: bestBpm: 146 @ 1.000, tpm: 0/4
+2025-04-26 13:19:44.778735: @    1.000,    1.671 s / 4 =    2.394 hz =  143.621 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 147, user: tempo, level: 0.039
+2025-04-26 13:19:46.403789: bestBpm: 147 @ 1.000, tpm: 0/4
+2025-04-26 13:19:46.403817: @    1.000,    1.624 s / 4 =    2.463 hz =  147.761 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 145, user: tempo, level: 0.044
+2025-04-26 13:19:48.153726: bestBpm: 145 @ 1.000, tpm: 0/4
+2025-04-26 13:19:48.153754: @    1.000,    1.664 s / 4 =    2.404 hz =  144.251 bpm
+2025-04-26 13:19:48.278640: @    1.000,    0.173 s / 1 =    5.769 hz =  346.113 bpm
+2025-04-26 13:19:49.778702: @    0.047,    1.492 s / 3 =    2.010 hz =  120.628 bpm
+2025-04-26 13:19:51.403714: @    1.000,    1.590 s / 4 =    2.516 hz =  150.963 bpm
+2025-04-26 13:19:53.028816: @    1.000,    1.632 s / 4 =    2.451 hz =  147.036 bpm
+2025-04-26 13:19:54.653813: @    1.000,    1.581 s / 4 =    2.531 hz =  151.835 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 148, user: tempo, level: 0.035
+2025-04-26 13:19:56.279242: bestBpm: 148 @ 1.000, tpm: 0/4
+2025-04-26 13:19:56.279269: @    1.000,    1.695 s / 4 =    2.360 hz =  141.595 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 147, user: tempo, level: 0.032
+2025-04-26 13:19:57.904303: bestBpm: 147 @ 1.000, tpm: 0/4
+2025-04-26 13:19:57.904331: @    1.000,    1.625 s / 4 =    2.462 hz =  147.730 bpm
+2025-04-26 13:19:59.529270: @    1.000,    1.646 s / 4 =    2.430 hz =  145.777 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 145, user: tempo, level: 0.043
+2025-04-26 13:20:01.279368: bestBpm: 145 @ 1.000, tpm: 0/4
+2025-04-26 13:20:01.279397: @    1.000,    1.657 s / 4 =    2.414 hz =  144.851 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 146, user: tempo, level: 0.043
+2025-04-26 13:20:02.905383: bestBpm: 146 @ 1.000, tpm: 0/4
+2025-04-26 13:20:02.905407: @    1.000,    1.628 s / 4 =    2.457 hz =  147.435 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 147, user: tempo, level: 0.039
+2025-04-26 13:20:04.404795: bestBpm: 147 @ 1.000, tpm: 0/4
+2025-04-26 13:20:04.404811: @    1.000,    1.619 s / 4 =    2.471 hz =  148.259 bpm
+2025-04-26 13:20:06.029711: @    1.000,    1.628 s / 4 =    2.457 hz =  147.437 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 80, beat: 320, measure: A, repeat: 1/2, key: C, currentBPM: 147, bpm: 147
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 149, user: tempo, level: 0.039
+2025-04-26 13:20:07.654846: bestBpm: 149 @ 1.000, tpm: 0/4
+2025-04-26 13:20:07.654869: @    1.000,    1.570 s / 4 =    2.548 hz =  152.889 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 148, user: tempo, level: 0.044
+2025-04-26 13:20:09.279998: bestBpm: 148 @ 1.000, tpm: 0/4
+2025-04-26 13:20:09.280014: @    1.000,    1.663 s / 4 =    2.406 hz =  144.343 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 149, user: tempo, level: 0.043
+2025-04-26 13:20:10.905048: bestBpm: 149 @ 1.000, tpm: 0/4
+2025-04-26 13:20:10.905073: @    1.000,    1.596 s / 4 =    2.506 hz =  150.344 bpm
+2025-04-26 13:20:12.529896: @    1.000,    1.601 s / 4 =    2.498 hz =  149.906 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 148, user: tempo, level: 0.041
+2025-04-26 13:20:14.155189: bestBpm: 148 @ 1.000, tpm: 0/4
+2025-04-26 13:20:14.155215: @    1.000,    1.634 s / 4 =    2.449 hz =  146.911 bpm
+2025-04-26 13:20:15.780164: @    1.000,    1.665 s / 4 =    2.403 hz =  144.187 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 147, user: tempo, level: 0.036
+2025-04-26 13:20:17.405420: bestBpm: 147 @ 1.000, tpm: 0/4
+2025-04-26 13:20:17.405435: @    1.000,    1.623 s / 4 =    2.464 hz =  147.863 bpm
+2025-04-26 13:20:19.030316: @    1.000,    1.614 s / 4 =    2.478 hz =  148.659 bpm
+2025-04-26 13:20:20.655401: @    1.000,    1.631 s / 4 =    2.453 hz =  147.172 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 148, user: tempo, level: 0.040
+2025-04-26 13:20:22.280704: bestBpm: 148 @ 1.000, tpm: 0/4
+2025-04-26 13:20:22.280720: @    1.000,    1.615 s / 4 =    2.476 hz =  148.561 bpm
+2025-04-26 13:20:23.905552: @    1.000,    1.629 s / 4 =    2.455 hz =  147.301 bpm
+2025-04-26 13:20:25.530674: @    1.000,    1.614 s / 4 =    2.478 hz =  148.693 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 149, user: tempo, level: 0.041
+2025-04-26 13:20:27.155862: bestBpm: 149 @ 1.000, tpm: 0/4
+2025-04-26 13:20:27.155878: @    1.000,    1.588 s / 4 =    2.519 hz =  151.139 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 148, user: tempo, level: 0.041
+2025-04-26 13:20:28.781164: bestBpm: 148 @ 1.000, tpm: 0/4
+2025-04-26 13:20:28.781249: @    1.000,    1.657 s / 4 =    2.415 hz =  144.882 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 149, user: tempo, level: 0.040
+2025-04-26 13:20:30.406144: bestBpm: 149 @ 1.000, tpm: 0/4
+2025-04-26 13:20:30.406171: @    1.000,    1.596 s / 4 =    2.507 hz =  150.417 bpm
+2025-04-26 13:20:32.030937: @    1.000,    1.624 s / 4 =    2.463 hz =  147.764 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 88, beat: 352, measure: A, key: C, currentBPM: 149, bpm: 149
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 149, user: tempo, level: 0.041
+2025-04-26 13:20:33.531334: bestBpm: 149 @ 1.000, tpm: 0/4
+2025-04-26 13:20:33.531349: @    1.000,    1.570 s / 4 =    2.548 hz =  152.885 bpm
+2025-04-26 13:20:35.281031: @    1.000,    1.645 s / 4 =    2.432 hz =  145.937 bpm
+2025-04-26 13:20:36.781298: @    1.000,    1.591 s / 4 =    2.514 hz =  150.864 bpm
+2025-04-26 13:20:38.406366: @    1.000,    1.625 s / 4 =    2.462 hz =  147.736 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 148, user: tempo, level: 0.039
+2025-04-26 13:20:40.031685: bestBpm: 148 @ 1.000, tpm: 0/4
+2025-04-26 13:20:40.031702: @    1.000,    1.633 s / 4 =    2.450 hz =  147.008 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 149, user: tempo, level: 0.037
+2025-04-26 13:20:41.656778: bestBpm: 149 @ 1.000, tpm: 0/4
+2025-04-26 13:20:41.656799: @    1.000,    1.611 s / 4 =    2.483 hz =  148.987 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 148, user: tempo, level: 0.043
+2025-04-26 13:20:43.281823: bestBpm: 148 @ 1.000, tpm: 0/4
+2025-04-26 13:20:43.281839: @    1.000,    1.623 s / 4 =    2.464 hz =  147.829 bpm
+2025-04-26 13:20:44.906672: @    1.000,    1.598 s / 4 =    2.504 hz =  150.213 bpm
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 92, beat: 368, measure: A, key: C, currentBPM: 148, bpm: 148
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 149, user: tempo, level: 0.033
+2025-04-26 13:20:46.531908: bestBpm: 149 @ 1.000, tpm: 0/4
+2025-04-26 13:20:46.531921: @    1.000,    1.621 s / 4 =    2.468 hz =  148.101 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 147, user: tempo, level: 0.034
+2025-04-26 13:20:48.281905: bestBpm: 147 @ 1.000, tpm: 0/4
+2025-04-26 13:20:48.281921: @    1.000,    1.700 s / 4 =    2.353 hz =  141.166 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 145, user: tempo, level: 0.034
+2025-04-26 13:20:49.907206: bestBpm: 145 @ 1.000, tpm: 0/4
+2025-04-26 13:20:49.907221: @    1.000,    1.709 s / 4 =    2.340 hz =  140.424 bpm
+2025-04-26 13:20:51.532048: @    1.000,    1.610 s / 4 =    2.484 hz =  149.028 bpm
+SongTempoUpdate: "Song_Whats_Up_by_4_Non_Blondes", currentBPM: 142, user: tempo, level: 0.041
+2025-04-26 13:20:53.282322: bestBpm: 142 @ 1.000, tpm: 0/4
+2025-04-26 13:20:53.282337: @    1.000,    1.743 s / 4 =    2.295 hz =  137.710 bpm
+2025-04-26 13:20:59.282436: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:21:02.282599: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 95, beat: 380, measure: A, key: C, currentBPM: 142, bpm: 142
+2025-04-26 13:22:35.287521: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:22:38.287707: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:22:41.287850: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 95, beat: 280, measure: Db, repeat: 3/3, key: D♭, currentBPM: 75, bpm: 75
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 0, beat: 0, measure: Db, key: D♭, currentBPM: 75, bpm: 75
+2025-04-26 13:22:44.288015: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 0, beat: 0, measure: Db, key: C, currentBPM: 75, bpm: 75
+2025-04-26 13:22:47.288164: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:22:50.288325: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 0, beat: 0, measure: Db, key: C, currentBPM: 75, bpm: 75
+2025-04-26 13:22:53.288475: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 1, beat: 4, measure: Fm, key: C, currentBPM: 75, bpm: 75
+2025-04-26 13:22:56.288656: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:22:59.288805: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 2, beat: 8, measure: Ab, key: C, currentBPM: 75, bpm: 75
+2025-04-26 13:23:02.288954: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 3, beat: 12, measure: DbBbm, key: C, currentBPM: 75, bpm: 75
+2025-04-26 13:23:05.289090: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 4, beat: 16, measure: Fm, key: C, currentBPM: 75, bpm: 75
+2025-04-26 13:23:08.289270: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 5, beat: 20, measure: Ebm7, key: C, currentBPM: 75, bpm: 75
+2025-04-26 13:23:12.039474: @    0.610,    1.684 s / 2 =    1.188 hz =   71.255 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 6, beat: 24, measure: AbAb7, key: C, currentBPM: 75, bpm: 75
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.030
+2025-04-26 13:23:13.665677: bestBpm: 73 @ 1.000, tpm: 0/4
+2025-04-26 13:23:13.665701: @    1.000,    1.607 s / 2 =    1.244 hz =   74.666 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 75, user: tempo, level: 0.026
+2025-04-26 13:23:15.164887: bestBpm: 75 @ 1.000, tpm: 0/4
+2025-04-26 13:23:15.164905: @    1.000,    1.533 s / 2 =    1.304 hz =   78.269 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 7, beat: 28, measure: DbBbm, key: C, currentBPM: 75, bpm: 75
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 75, user: tempo, level: 0.030
+2025-04-26 13:23:16.789858: bestBpm: 75 @ 1.000, tpm: 0/4
+2025-04-26 13:23:16.789886: @    1.000,    1.586 s / 2 =    1.261 hz =   75.656 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 76, user: tempo, level: 0.029
+2025-04-26 13:23:18.414937: bestBpm: 76 @ 1.000, tpm: 0/4
+2025-04-26 13:23:18.414954: @    1.000,    1.616 s / 2 =    1.237 hz =   74.246 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 8, beat: 32, measure: Fm, key: C, currentBPM: 76, bpm: 76
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 8, beat: 32, measure: Fm, key: C, currentBPM: 76, bpm: 76
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 76, user: tempo, level: 0.032
+2025-04-26 13:23:19.915091: bestBpm: 76 @ 1.000, tpm: 0/4
+2025-04-26 13:23:19.915123: @    1.000,    1.543 s / 2 =    1.297 hz =   77.792 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 75, user: tempo, level: 0.043
+2025-04-26 13:23:21.540132: bestBpm: 75 @ 1.000, tpm: 0/4
+2025-04-26 13:23:21.540159: @    1.000,    1.613 s / 2 =    1.240 hz =   74.397 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 76, user: tempo, level: 0.027
+2025-04-26 13:23:23.165123: bestBpm: 76 @ 1.000, tpm: 0/4
+2025-04-26 13:23:23.165150: @    1.000,    1.567 s / 2 =    1.277 hz =   76.602 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 77, user: tempo, level: 0.027
+2025-04-26 13:23:24.665215: bestBpm: 77 @ 0.811, tpm: 0/4
+2025-04-26 13:23:24.665241: @    0.811,    1.509 s / 2 =    1.325 hz =   79.511 bpm
+2025-04-26 13:23:30.665330: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:23:33.665481: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:23:36.665644: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:23:39.665795: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:23:42.665954: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:23:46.541205: @    1.000,    1.869 s / 2 =    1.070 hz =   64.189 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 63, user: tempo, level: 0.034
+2025-04-26 13:23:48.541434: bestBpm: 63 @ 1.000, tpm: 0/4
+2025-04-26 13:23:48.541462: @    1.000,    1.970 s / 2 =    1.015 hz =   60.927 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 62, user: tempo, level: 0.029
+2025-04-26 13:23:50.416747: bestBpm: 62 @ 1.000, tpm: 0/4
+2025-04-26 13:23:50.416773: @    1.000,    1.970 s / 2 =    1.015 hz =   60.903 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 11, beat: 42, measure: Db, key: C, currentBPM: 62, bpm: 62
+2025-04-26 13:23:50.541571: @    1.000,    0.128 s / 1 =    7.807 hz =  468.446 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 7, beat: 28, measure: DbBbm, key: C, currentBPM: 62, bpm: 62
+2025-04-26 13:23:52.541483: @    0.046,    1.909 s / 2 =    1.048 hz =   62.860 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 3, beat: 12, measure: DbBbm, key: C, currentBPM: 62, bpm: 62
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 0, beat: 0, measure: Db, key: C, currentBPM: 62, bpm: 62
+2025-04-26 13:23:58.541781: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:24:01.541941: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:24:04.542090: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:24:07.542243: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:24:10.542404: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:24:13.542581: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:24:16.542709: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:24:19.542879: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:24:23.168261: @    1.000,    2.033 s / 3 =    1.476 hz =   88.535 bpm
+2025-04-26 13:24:23.293277: @    1.000,    0.128 s / 1 =    7.807 hz =  468.446 bpm
+2025-04-26 13:24:25.168305: @    0.046,    1.838 s / 2 =    1.088 hz =   65.305 bpm
+2025-04-26 13:24:27.168285: @    0.624,    1.942 s / 2 =    1.030 hz =   61.803 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: -1, beat: 0, measure: Db, key: C, currentBPM: 62, bpm: 62
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 0, beat: 0, measure: Db, key: C, currentBPM: 62, bpm: 62
+2025-04-26 13:24:29.168768: @    1.000,    2.046 s / 3 =    1.466 hz =   87.969 bpm
+2025-04-26 13:24:31.168497: @    0.718,    1.953 s / 2 =    1.024 hz =   61.435 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 1, beat: 4, measure: Fm, key: C, currentBPM: 62, bpm: 62
+2025-04-26 13:24:33.043571: @    1.000,    1.873 s / 2 =    1.068 hz =   64.065 bpm
+2025-04-26 13:24:34.918778: @    0.793,    1.930 s / 2 =    1.036 hz =   62.186 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 2, beat: 8, measure: Ab, key: C, currentBPM: 62, bpm: 62
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 63, user: tempo, level: 0.037
+2025-04-26 13:24:36.794076: bestBpm: 63 @ 1.000, tpm: 0/4
+2025-04-26 13:24:36.794092: @    1.000,    1.881 s / 2 =    1.063 hz =   63.781 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 64, user: tempo, level: 0.036
+2025-04-26 13:24:38.669096: bestBpm: 64 @ 1.000, tpm: 0/4
+2025-04-26 13:24:38.669112: @    1.000,    1.836 s / 2 =    1.089 hz =   65.356 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 3, beat: 12, measure: DbBbm, key: C, currentBPM: 64, bpm: 64
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 65, user: tempo, level: 0.031
+2025-04-26 13:24:40.419229: bestBpm: 65 @ 1.000, tpm: 0/4
+2025-04-26 13:24:40.419244: @    1.000,    1.793 s / 2 =    1.115 hz =   66.916 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 66, user: tempo, level: 0.035
+2025-04-26 13:24:42.169369: bestBpm: 66 @ 1.000, tpm: 0/4
+2025-04-26 13:24:42.169386: @    1.000,    1.753 s / 2 =    1.141 hz =   68.468 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 4, beat: 16, measure: Fm, key: C, currentBPM: 66, bpm: 66
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 67, user: tempo, level: 0.032
+2025-04-26 13:24:43.919516: bestBpm: 67 @ 1.000, tpm: 0/4
+2025-04-26 13:24:43.919531: @    1.000,    1.791 s / 2 =    1.116 hz =   66.984 bpm
+2025-04-26 13:24:45.794248: @    1.000,    1.775 s / 2 =    1.127 hz =   67.614 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 5, beat: 20, measure: Ebm7, key: C, currentBPM: 67, bpm: 67
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 68, user: tempo, level: 0.033
+2025-04-26 13:24:47.544584: bestBpm: 68 @ 1.000, tpm: 0/4
+2025-04-26 13:24:47.544613: @    1.000,    1.777 s / 2 =    1.126 hz =   67.544 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 67, user: tempo, level: 0.024
+2025-04-26 13:24:49.294772: bestBpm: 67 @ 0.449, tpm: 0/4
+2025-04-26 13:24:49.294788: @    0.449,    1.799 s / 2 =    1.112 hz =   66.715 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 6, beat: 24, measure: AbAb7, key: C, currentBPM: 67, bpm: 67
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 66, user: tempo, level: 0.025
+2025-04-26 13:24:51.169952: bestBpm: 66 @ 1.000, tpm: 0/4
+2025-04-26 13:24:51.169969: @    1.000,    1.906 s / 2 =    1.049 hz =   62.967 bpm
+2025-04-26 13:24:52.919817: @    1.000,    1.742 s / 2 =    1.148 hz =   68.895 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 7, beat: 28, measure: DbBbm, key: C, currentBPM: 66, bpm: 66
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 66, user: tempo, level: 0.027
+2025-04-26 13:24:54.794922: bestBpm: 66 @ 0.605, tpm: 0/4
+2025-04-26 13:24:54.794937: @    0.605,    1.797 s / 2 =    1.113 hz =   66.767 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 67, user: tempo, level: 0.038
+2025-04-26 13:24:56.545170: bestBpm: 67 @ 0.256, tpm: 0/4
+2025-04-26 13:24:56.545217: @    0.256,    1.754 s / 2 =    1.140 hz =   68.397 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 8, beat: 32, measure: Fm, key: C, currentBPM: 67, bpm: 67
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 68, user: tempo, level: 0.032
+2025-04-26 13:24:58.295073: bestBpm: 68 @ 0.798, tpm: 0/4
+2025-04-26 13:24:58.295088: @    0.798,    1.739 s / 2 =    1.150 hz =   69.011 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 67, user: tempo, level: 0.026
+2025-04-26 13:25:00.170303: bestBpm: 67 @ 0.475, tpm: 0/4
+2025-04-26 13:25:00.170383: @    0.475,    1.852 s / 2 =    1.080 hz =   64.779 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 9, beat: 36, measure: Ebm7Gbm, key: C, currentBPM: 67, bpm: 67
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 67, user: tempo, level: 0.024
+2025-04-26 13:25:01.920448: bestBpm: 67 @ 0.261, tpm: 0/4
+2025-04-26 13:25:01.920491: @    0.261,    1.817 s / 2 =    1.101 hz =   66.035 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 11, beat: 42, measure: Db, key: C, currentBPM: 67, bpm: 67
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 67, user: tempo, level: 0.027
+2025-04-26 13:25:03.670411: bestBpm: 67 @ 1.000, tpm: 0/4
+2025-04-26 13:25:03.670428: @    1.000,    1.719 s / 2 =    1.164 hz =   69.811 bpm
+2025-04-26 13:25:05.420281: @    0.911,    1.734 s / 2 =    1.153 hz =   69.198 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 12, beat: 46, measure: Db, key: C, currentBPM: 67, bpm: 67
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 68, user: tempo, level: 0.043
+2025-04-26 13:25:07.170675: bestBpm: 68 @ 0.137, tpm: 0/4
+2025-04-26 13:25:07.170692: @    0.137,    1.805 s / 2 =    1.108 hz =   66.465 bpm
+2025-04-26 13:25:09.045447: @    0.046,    1.808 s / 2 =    1.106 hz =   66.359 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 13, beat: 50, measure: Ab7,, key: C, currentBPM: 68, bpm: 68
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 67, user: tempo, level: 0.027
+2025-04-26 13:25:10.795966: bestBpm: 67 @ 0.610, tpm: 0/4
+2025-04-26 13:25:10.796051: @    0.610,    1.797 s / 2 =    1.113 hz =   66.782 bpm
+2025-04-26 13:25:12.545772: @    1.000,    1.783 s / 2 =    1.122 hz =   67.298 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 14, beat: 54, measure: Ab, key: C, currentBPM: 67, bpm: 67
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 68, user: tempo, level: 0.037
+2025-04-26 13:25:14.296149: bestBpm: 68 @ 1.000, tpm: 0/4
+2025-04-26 13:25:14.296235: @    1.000,    1.707 s / 2 =    1.171 hz =   70.287 bpm
+2025-04-26 13:25:16.045929: @    1.000,    1.758 s / 2 =    1.138 hz =   68.269 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 15, beat: 58, measure: Ab7, key: C, currentBPM: 68, bpm: 68
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 69, user: tempo, level: 0.031
+2025-04-26 13:25:17.671417: bestBpm: 69 @ 1.000, tpm: 0/4
+2025-04-26 13:25:17.671502: @    1.000,    1.687 s / 2 =    1.186 hz =   71.133 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.030
+2025-04-26 13:25:19.421482: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:25:19.422346: @    1.000,    1.731 s / 2 =    1.156 hz =   69.343 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 16, beat: 62, measure: Gb, key: C, currentBPM: 70, bpm: 70
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.029
+2025-04-26 13:25:21.171313: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:25:21.171330: @    1.000,    1.680 s / 2 =    1.191 hz =   71.440 bpm
+2025-04-26 13:25:22.921228: @    1.000,    1.746 s / 2 =    1.145 hz =   68.724 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 17, beat: 66, measure: Db,, key: C, currentBPM: 70, bpm: 70
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.034
+2025-04-26 13:25:24.546800: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:25:24.546884: @    1.000,    1.719 s / 2 =    1.164 hz =   69.811 bpm
+2025-04-26 13:25:26.296414: @    1.000,    1.679 s / 2 =    1.191 hz =   71.471 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 18, beat: 70, measure: Ab, key: C, currentBPM: 70, bpm: 70
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.041
+2025-04-26 13:25:27.921785: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:25:27.921801: @    1.000,    1.671 s / 2 =    1.197 hz =   71.828 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 71, user: tempo, level: 0.033
+2025-04-26 13:25:29.671837: bestBpm: 71 @ 1.000, tpm: 0/4
+2025-04-26 13:25:29.671863: @    1.000,    1.725 s / 2 =    1.159 hz =   69.548 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 19, beat: 74, measure: Ab7, key: C, currentBPM: 71, bpm: 71
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.040
+2025-04-26 13:25:31.421875: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:25:31.421899: @    1.000,    1.734 s / 2 =    1.154 hz =   69.212 bpm
+2025-04-26 13:25:33.171742: @    1.000,    1.722 s / 2 =    1.161 hz =   69.680 bpm
+2025-04-26 13:25:33.296767: @    1.000,    0.128 s / 1 =    7.807 hz =  468.446 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 20, beat: 78, measure: Gb, key: C, currentBPM: 70, bpm: 70
+2025-04-26 13:25:34.796969: @    0.047,    1.569 s / 2 =    1.275 hz =   76.496 bpm
+2025-04-26 13:25:36.546928: @    1.000,    1.690 s / 2 =    1.184 hz =   71.026 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 21, beat: 82, measure: Db, key: C, currentBPM: 70, bpm: 70
+2025-04-26 13:25:38.172149: @    1.000,    1.682 s / 2 =    1.189 hz =   71.332 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.028
+2025-04-26 13:25:39.922338: bestBpm: 72 @ 1.000, tpm: 0/4
+2025-04-26 13:25:39.922365: @    1.000,    1.721 s / 2 =    1.162 hz =   69.709 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 22, beat: 86, measure: DbBbm, key: C, currentBPM: 72, bpm: 72
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 71, user: tempo, level: 0.030
+2025-04-26 13:25:41.547549: bestBpm: 71 @ 1.000, tpm: 0/4
+2025-04-26 13:25:41.547571: @    1.000,    1.679 s / 2 =    1.191 hz =   71.455 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.033
+2025-04-26 13:25:43.297638: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:25:43.297655: @    1.000,    1.732 s / 2 =    1.155 hz =   69.300 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 23, beat: 90, measure: Fm, key: C, currentBPM: 70, bpm: 70
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.037
+2025-04-26 13:25:45.047534: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:25:45.047551: @    1.000,    1.681 s / 2 =    1.190 hz =   71.393 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 71, user: tempo, level: 0.037
+2025-04-26 13:25:46.672791: bestBpm: 71 @ 1.000, tpm: 0/4
+2025-04-26 13:25:46.672809: @    1.000,    1.689 s / 2 =    1.184 hz =   71.042 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 24, beat: 94, measure: Ebm7, key: C, currentBPM: 71, bpm: 71
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 71, user: tempo, level: 0.027
+2025-04-26 13:25:48.297847: bestBpm: 71 @ 1.000, tpm: 0/4
+2025-04-26 13:25:48.297864: @    1.000,    1.615 s / 2 =    1.238 hz =   74.296 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.025
+2025-04-26 13:25:50.172913: bestBpm: 70 @ 0.649, tpm: 0/4
+2025-04-26 13:25:50.172929: @    0.649,    1.855 s / 2 =    1.078 hz =   64.679 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 25, beat: 98, measure: AbAb7, key: C, currentBPM: 70, bpm: 70
+2025-04-26 13:25:51.672896: @    1.000,    1.540 s / 2 =    1.299 hz =   77.937 bpm
+2025-04-26 13:25:53.422879: @    0.499,    1.709 s / 2 =    1.170 hz =   70.197 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 26, beat: 102, measure: DbBbm, key: C, currentBPM: 70, bpm: 70
+2025-04-26 13:25:55.172938: @    0.152,    1.736 s / 2 =    1.152 hz =   69.111 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 71, user: tempo, level: 0.039
+2025-04-26 13:25:56.923255: bestBpm: 71 @ 0.303, tpm: 0/4
+2025-04-26 13:25:56.923272: @    0.303,    1.770 s / 2 =    1.130 hz =   67.794 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 27, beat: 106, measure: Fm, key: C, currentBPM: 71, bpm: 71
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 69, user: tempo, level: 0.044
+2025-04-26 13:25:58.673361: bestBpm: 69 @ 0.097, tpm: 0/4
+2025-04-26 13:25:58.673377: @    0.097,    1.749 s / 2 =    1.143 hz =   68.595 bpm
+2025-04-26 13:26:00.423159: @    0.491,    1.706 s / 2 =    1.172 hz =   70.347 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 28, beat: 110, measure: Ebm7, key: C, currentBPM: 69, bpm: 69
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 69, user: tempo, level: 0.030
+2025-04-26 13:26:02.173433: bestBpm: 69 @ 0.900, tpm: 0/4
+2025-04-26 13:26:02.173448: @    0.900,    1.744 s / 2 =    1.147 hz =   68.809 bpm
+2025-04-26 13:26:03.798525: @    0.450,    1.717 s / 2 =    1.165 hz =   69.886 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 29, beat: 114, measure: AbAb7, key: C, currentBPM: 69, bpm: 69
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.030
+2025-04-26 13:26:05.548659: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:26:05.548674: @    1.000,    1.679 s / 2 =    1.191 hz =   71.486 bpm
+2025-04-26 13:26:07.298556: @    0.821,    1.753 s / 2 =    1.141 hz =   68.467 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 30, beat: 118, measure: Db, key: C, currentBPM: 70, bpm: 70
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 69, user: tempo, level: 0.031
+2025-04-26 13:26:09.048936: bestBpm: 69 @ 0.298, tpm: 0/4
+2025-04-26 13:26:09.048954: @    0.298,    1.792 s / 2 =    1.116 hz =   66.958 bpm
+2025-04-26 13:26:10.798862: @    1.000,    1.760 s / 2 =    1.137 hz =   68.199 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 31, beat: 122, measure: Db, key: C, currentBPM: 69, bpm: 69
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 68, user: tempo, level: 0.035
+2025-04-26 13:26:12.549058: bestBpm: 68 @ 1.000, tpm: 0/4
+2025-04-26 13:26:12.549076: @    1.000,    1.722 s / 2 =    1.162 hz =   69.694 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 69, user: tempo, level: 0.032
+2025-04-26 13:26:14.174193: bestBpm: 69 @ 1.000, tpm: 0/4
+2025-04-26 13:26:14.174209: @    1.000,    1.658 s / 2 =    1.206 hz =   72.378 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 32, beat: 126, measure: Ab7,, key: C, currentBPM: 69, bpm: 69
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.039
+2025-04-26 13:26:15.924244: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:26:15.924262: @    1.000,    1.723 s / 2 =    1.161 hz =   69.664 bpm
+2025-04-26 13:26:17.674175: @    1.000,    1.768 s / 2 =    1.131 hz =   67.867 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 33, beat: 130, measure: Ab, key: C, currentBPM: 70, bpm: 70
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 70, user: tempo, level: 0.039
+2025-04-26 13:26:19.424324: bestBpm: 70 @ 1.000, tpm: 0/4
+2025-04-26 13:26:19.424341: @    1.000,    1.688 s / 2 =    1.185 hz =   71.099 bpm
+2025-04-26 13:26:21.049328: @    1.000,    1.684 s / 2 =    1.187 hz =   71.243 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 34, beat: 134, measure: Ab7, key: C, currentBPM: 70, bpm: 70
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 71, user: tempo, level: 0.037
+2025-04-26 13:26:22.799456: bestBpm: 71 @ 1.000, tpm: 0/4
+2025-04-26 13:26:22.799471: @    1.000,    1.663 s / 2 =    1.203 hz =   72.170 bpm
+2025-04-26 13:26:24.424484: @    1.000,    1.697 s / 2 =    1.178 hz =   70.707 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 35, beat: 138, measure: Gb, key: C, currentBPM: 71, bpm: 71
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.039
+2025-04-26 13:26:26.049796: bestBpm: 72 @ 1.000, tpm: 0/4
+2025-04-26 13:26:26.049813: @    1.000,    1.652 s / 2 =    1.211 hz =   72.633 bpm
+2025-04-26 13:26:27.799543: @    1.000,    1.663 s / 2 =    1.203 hz =   72.172 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 36, beat: 142, measure: Db,, key: C, currentBPM: 72, bpm: 72
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.035
+2025-04-26 13:26:29.424842: bestBpm: 72 @ 1.000, tpm: 0/4
+2025-04-26 13:26:29.424857: @    1.000,    1.636 s / 2 =    1.223 hz =   73.357 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.034
+2025-04-26 13:26:31.049946: bestBpm: 73 @ 1.000, tpm: 0/4
+2025-04-26 13:26:31.049961: @    1.000,    1.640 s / 2 =    1.220 hz =   73.178 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 37, beat: 146, measure: Ab, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.034
+2025-04-26 13:26:32.675041: bestBpm: 73 @ 1.000, tpm: 0/4
+2025-04-26 13:26:32.675056: @    1.000,    1.636 s / 2 =    1.223 hz =   73.357 bpm
+2025-04-26 13:26:34.424863: @    1.000,    1.709 s / 2 =    1.170 hz =   70.227 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 38, beat: 150, measure: Ab7, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.030
+2025-04-26 13:26:36.050270: bestBpm: 72 @ 1.000, tpm: 0/4
+2025-04-26 13:26:36.050286: @    1.000,    1.684 s / 2 =    1.188 hz =   71.255 bpm
+2025-04-26 13:26:37.675188: @    1.000,    1.645 s / 2 =    1.216 hz =   72.953 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 39, beat: 154, measure: Gb, key: C, currentBPM: 72, bpm: 72
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.037
+2025-04-26 13:26:39.300488: bestBpm: 72 @ 1.000, tpm: 0/4
+2025-04-26 13:26:39.300503: @    1.000,    1.636 s / 2 =    1.222 hz =   73.341 bpm
+2025-04-26 13:26:41.050255: @    1.000,    1.676 s / 2 =    1.193 hz =   71.610 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 40, beat: 158, measure: Db, key: C, currentBPM: 72, bpm: 72
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.029
+2025-04-26 13:26:42.675589: bestBpm: 73 @ 1.000, tpm: 0/4
+2025-04-26 13:26:42.675606: @    1.000,    1.654 s / 2 =    1.209 hz =   72.569 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.028
+2025-04-26 13:26:44.300722: bestBpm: 72 @ 1.000, tpm: 0/4
+2025-04-26 13:26:44.300738: @    1.000,    1.658 s / 2 =    1.206 hz =   72.362 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 41, beat: 162, measure: DbBbm, key: C, currentBPM: 72, bpm: 72
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.032
+2025-04-26 13:26:45.925748: bestBpm: 73 @ 1.000, tpm: 0/4
+2025-04-26 13:26:45.925764: @    1.000,    1.593 s / 2 =    1.256 hz =   75.345 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.033
+2025-04-26 13:26:47.675933: bestBpm: 72 @ 1.000, tpm: 0/4
+2025-04-26 13:26:47.675950: @    1.000,    1.783 s / 2 =    1.122 hz =   67.312 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 42, beat: 166, measure: Fm, key: C, currentBPM: 72, bpm: 72
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.033
+2025-04-26 13:26:49.300913: bestBpm: 72 @ 1.000, tpm: 0/4
+2025-04-26 13:26:49.300928: @    1.000,    1.593 s / 2 =    1.255 hz =   75.311 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.042
+2025-04-26 13:26:50.926070: bestBpm: 73 @ 0.481, tpm: 0/4
+2025-04-26 13:26:50.926085: @    0.481,    1.640 s / 2 =    1.220 hz =   73.177 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 43, beat: 170, measure: Ebm7Gbm, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.022
+2025-04-26 13:26:52.551070: bestBpm: 72 @ 0.244, tpm: 0/4
+2025-04-26 13:26:52.551085: @    0.244,    1.608 s / 2 =    1.244 hz =   74.616 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.034
+2025-04-26 13:26:54.301181: bestBpm: 73 @ 0.926, tpm: 0/4
+2025-04-26 13:26:54.301197: @    0.926,    1.752 s / 2 =    1.142 hz =   68.496 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 44, beat: 174, measure: Gbm., key: C, currentBPM: 73, bpm: 73
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 45, beat: 176, measure: DbBbm, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.027
+2025-04-26 13:26:57.676232: bestBpm: 72 @ 0.377, tpm: 0/4
+2025-04-26 13:26:57.676248: @    0.377,    3.319 s / 4 =    1.205 hz =   72.315 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.036
+2025-04-26 13:26:59.176498: bestBpm: 73 @ 0.084, tpm: 0/4
+2025-04-26 13:26:59.176514: @    0.084,    1.581 s / 2 =    1.265 hz =   75.911 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 46, beat: 180, measure: Fm, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.028
+2025-04-26 13:27:00.801517: bestBpm: 73 @ 0.150, tpm: 0/4
+2025-04-26 13:27:00.801532: @    0.150,    1.587 s / 2 =    1.260 hz =   75.626 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 74, user: tempo, level: 0.041
+2025-04-26 13:27:02.426696: bestBpm: 74 @ 0.085, tpm: 0/4
+2025-04-26 13:27:02.426711: @    0.085,    1.686 s / 2 =    1.186 hz =   71.179 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 47, beat: 184, measure: Ebm7, key: C, currentBPM: 74, bpm: 74
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 74, user: tempo, level: 0.034
+2025-04-26 13:27:04.051754: bestBpm: 74 @ 0.122, tpm: 0/4
+2025-04-26 13:27:04.051769: @    0.122,    1.614 s / 2 =    1.239 hz =   74.329 bpm
+2025-04-26 13:27:05.676660: @    0.111,    1.627 s / 2 =    1.229 hz =   73.766 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 48, beat: 188, measure: AbAb7, key: C, currentBPM: 74, bpm: 74
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.034
+2025-04-26 13:27:09.051932: bestBpm: 73 @ 0.121, tpm: 0/4
+2025-04-26 13:27:09.051948: @    0.121,    3.313 s / 4 =    1.207 hz =   72.450 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 49, beat: 192, measure: Db, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.029
+2025-04-26 13:27:10.677052: bestBpm: 73 @ 0.112, tpm: 0/4
+2025-04-26 13:27:10.677067: @    0.112,    1.673 s / 2 =    1.196 hz =   71.734 bpm
+2025-04-26 13:27:12.301937: @    0.764,    1.606 s / 2 =    1.245 hz =   74.716 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 50, beat: 196, measure: Db, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.016
+2025-04-26 13:27:14.052218: bestBpm: 72 @ 0.052, tpm: 0/4
+2025-04-26 13:27:14.052235: @    0.052,    1.751 s / 2 =    1.142 hz =   68.539 bpm
+2025-04-26 13:27:15.677080: @    0.598,    1.615 s / 2 =    1.239 hz =   74.313 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 51, beat: 200, measure: Ab7,, key: C, currentBPM: 72, bpm: 72
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 72, user: tempo, level: 0.026
+2025-04-26 13:27:17.302465: bestBpm: 72 @ 0.503, tpm: 0/4
+2025-04-26 13:27:17.302480: @    0.503,    1.676 s / 2 =    1.194 hz =   71.611 bpm
+2025-04-26 13:27:18.927407: @    1.000,    1.639 s / 2 =    1.220 hz =   73.195 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 52, beat: 204, measure: Ab, key: C, currentBPM: 72, bpm: 72
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.025
+2025-04-26 13:27:20.677480: bestBpm: 73 @ 0.819, tpm: 0/4
+2025-04-26 13:27:20.677496: @    0.819,    1.651 s / 2 =    1.211 hz =   72.664 bpm
+2025-04-26 13:27:22.302356: @    0.620,    1.623 s / 2 =    1.232 hz =   73.914 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 53, beat: 208, measure: Ab7, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 74, user: tempo, level: 0.038
+2025-04-26 13:27:23.802741: bestBpm: 74 @ 0.784, tpm: 0/4
+2025-04-26 13:27:23.802756: @    0.784,    1.563 s / 2 =    1.280 hz =   76.798 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.029
+2025-04-26 13:27:25.552899: bestBpm: 73 @ 0.116, tpm: 0/4
+2025-04-26 13:27:25.552914: @    0.116,    1.772 s / 2 =    1.129 hz =   67.724 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 54, beat: 212, measure: Gb, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.027
+2025-04-26 13:27:27.302780: bestBpm: 73 @ 0.741, tpm: 0/4
+2025-04-26 13:27:27.302797: @    0.741,    1.650 s / 2 =    1.212 hz =   72.713 bpm
+2025-04-26 13:27:28.927696: @    0.741,    1.625 s / 2 =    1.231 hz =   73.832 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 55, beat: 216, measure: Db,, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 71, user: tempo, level: 0.026
+2025-04-26 13:27:30.553073: bestBpm: 71 @ 0.801, tpm: 0/4
+2025-04-26 13:27:30.553088: @    0.801,    1.688 s / 2 =    1.185 hz =   71.072 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.026
+2025-04-26 13:27:32.178090: bestBpm: 73 @ 1.000, tpm: 0/4
+2025-04-26 13:27:32.178105: @    1.000,    1.588 s / 2 =    1.259 hz =   75.570 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 56, beat: 220, measure: Ab, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.031
+2025-04-26 13:27:33.803185: bestBpm: 73 @ 1.000, tpm: 0/4
+2025-04-26 13:27:33.803199: @    1.000,    1.639 s / 2 =    1.220 hz =   73.211 bpm
+2025-04-26 13:27:35.428104: @    1.000,    1.635 s / 2 =    1.223 hz =   73.406 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 57, beat: 224, measure: Ab7, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 74, user: tempo, level: 0.032
+2025-04-26 13:27:37.053462: bestBpm: 74 @ 1.000, tpm: 0/4
+2025-04-26 13:27:37.053477: @    1.000,    1.657 s / 2 =    1.207 hz =   72.442 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.035
+2025-04-26 13:27:38.803398: bestBpm: 73 @ 1.000, tpm: 0/4
+2025-04-26 13:27:38.803414: @    1.000,    1.684 s / 2 =    1.188 hz =   71.270 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 58, beat: 228, measure: Gb, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.034
+2025-04-26 13:27:40.428473: bestBpm: 73 @ 1.000, tpm: 0/4
+2025-04-26 13:27:40.428491: @    1.000,    1.623 s / 2 =    1.232 hz =   73.948 bpm
+2025-04-26 13:27:42.053436: @    0.800,    1.655 s / 2 =    1.208 hz =   72.505 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 59, beat: 232, measure: Db, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 73, user: tempo, level: 0.027
+2025-04-26 13:27:43.678688: bestBpm: 73 @ 0.770, tpm: 0/4
+2025-04-26 13:27:43.678704: @    0.770,    1.616 s / 2 =    1.238 hz =   74.279 bpm
+2025-04-26 13:27:45.303654: @    1.000,    1.659 s / 2 =    1.205 hz =   72.315 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 60, beat: 236, measure: Db, repeat: 1/3, key: C, currentBPM: 73, bpm: 73
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 74, user: tempo, level: 0.035
+2025-04-26 13:27:46.928850: bestBpm: 74 @ 1.000, tpm: 0/4
+2025-04-26 13:27:46.928870: @    1.000,    1.561 s / 2 =    1.281 hz =   76.869 bpm
+2025-04-26 13:27:48.553710: @    1.000,    1.626 s / 2 =    1.230 hz =   73.783 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 61, beat: 240, measure: Db, repeat: 1/3, key: C, currentBPM: 74, bpm: 74
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 74, user: tempo, level: 0.029
+2025-04-26 13:27:50.179007: bestBpm: 74 @ 1.000, tpm: 0/4
+2025-04-26 13:27:50.179024: @    1.000,    1.632 s / 2 =    1.225 hz =   73.520 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 75, user: tempo, level: 0.030
+2025-04-26 13:27:51.679272: bestBpm: 75 @ 1.000, tpm: 0/4
+2025-04-26 13:27:51.679289: @    1.000,    1.608 s / 2 =    1.244 hz =   74.648 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 62, beat: 244, measure: Db, repeat: 1/3, key: C, currentBPM: 75, bpm: 75
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 74, user: tempo, level: 0.041
+2025-04-26 13:27:53.304284: bestBpm: 74 @ 1.000, tpm: 0/4
+2025-04-26 13:27:53.304300: @    1.000,    1.588 s / 2 =    1.259 hz =   75.552 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 75, user: tempo, level: 0.030
+2025-04-26 13:27:54.929340: bestBpm: 75 @ 1.000, tpm: 0/4
+2025-04-26 13:27:54.929357: @    1.000,    1.593 s / 2 =    1.256 hz =   75.346 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 63, beat: 248, measure: Db, repeat: 1/3, key: C, currentBPM: 75, bpm: 75
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 75, user: tempo, level: 0.034
+2025-04-26 13:27:56.554397: bestBpm: 75 @ 1.000, tpm: 0/4
+2025-04-26 13:27:56.554413: @    1.000,    1.628 s / 2 =    1.228 hz =   73.700 bpm
+2025-04-26 13:27:58.179218: @    1.000,    1.573 s / 2 =    1.271 hz =   76.284 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 64, beat: 252, measure: Db, repeat: 2/3, key: C, currentBPM: 75, bpm: 75
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 75, user: tempo, level: 0.040
+2025-04-26 13:27:59.679652: bestBpm: 75 @ 1.000, tpm: 0/4
+2025-04-26 13:27:59.679668: @    1.000,    1.592 s / 2 =    1.257 hz =   75.398 bpm
+2025-04-26 13:28:01.304519: @    1.000,    1.602 s / 2 =    1.248 hz =   74.885 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 65, beat: 256, measure: Db, repeat: 2/3, key: C, currentBPM: 75, bpm: 75
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 76, user: tempo, level: 0.027
+2025-04-26 13:28:02.929637: bestBpm: 76 @ 1.000, tpm: 0/4
+2025-04-26 13:28:02.929653: @    1.000,    1.553 s / 2 =    1.288 hz =   77.264 bpm
+2025-04-26 13:28:04.429722: @    1.000,    1.583 s / 2 =    1.263 hz =   75.794 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 66, beat: 260, measure: Db, repeat: 2/3, key: C, currentBPM: 76, bpm: 76
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 77, user: tempo, level: 0.042
+2025-04-26 13:28:05.930021: bestBpm: 77 @ 1.000, tpm: 0/4
+2025-04-26 13:28:05.930036: @    1.000,    1.523 s / 2 =    1.314 hz =   78.810 bpm
+SongTempoUpdate: "Song_Across_The_Universe_by_Beatles_The", currentBPM: 76, user: tempo, level: 0.039
+2025-04-26 13:28:07.555121: bestBpm: 76 @ 1.000, tpm: 0/4
+2025-04-26 13:28:07.555148: @    1.000,    1.619 s / 2 =    1.235 hz =   74.097 bpm
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 67, beat: 264, measure: Db, repeat: 2/3, key: C, currentBPM: 76, bpm: 76
+webSocketCallback: SongUpdate: "Across The Universe" by "Beatles, The" : , moment: 71, beat: 280, measure: Db, repeat: 3/3, key: C, currentBPM: 76, bpm: 76
+2025-04-26 13:28:13.555183: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0
+2025-04-26 13:28:16.555337: 288001: stalled @0.000 <= 0.000, from 0.045 < 1.0

@@ -258,13 +258,12 @@ void webSocketCallback(final SongUpdate songUpdate) {
   }
   //print('webSocketCallback: title: "${songUpdate.song.title}", beatsPerMinute: ${songUpdate.song.beatsPerMinute}');
 
-  //  only use beats per minute from a non-empty song
-  if (songUpdate.song.title.isNotEmpty) {
-    processTempo.expectedBpm = songUpdate.song.beatsPerMinute;
-    //  induce a call back to the server on a song change
-    _bpm = 0;
-    _tpm = 0;
-  }
+  processTempo.expectedBpm = songUpdate.currentBeatsPerMinute;
+
+  //  induce a call back to the server on a song change
+  _bpm = 0;
+  _tpm = 0;
+
   processTempo.beatsPerMeasure = songUpdate.song.beatsPerBar;
   _songTempoUpdate = SongTempoUpdate(songUpdate.song.songId, songUpdate.currentBeatsPerMinute, processTempo.maxAmp);
 }
