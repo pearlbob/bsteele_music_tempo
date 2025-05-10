@@ -69,7 +69,7 @@ class ProcessTempo {
               ' <= ${((1 + _looseTolerance) * MusicConstants.maxBpm) / 60}',
             );
             if (_lastHertz >= ((1 - _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure) &&
-                _lastHertz <= ((1 + _looseTolerance) * MusicConstants.maxBpm) / 60) {
+                _lastHertz <= ((1 + _looseTolerance) * _expectedBpm) / 60) {
               if (_samplesNotInstateCount > 0) {
                 _samplesNotInstateAverage = _samplesNotInstateSum / _samplesNotInstateCount;
               }
@@ -93,11 +93,13 @@ class ProcessTempo {
 
               _lastSamplesInState = _samplesInState;
             } else {
-              logger.log(
-                _logDetail,
-                'out of hertz range: ${_lastHertz.toStringAsFixed(3)}'
-                ' @ ${audioConfiguration.debugAmp(_maxAbs)}',
-              );
+              if (veryVerbose) {
+                print(
+                  'out of hertz range: ${_lastHertz.toStringAsFixed(3)} hz'
+                  ' = ${to3(60 * _lastHertz)} bpm'
+                  ' @  ${audioConfiguration.debugAmp(_instateMaxAmp)}',
+                );
+              }
             }
           }
 
@@ -122,8 +124,7 @@ class ProcessTempo {
     if (_samplesInState > 6 * sampleRate) {
       print(
         '${DateTime.now()}: $_samplesInState: stalled'
-        ' @${audioConfiguration.debugAmp(_minAbs)} <= ${audioConfiguration.debugAmp(_minAbs)}'
-        ', from ${audioConfiguration.debugAmp(minSignalAmp)} < 1.0',
+        ' @ ${audioConfiguration.debugAmp(_maxAbs)}'
       );
 
       _samplesInState = 3 * sampleRate; //  something too slow
@@ -178,10 +179,12 @@ class ProcessTempo {
         sum += p;
       }
       double averageUs = sum / _beatQueueUs.length;
+      // print('averageUs: $averageUs');
 
       //  see if the taps are consistent with each other
       bool consistent = true;
       for (double p in _beatQueueUs) {
+        // print('  ($p - $averageUs).abs() = ${(p -averageUs).abs()}  vs: ${averageUs * _tightTolerance}');
         if ((p - averageUs).abs() > averageUs * _tightTolerance) {
           //  failed
           consistent = false;

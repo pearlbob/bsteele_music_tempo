@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:bsteele_music_tempo/app_logger.dart';
 import 'package:logger/logger.dart';
@@ -7,6 +8,7 @@ import 'package:test/test.dart';
 var fileName = '20250426.log';
 
 DateTime? _lastBpmDateTime;
+List<double> bpms = [];
 
 void main() {
   Logger.level = Level.info;
@@ -62,11 +64,12 @@ void main() {
         logger.i('     bpm: $bpm');
 
         _processBpm(dateTime);
+        bpms.add(bpm);
         continue;
       }
       m = bestBpmRegex.firstMatch(line);
       if (m != null) {
-        logger.i('bestBpm: $line');
+        logger.i('best Bpm: $line');
         var dateTime = DateTime.parse(m.group(1)!);
         logger.i('     dateTime: $dateTime');
         int bestBpm = int.parse(m.group(2)!);
@@ -82,15 +85,21 @@ void main() {
 
       logger.i('NOT FOUND: "$line"');
     }
+
+    logger.i(bpms.toString());
+    logger.i(
+      'max: ${bpms.reduce((v, e) {
+        return max(v, e);
+      })}',
+    );
   });
 }
 
-_processBpm(DateTime dateTime){
-  if ( _lastBpmDateTime != null ) {
+_processBpm(DateTime dateTime) {
+  if (_lastBpmDateTime != null) {
     logger.i('duration: ${dateTime.difference(_lastBpmDateTime!)}');
   }
   _lastBpmDateTime = dateTime;
-    
 }
 
 //  webSocketCallback: SongUpdate: "What's Up" by "4 Non Blondes" : , moment: 0, beat: 0, measure: A, repeat: 1/2, key: C,
