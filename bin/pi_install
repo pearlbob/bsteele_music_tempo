@@ -29,7 +29,7 @@ set hostname=`hostname`;
 if ( $hostname == 'bob' || $hostname == 'bobsm4.localdomain' ) then
   #  update the date file
   cd ~/github/${app}
-  echo "String releaseUtcDate() => '`date --utc +%Y%m%d_%H%M%S`';"  > lib/utcDate.dart
+  echo "String releaseUtcDate() => '`date --utc +%Y%m%d_%H%M%S`';"  > lib/utc_date.dart
 
   # copy source to pi
 	ssh ${machine} mkdir -p '~pi/junk'

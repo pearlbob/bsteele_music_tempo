@@ -61,13 +61,14 @@ class ProcessTempo {
             _lastHertz = sampleRate / _samplesInState;
             //  note that a slow tempo can be expected, eg. a 4/4 song at 50 bpm with beats on 2 only
             //  or as fast as every beat
-            logger.log(
-              _logDetail,
-              'hertz: '
-              ' ${((1 - _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure)}'
-              ' <= $_lastHertz'
-              ' <= ${((1 + _looseTolerance) * MusicConstants.maxBpm) / 60}',
-            );
+            if (veryVerbose && _logDetail == Level.info) {
+              print(
+                'hertz: '
+                ' ${((1 - _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure)}'
+                ' <= $_lastHertz'
+                ' <= ${((1 + _looseTolerance) * _expectedBpm) / 60}',
+              );
+            }
             if (_lastHertz >= ((1 - _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure) &&
                 _lastHertz <= ((1 + _looseTolerance) * _expectedBpm) / 60) {
               if (_samplesNotInstateCount > 0) {
@@ -124,7 +125,7 @@ class ProcessTempo {
     if (_samplesInState > 6 * sampleRate) {
       print(
         '${DateTime.now()}: $_samplesInState: stalled'
-        ' @ ${audioConfiguration.debugAmp(_maxAbs)}'
+        ' @ ${audioConfiguration.debugAmp(_maxAbs)}',
       );
 
       _samplesInState = 3 * sampleRate; //  something too slow
@@ -165,8 +166,9 @@ class ProcessTempo {
     _tapUs.add(epochUs);
 
     //  figure out how many beats have there been since the prior tap
+    //  one tap per beat if we are not limited, i.e. in tap to tempo mode
     int beats = (periodUs / _expectedBeatPeriodUs).round();
-    beats = max(1, beats);
+    beats = max(1, min(beats, beatsPerMeasure));
 
     //  remember the average beat duration between taps
     var beatUs = periodUs / beats;
