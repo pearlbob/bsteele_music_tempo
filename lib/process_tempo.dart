@@ -64,13 +64,14 @@ class ProcessTempo {
             if (veryVerbose && _logDetail == Level.info) {
               print(
                 'hertz: '
-                ' ${((1 - _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure)}'
-                ' <= $_lastHertz'
-                ' <= ${((1 + _looseTolerance) * _expectedBpm) / 60}',
+                ' ${to3(((1 - _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure))}'
+                ' <= ${to3(_lastHertz)}'
+                ' <= ${to3(((1 + _looseTolerance) * _expectedBpm) / 60)}'
+                ', _expectedBpm: $_expectedBpm',
               );
             }
             if (_lastHertz >= ((1 - _looseTolerance) * MusicConstants.minBpm) / (60 * _beatsPerMeasure) &&
-                _lastHertz <= ((1 + _looseTolerance) * _expectedBpm) / 60) {
+                _lastHertz <= ((1 + _looseTolerance) * (_limited ? _expectedBpm : MusicConstants.maxBpm)) / 60) {
               if (_samplesNotInstateCount > 0) {
                 _samplesNotInstateAverage = _samplesNotInstateSum / _samplesNotInstateCount;
               }
@@ -98,7 +99,8 @@ class ProcessTempo {
                 print(
                   'out of hertz range: ${_lastHertz.toStringAsFixed(3)} hz'
                   ' = ${to3(60 * _lastHertz)} bpm'
-                  ' @  ${audioConfiguration.debugAmp(_instateMaxAmp)}',
+                  ' @  ${audioConfiguration.debugAmp(_instateMaxAmp)}'
+                      ' vs. $_expectedBpm',
                 );
               }
             }
@@ -167,7 +169,7 @@ class ProcessTempo {
 
     //  figure out how many beats have there been since the prior tap
     //  one tap per beat if we are not limited, i.e. in tap to tempo mode
-    int beats = (periodUs / _expectedBeatPeriodUs).round();
+    int beats = _limited ? (periodUs / _expectedBeatPeriodUs).round() : 1;
     beats = max(1, min(beats, beatsPerMeasure));
 
     //  remember the average beat duration between taps
@@ -205,8 +207,10 @@ class ProcessTempo {
       print(
         '${DateTime.now()}: '
         '@ ${to3(_instateMaxAmp / audioConfiguration.ampMaximum)}'
-        ', ${to3(periodUs / Duration.microsecondsPerSecond)} s / $beats = ${to3(Duration.microsecondsPerSecond / beatUs)} hz'
-        ' = ${to3(60 * Duration.microsecondsPerSecond / beatUs)} bpm',
+        ', ${to3(periodUs / Duration.microsecondsPerSecond)} s / $beats'
+        ' = ${to3(Duration.microsecondsPerSecond / beatUs)} hz'
+        ' = ${to3(60 * Duration.microsecondsPerSecond / beatUs)} bpm'
+        '${_limited ? ', limited' : ''}',
       );
     }
 
@@ -259,7 +263,7 @@ class ProcessTempo {
   double _samplesNotInstateAverage = 0;
 
   set expectedBpm(final int givenBpm) {
-    _expectedBpm = givenBpm >= MusicConstants.minBpm ? givenBpm : defaultBpm;
+    _expectedBpm = givenBpm >= MusicConstants.minBpm && givenBpm <= MusicConstants.maxBpm ? givenBpm : defaultBpm;
     _computeExpectedPeriodUs();
   }
 
@@ -280,6 +284,9 @@ class ProcessTempo {
   int _beatsPerMeasure = 4; //  default only value
   int bestBpm = 0;
   int tapsPerMeasure = 0;
+
+  set limited(bool value) => _limited = value;
+  bool _limited = true;
   int _expectedMeasurePeriodUs = 1;
   int _expectedBeatPeriodUs = 1;
 

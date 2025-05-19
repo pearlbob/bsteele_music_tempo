@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:args/args.dart';
+import 'package:bsteele_music_lib/songs/song_id.dart';
 
 // import 'package:bsteele_bass_common/low_pass_filter.dart';
 import 'package:bsteele_music_lib/songs/song_tempo_update.dart';
@@ -227,7 +228,9 @@ Future<void> runARecord() async {
 
 processTempoCallback() {
   // print('processTempoCallback():');
-  if (processTempo.bestBpm != _bpm || processTempo.tapsPerMeasure != _tpm) {
+  if (processTempo.bestBpm != _bpm ||
+      processTempo.tapsPerMeasure != _tpm ||
+      (_songTempoUpdate != null && _songTempoUpdate!.songId != _lastSongId)) {
     _bpm = processTempo.bestBpm;
     _tpm = processTempo.tapsPerMeasure;
     if (_songTempoUpdate != null) {
@@ -244,7 +247,8 @@ processTempoCallback() {
         print(
           '${DateTime.now()}: bestBpm: ${processTempo.bestBpm}'
           ' @ ${audioConfiguration.debugAmp(processTempo.instateMaxAmp)}'
-          ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}',
+          ', tpm: ${processTempo.tapsPerMeasure}/${processTempo.beatsPerMeasure}'
+          ', limited: $_limited',
         );
       }
     }
@@ -258,19 +262,32 @@ void webSocketCallback(final SongUpdate songUpdate) {
   }
   //print('webSocketCallback: title: "${songUpdate.song.title}", beatsPerMinute: ${songUpdate.song.beatsPerMinute}');
 
-  processTempo.expectedBpm = songUpdate.currentBeatsPerMinute;
+  switch (songUpdate.state) {
+    case SongUpdateState.drumTempo:
+    case SongUpdateState.idle:
+    case SongUpdateState.none:
+      processTempo.expectedBpm = songUpdate.currentBeatsPerMinute;
+      break;
+    default:
+      break;
+  }
 
   //  induce a call back to the server on a song change
   _bpm = 0;
   _tpm = 0;
+  _limited = songUpdate.state != SongUpdateState.drumTempo;
 
   processTempo.beatsPerMeasure = songUpdate.song.beatsPerBar;
+  processTempo.limited = _limited;
   _songTempoUpdate = SongTempoUpdate(songUpdate.song.songId, songUpdate.currentBeatsPerMinute, processTempo.maxAmp);
+  _lastSongId = songUpdate.song.songId;
 }
 
 SongTempoUpdate? _songTempoUpdate;
+SongId? _lastSongId;
 int _bpm = 0;
 int _tpm = 0; //  taps per measure as read
+bool _limited = true;
 const _targetDevice = 'Plugable USB Audio Device'; //  known misspelling
 final _cardLineRegExp = RegExp(
   r'^card\s+([0-9]+):\s+\w+\s+\['
