@@ -228,9 +228,8 @@ Future<void> runARecord() async {
 
 processTempoCallback() {
   // print('processTempoCallback():');
-  if (processTempo.bestBpm != _bpm ||
-      processTempo.tapsPerMeasure != _tpm ||
-      (_songTempoUpdate != null && _songTempoUpdate!.songId != _lastSongId)) {
+  if ((processTempo.bestBpm != _bpm || processTempo.tapsPerMeasure != _tpm) &&
+      _songTempoUpdate?.songId == _lastSongId) {
     _bpm = processTempo.bestBpm;
     _tpm = processTempo.tapsPerMeasure;
     if (_songTempoUpdate != null) {
@@ -284,7 +283,7 @@ void webSocketCallback(final SongUpdate songUpdate) {
 }
 
 SongTempoUpdate? _songTempoUpdate;
-SongId? _lastSongId;
+SongId _lastSongId = SongId('');
 int _bpm = 0;
 int _tpm = 0; //  taps per measure as read
 bool _limited = true;
